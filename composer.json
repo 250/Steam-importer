@@ -1,0 +1,32 @@
+{
+  "name": "scriptfusion/steam-top-250",
+  "description": "Steam top 250 games as rated by players.",
+  "authors": [
+    {
+      "name": "Bilge",
+      "email": "bilge@scriptfusion.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "provider/steam": "dev-master",
+    "scriptfusion/porter": "@dev",
+    "connectors/http": "@dev"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6"
+  },
+  "autoload": {
+    "psr-4": {
+      "ScriptFUSION\\Steam250\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ScriptFUSIONTest\\Steam250\\": "test"
+    }
+  },
+  "scripts": {
+    "test": "phpunit -c test"
+  }
+}
