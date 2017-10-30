@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ScriptFUSION\Steam250;
+namespace ScriptFUSION\Steam250\Import;
 
 use ScriptFUSION\Porter\Collection\CountableProviderRecords;
 use ScriptFUSION\Porter\Collection\RecordCollection;
@@ -10,7 +10,7 @@ use ScriptFUSION\Porter\Provider\Steam\Resource\GetUserReviewsList;
 use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Porter\Transform\Transformer;
 
-class GameReviewImportSpecification extends ImportSpecification
+class GameReviewsSpecification extends ImportSpecification
 {
     public function __construct(int $appId)
     {

@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250;
 
+use Joomla\DI\Container;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\SteamProvider;
-use Simply\Container\Container;
 
 final class PorterFactory
 {
@@ -13,7 +13,7 @@ final class PorterFactory
     {
         $porter = new Porter($container = new Container);
 
-        $container[SteamProvider::class] = new SteamProvider;
+        $container->set(SteamProvider::class, new SteamProvider);
 
         return $porter;
     }

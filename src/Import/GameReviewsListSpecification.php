@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ScriptFUSION\Steam250;
+namespace ScriptFUSION\Steam250\Import;
 
 use ScriptFUSION\Mapper\AnonymousMapping;
 use ScriptFUSION\Mapper\Strategy\Copy;
@@ -15,7 +15,7 @@ use ScriptFUSION\Porter\Transform\FilterTransformer;
 use ScriptFUSION\Porter\Transform\Mapping\Mapper\Strategy\SubImport;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
 
-class GameReviewsListImportSpecification extends ImportSpecification
+class GameReviewsListSpecification extends ImportSpecification
 {
     public function __construct()
     {
@@ -33,7 +33,7 @@ class GameReviewsListImportSpecification extends ImportSpecification
                             new TakeFirst(
                                 new SubImport(
                                     function (array $data): ImportSpecification {
-                                        return new GameReviewImportSpecification($data['appid']);
+                                        return new GameReviewsSpecification($data['appid']);
                                     }
                                 )
                             ),

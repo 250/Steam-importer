@@ -13,8 +13,9 @@
     "transformers/mapping-transformer": "4.0.x-dev",
     "scriptfusion/porter": "@dev",
     "connectors/http": "@dev",
-    "simply/container": "@dev",
+    "joomla/di": "^2@dev",
     "doctrine/dbal": "^2",
+    "twig/twig": "^2",
     "monolog/monolog": "^1"
   },
   "require-dev": {

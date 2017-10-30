@@ -2,10 +2,10 @@
 <?php
 declare(strict_types=1);
 
-use ScriptFUSION\Steam250\Import\ImporterFactory;
+use ScriptFUSION\Steam250\Generate\GeneratorFactory;
 
 chdir(__DIR__ . '/..');
 
 include 'vendor/autoload.php';
 
-(new ImporterFactory)->create()->import();
+(new GeneratorFactory)->create()->generate();
