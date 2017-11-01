@@ -17,8 +17,7 @@ class GameReviewsSpecification extends ImportSpecification
         parent::__construct(new GetUserReviewsList($appId));
 
         $this->addTransformer(
-            new class implements Transformer
-            {
+            new class implements Transformer {
                 public function transform(RecordCollection $records, $context): RecordCollection
                 {
                     if (!$records instanceof UserReviewsCollection) {

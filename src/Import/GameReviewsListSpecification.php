@@ -27,7 +27,7 @@ class GameReviewsListSpecification extends ImportSpecification
                     new Merge(
                         [
                             'id' => new Copy('appid'),
-                            'game_name' => new Copy('name'),
+                            'app_name' => new Copy('name'),
                         ],
                         new TryCatch(
                             new TakeFirst(

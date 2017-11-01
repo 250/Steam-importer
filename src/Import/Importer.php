@@ -32,13 +32,13 @@ class Importer
             try {
                 $this->database->insert('review', $review);
             } catch (UniqueConstraintViolationException $exception) {
-                $this->logger->warning("Skipped #$review[id] $review[game_name] (already exists).");
+                $this->logger->warning("Skipped #$review[id] $review[app_name] (already exists).");
 
                 continue;
             }
 
             $this->logger->info(
-                "Inserted #$review[id] $review[game_name]: +$review[positive_reviews] -$review[negative_reviews]"
+                "Inserted #$review[id] $review[app_name]: +$review[positive_reviews] -$review[negative_reviews]"
                     . " =$review[total_reviews]"
             );
         }
