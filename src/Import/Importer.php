@@ -26,7 +26,7 @@ class Importer
     public function import(): void
     {
         $this->logger->info('Starting Steam games import...');
-        $reviews = $this->porter->import(new GameReviewsListSpecification);
+        $reviews = $this->porter->import(new GameReviewsListSpecification($this->logger));
 
         foreach ($reviews as $review) {
             try {
@@ -38,8 +38,7 @@ class Importer
             }
 
             $this->logger->info(
-                "Inserted #$review[id] $review[app_name]: +$review[positive_reviews] -$review[negative_reviews]"
-                    . " =$review[total_reviews]"
+                "Inserted #$review[id] $review[app_name]: ($review[total_reviews] reviews)."
             );
         }
 

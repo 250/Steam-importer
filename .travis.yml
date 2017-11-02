@@ -18,7 +18,7 @@ cache:
 install:
   - alias composer=composer\ -n && composer selfupdate
   - composer validate
-  - composer update $DEPENDENCIES
+  - composer install
 
 script:
   - bin/import

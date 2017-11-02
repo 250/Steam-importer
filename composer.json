@@ -26,11 +26,6 @@
       "ScriptFUSION\\Steam250\\": "src"
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-      "ScriptFUSIONTest\\Steam250\\": "test"
-    }
-  },
   "scripts": {
     "test": "phpunit -c test"
   }

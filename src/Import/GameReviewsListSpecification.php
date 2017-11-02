@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250\Import;
 
+use Psr\Log\LoggerInterface;
 use ScriptFUSION\Mapper\AnonymousMapping;
 use ScriptFUSION\Mapper\Strategy\Copy;
 use ScriptFUSION\Mapper\Strategy\Merge;
@@ -14,14 +15,18 @@ use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Porter\Transform\FilterTransformer;
 use ScriptFUSION\Porter\Transform\Mapping\Mapper\Strategy\SubImport;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
+use ScriptFUSION\Steam250\Transformer\ChunkTransformer;
 
 class GameReviewsListSpecification extends ImportSpecification
 {
-    public function __construct()
+    public function __construct(LoggerInterface $logger, int $chunks = 0, int $chunkIndex = 1)
     {
         parent::__construct(new GetAppList);
 
+        $chunks && $logger->info("Processing chunk $chunkIndex of $chunks.");
+
         $this->addTransformers([
+            new ChunkTransformer($chunks, $chunkIndex),
             new MappingTransformer(
                 new AnonymousMapping(
                     new Merge(
@@ -37,10 +42,12 @@ class GameReviewsListSpecification extends ImportSpecification
                                     }
                                 )
                             ),
-                            function (\Exception $exception): void {
+                            function (\Exception $exception, array $data) use ($logger): void {
                                 if (!$exception instanceof ApiResponseException) {
                                     throw $exception;
                                 }
+
+                                $logger->warning("#$data[appid] $data[name]: {$exception->getMessage()}");
                             },
                             null
                         )
@@ -48,6 +55,7 @@ class GameReviewsListSpecification extends ImportSpecification
                 )
             ),
             new FilterTransformer(function (array $data): bool {
+                // Exclude apps with no reviews.
                 return isset($data['total_reviews']) && $data['total_reviews'] > 0;
             }),
         ]);
