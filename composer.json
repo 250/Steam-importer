@@ -16,7 +16,8 @@
     "joomla/di": "^2@dev",
     "doctrine/dbal": "^2",
     "twig/twig": "^2",
-    "monolog/monolog": "^1"
+    "monolog/monolog": "^1",
+    "ulrichsg/getopt-php": "^3"
   },
   "require-dev": {
     "phpunit/phpunit": "^6"

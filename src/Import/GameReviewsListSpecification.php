@@ -19,7 +19,7 @@ use ScriptFUSION\Steam250\Transformer\ChunkTransformer;
 
 class GameReviewsListSpecification extends ImportSpecification
 {
-    public function __construct(LoggerInterface $logger, int $chunks = 0, int $chunkIndex = 1)
+    public function __construct(LoggerInterface $logger, int $chunks, int $chunkIndex)
     {
         parent::__construct(new GetAppList);
 

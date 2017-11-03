@@ -23,10 +23,10 @@ class Importer
         $this->logger = $logger;
     }
 
-    public function import(): void
+    public function import(int $chunks = 0, int $chunkIndex = 1): void
     {
         $this->logger->info('Starting Steam games import...');
-        $reviews = $this->porter->import(new GameReviewsListSpecification($this->logger));
+        $reviews = $this->porter->import(new GameReviewsListSpecification($this->logger, $chunks, $chunkIndex));
 
         foreach ($reviews as $review) {
             try {
