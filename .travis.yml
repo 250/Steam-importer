@@ -8,6 +8,10 @@ language: php
 php:
   - 7.1
 
+env:
+  - chunk=1
+  - chunk=2
+
 matrix:
   fast_finish: true
 
@@ -18,7 +22,32 @@ cache:
 install:
   - alias composer=composer\ -n && composer selfupdate
   - composer validate
-  - composer install
+  - composer install --no-progress --no-suggest
+
+before_script:
+  - |
+    git clone --depth=1 https://github.com/Bilge/Steam-data.git ${datadir=~/Steam-data} && cd $_
+    git config user.name Travis
+    git config user.email bilge+travis@scriptfusion.com
+    git config credential.helper store
+    echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
+  - mkdir -pv "${dbdir=${builddir=$datadir/$TRAVIS_BUILD_NUMBER}/db}"
+  - alias 250="$TRAVIS_BUILD_DIR/bin/250"
 
 script:
-  - bin/import
+  - ls -la
+  - 250 import-reviews -c 10 -i $chunk
+
+jobs:
+  include:
+    - stage: Import Steam app list
+      script: applist=$builddir/applist.json && 250 import-apps > "$applist"
+stages:
+  - Import Steam app list
+  - Test
+
+after_success:
+  - cd "$datadir" &&
+    git add -A . &&
+    git commit -m "Built from $TRAVIS_COMMIT." &&
+    git push origin HEAD:master
