@@ -9,12 +9,19 @@ use ScriptFUSION\Steam250\PorterFactory;
 
 final class ImporterFactory
 {
-    public function create(): Importer
+    public function create(int $chunks, int $chunkIndex): Importer
     {
-        return new Importer(
+        $extension = 'sqlite';
+        $chunks && $extension .= ".p$chunkIndex";
+
+        $importer = new Importer(
             (new PorterFactory)->create(),
-            (new DatabaseFactory)->create(),
+            (new DatabaseFactory)->create("db/steam.$extension"),
             new Logger('Import')
         );
+        $importer->setChunks($chunks);
+        $importer->setChunkIndex($chunkIndex);
+
+        return $importer;
     }
 }

@@ -11,9 +11,16 @@ php:
 env:
   - chunk=1
   - chunk=2
-
-matrix:
-  fast_finish: true
+  - chunk=3
+  - chunk=4
+  - chunk=5
+  - chunk=6
+  - chunk=7
+  - chunk=8
+  - chunk=9
+  - chunk=10
+  - chunk=11
+  - chunk=12
 
 cache:
   directories:
@@ -31,23 +38,33 @@ before_script:
     git config user.email bilge+travis@scriptfusion.com
     git config credential.helper store
     echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
+
   - mkdir -pv "${dbdir=${builddir=$datadir/$TRAVIS_BUILD_NUMBER}/db}"
-  - alias 250="$TRAVIS_BUILD_DIR/bin/250"
+  - S250() { "$TRAVIS_BUILD_DIR/bin/250" "$@"; }
+  - cd "$builddir"
 
 script:
-  - ls -la
-  - 250 import-reviews -c 10 -i $chunk
+  - S250 import-reviews -c ${chunks=12} -i $chunk
+  - git add "$dbdir" &&
+    git checkout -b ${branch=$TRAVIS_BUILD_NUMBER.$chunk} &&
+    git commit -m "Added database chunk $chunk/$chunks for $TRAVIS_COMMIT." &&
+    git push origin HEAD:$branch
 
 jobs:
   include:
-    - stage: Import Steam app list
-      script: applist=$builddir/applist.json && 250 import-apps > "$applist"
-stages:
-  - Import Steam app list
-  - Test
+    - stage: Import app list
+      script:
+        - S250 import-apps > applist.json
+        - git add -A . &&
+          git commit -m "Added applist for $TRAVIS_COMMIT." &&
+          git push origin HEAD:master
 
-after_success:
-  - cd "$datadir" &&
-    git add -A . &&
-    git commit -m "Built from $TRAVIS_COMMIT." &&
-    git push origin HEAD:master
+    - stage: Merge data chunks
+      script:
+        - mapfile -t branches <<<"$(git ls-remote origin refs/heads/$TRAVIS_BUILD_NUMBER.* | cut -f2)" &&
+          git pull --no-edit origin "${branches[@]}" &&
+          git push &&
+          git push origin $(echo "${branches[@]/#/:}")
+
+stages:
+  - Import app list

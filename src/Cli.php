@@ -9,6 +9,7 @@ use GetOpt\GetOpt;
 use ScriptFUSION\Porter\Provider\Steam\Resource\GetAppList;
 use ScriptFUSION\Steam250\Decorate\DecoratorFactory;
 use ScriptFUSION\Steam250\Generate\GeneratorFactory;
+use ScriptFUSION\Steam250\Import\Importer;
 use ScriptFUSION\Steam250\Import\ImporterFactory;
 
 final class Cli
@@ -26,8 +27,20 @@ final class Cli
             (new Command('import-reviews', [$this, 'importReviews']))
                 ->setShortDescription('Import reviews for each Steam app into database.')
                 ->addOptions([
-                    ['c', 'chunks', GetOpt::REQUIRED_ARGUMENT, 'Number of chunks to split import into.', 0],
-                    ['i', 'chunk-index', GetOpt::REQUIRED_ARGUMENT, 'Chunk index of this job (1-total chunks).', 1],
+                    [
+                        'c',
+                        'chunks',
+                        GetOpt::REQUIRED_ARGUMENT,
+                        'Number of chunks to split import into.',
+                        Importer::DEFAULT_CHUNKS,
+                    ],
+                    [
+                        'i',
+                        'chunk-index',
+                        GetOpt::REQUIRED_ARGUMENT,
+                        'Chunk index of this job (1-total chunks).',
+                        Importer::DEFAULT_CHUNK_INDEX,
+                    ],
                 ]),
 
             (new Command('decorate', [$this, 'decorate']))
@@ -65,10 +78,10 @@ final class Cli
 
     public function importReviews(Command $command): void
     {
-        (new ImporterFactory)->create()->import(
+        (new ImporterFactory)->create(
             +$command->getOption('chunks')->value(),
             +$command->getOption('chunk-index')->value()
-        );
+        )->import();
     }
 
     public function decorate(): void

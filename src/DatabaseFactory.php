@@ -8,9 +8,9 @@ use Doctrine\DBAL\DriverManager;
 
 final class DatabaseFactory
 {
-    public function create(): Connection
+    public function create(string $path): Connection
     {
-        $connection = DriverManager::getConnection(['url' => 'sqlite:///db/games.sqlite']);
+        $connection = DriverManager::getConnection(['url' => "sqlite:///$path"]);
 
         $connection->exec(
             'CREATE TABLE IF NOT EXISTS review (

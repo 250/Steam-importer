@@ -7,7 +7,7 @@ use ScriptFUSION\Porter\Collection\RecordCollection;
 use ScriptFUSION\Porter\Transform\Transformer;
 use ScriptFUSION\Steam250\Transformer\Collection\ChunkedRecords;
 
-class ChunkTransformer implements Transformer
+class ChunkingTransformer implements Transformer
 {
     private $chunks;
 
@@ -24,27 +24,29 @@ class ChunkTransformer implements Transformer
         $this->chunkIndex = $chunkIndex;
     }
 
-    public function transform(RecordCollection $records, $context)
+    public function transform(RecordCollection $records, $context): RecordCollection
     {
         if (!$records instanceof \Countable) {
             // TODO: Consider allowing passing total count to constructor if caller knows it somehow.
             throw new \InvalidArgumentException('Non-countable records currently unsupported.');
         }
 
-        return new ChunkedRecords(
-            (function () use ($records): \Generator {
-                $chunkSize = $this->chunks > 0 ? count($records) / $this->chunks : count($records);
-                $start = ceil($chunkSize * ($this->chunkIndex - 1));
-                $end = ceil($start + $chunkSize);
+        $chunkSize = $this->chunks > 0 ? count($records) / $this->chunks : count($records);
+        $start = ceil($chunkSize * ($this->chunkIndex - 1));
+        $end = ceil($start + $chunkSize);
 
+        return new ChunkedRecords(
+            (function () use ($records, $start, $end): \Generator {
                 $i = 0;
                 foreach ($records as $record) {
-                    if ($i >= $start && $i <= $end) {
+                    if ($i >= $start && $i < $end) {
                         yield $record;
                     }
                     ++$i;
                 }
             })(),
+            // TODO: Figure out how to calculate the correct size for the last chunk.
+            $chunkSize | 0,
             $records
         );
     }
