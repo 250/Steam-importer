@@ -8,10 +8,11 @@ use GetOpt\Command;
 use GetOpt\GetOpt;
 use GetOpt\Operand;
 use ScriptFUSION\Porter\Provider\Steam\Resource\GetAppList;
+use ScriptFUSION\Steam250\Database\DatabaseStitcherFactory;
 use ScriptFUSION\Steam250\Decorate\DecoratorFactory;
-use ScriptFUSION\Steam250\Generate\GeneratorFactory;
 use ScriptFUSION\Steam250\Import\Importer;
 use ScriptFUSION\Steam250\Import\ImporterFactory;
+use ScriptFUSION\Steam250\SiteGenerator\SiteGeneratorFactory;
 
 final class Cli
 {
@@ -22,10 +23,11 @@ final class Cli
         $this->cli = (new GetOpt([
             ['?', 'help', GetOpt::NO_ARGUMENT, 'Show this help.'],
         ]))->addCommands([
-            (new Command('import-apps', [$this, 'importApps']))
-                ->setShortDescription('Import full list of Steam apps in JSON format.'),
+            (new Command('applist', [$this, 'importApps']))
+                ->setShortDescription('Import full list of Steam apps in JSON format.')
+            ,
 
-            (new Command('import-reviews', [$this, 'importReviews']))
+            (new Command('reviews', [$this, 'importReviews']))
                 ->setShortDescription('Import reviews for each Steam app into database.')
                 ->addOptions([
                     [
@@ -39,19 +41,27 @@ final class Cli
                         'i',
                         'chunk-index',
                         GetOpt::REQUIRED_ARGUMENT,
-                        'Chunk index of this job (1-total chunks).',
+                        'Chunk index of this job (1 to total chunks).',
                         Importer::DEFAULT_CHUNK_INDEX,
                     ],
                 ])
-                ->addOperand(new Operand('appListPath', Operand::REQUIRED))
+                ->addOperand(new Operand('app-list-path', Operand::REQUIRED))
                     ->setShortDescription('Path to Steam app list in JSON format.')
             ,
 
+            (new Command('stitch', [$this, 'stitch']))
+                ->setShortDescription('Stitch database chunks back together.')
+                ->addOperand(new Operand('path', Operand::REQUIRED))
+                    ->setShortDescription('Path to database chunks.')
+            ,
+
             (new Command('decorate', [$this, 'decorate']))
-                ->setShortDescription('Decorate each Steam game with additional information in database.'),
+                ->setShortDescription('Decorate each Steam game with additional information in database.')
+            ,
 
             (new Command('generate', [$this, 'generate']))
-                ->setShortDescription('Generate Steam Top 250 site content from database.'),
+                ->setShortDescription('Generate Steam Top 250 site content from database.')
+            ,
         ]);
     }
 
@@ -83,10 +93,15 @@ final class Cli
     public function importReviews(Command $command): void
     {
         (new ImporterFactory)->create(
-            $command->getOperand('appListPath')->value(),
+            $command->getOperand('app-list-path')->value(),
             +$command->getOption('chunks')->value(),
             +$command->getOption('chunk-index')->value()
         )->import();
+    }
+
+    public function stitch(Command $command): void
+    {
+        (new DatabaseStitcherFactory)->create($command->getOperand('path')->value())->stitch();
     }
 
     public function decorate(): void
@@ -96,6 +111,6 @@ final class Cli
 
     public function generate(): void
     {
-        (new GeneratorFactory)->create()->generate();
+        (new SiteGeneratorFactory)->create()->generate();
     }
 }

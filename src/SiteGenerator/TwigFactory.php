@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ScriptFUSION\Steam250;
+namespace ScriptFUSION\Steam250\SiteGenerator;
 
 final class TwigFactory
 {

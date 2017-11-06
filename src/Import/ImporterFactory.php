@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace ScriptFUSION\Steam250\Import;
 
 use Monolog\Logger;
-use ScriptFUSION\Steam250\DatabaseFactory;
+use ScriptFUSION\Steam250\Database\DatabaseFactory;
 use ScriptFUSION\Steam250\PorterFactory;
 
 final class ImporterFactory

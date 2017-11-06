@@ -7,7 +7,7 @@ use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
-use ScriptFUSION\Steam250\Queries;
+use ScriptFUSION\Steam250\Database\Queries;
 
 /**
  * Decorates Steam games with missing information, such as whether they're actually a game.
