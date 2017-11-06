@@ -19,15 +19,18 @@ class Importer
 
     private $logger;
 
+    private $appListPath;
+
     private $chunks = self::DEFAULT_CHUNKS;
 
     private $chunkIndex = self::DEFAULT_CHUNK_INDEX;
 
-    public function __construct(Porter $porter, Connection $database, LoggerInterface $logger)
+    public function __construct(Porter $porter, Connection $database, LoggerInterface $logger, string $appListPath)
     {
         $this->porter = $porter;
         $this->database = $database;
         $this->logger = $logger;
+        $this->appListPath = $appListPath;
     }
 
     public function import(): void
@@ -35,7 +38,9 @@ class Importer
         $this->logger->info('Starting Steam games import...');
         $this->chunks && $this->logger->info("Processing chunk $this->chunkIndex of $this->chunks.");
 
-        $reviews = $this->porter->import(new GameReviewsListSpecification($this->chunks, $this->chunkIndex));
+        $reviews = $this->porter->import(
+            new GameReviewsListSpecification($this->appListPath, $this->chunks, $this->chunkIndex)
+        );
 
         $total = count($reviews);
         $count = 0;

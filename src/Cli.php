@@ -6,6 +6,7 @@ namespace ScriptFUSION\Steam250;
 use GetOpt\ArgumentException;
 use GetOpt\Command;
 use GetOpt\GetOpt;
+use GetOpt\Operand;
 use ScriptFUSION\Porter\Provider\Steam\Resource\GetAppList;
 use ScriptFUSION\Steam250\Decorate\DecoratorFactory;
 use ScriptFUSION\Steam250\Generate\GeneratorFactory;
@@ -41,7 +42,10 @@ final class Cli
                         'Chunk index of this job (1-total chunks).',
                         Importer::DEFAULT_CHUNK_INDEX,
                     ],
-                ]),
+                ])
+                ->addOperand(new Operand('appListPath', Operand::REQUIRED))
+                    ->setShortDescription('Path to Steam app list in JSON format.')
+            ,
 
             (new Command('decorate', [$this, 'decorate']))
                 ->setShortDescription('Decorate each Steam game with additional information in database.'),
@@ -79,6 +83,7 @@ final class Cli
     public function importReviews(Command $command): void
     {
         (new ImporterFactory)->create(
+            $command->getOperand('appListPath')->value(),
             +$command->getOption('chunks')->value(),
             +$command->getOption('chunk-index')->value()
         )->import();

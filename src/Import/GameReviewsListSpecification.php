@@ -9,17 +9,17 @@ use ScriptFUSION\Mapper\Strategy\Merge;
 use ScriptFUSION\Mapper\Strategy\TakeFirst;
 use ScriptFUSION\Mapper\Strategy\TryCatch;
 use ScriptFUSION\Porter\Provider\Steam\Resource\ApiResponseException;
-use ScriptFUSION\Porter\Provider\Steam\Resource\GetAppList;
 use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Porter\Transform\Mapping\Mapper\Strategy\SubImport;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
+use ScriptFUSION\Steam250\Resource\StaticSteamAppList;
 use ScriptFUSION\Steam250\Transformer\ChunkingTransformer;
 
 class GameReviewsListSpecification extends ImportSpecification
 {
-    public function __construct(int $chunks, int $chunkIndex)
+    public function __construct(string $appListPath, int $chunks, int $chunkIndex)
     {
-        parent::__construct(new GetAppList);
+        parent::__construct(new StaticSteamAppList($appListPath));
 
         $this->addTransformers([
             new ChunkingTransformer($chunks, $chunkIndex),
