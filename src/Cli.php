@@ -57,10 +57,16 @@ final class Cli
 
             (new Command('decorate', [$this, 'decorate']))
                 ->setShortDescription('Decorate each Steam game with additional information in database.')
+                ->addOperand(new Operand('path', Operand::REQUIRED))
+                    ->setShortDescription('Path to database.')
             ,
 
             (new Command('generate', [$this, 'generate']))
                 ->setShortDescription('Generate Steam Top 250 site content from database.')
+                ->addOperand(new Operand('db-path', Operand::REQUIRED))
+                    ->setShortDescription('Path to database.')
+                ->addOperand(new Operand('output-path', Operand::REQUIRED))
+                    ->setShortDescription('Path to database.')
             ,
         ]);
     }
@@ -104,13 +110,16 @@ final class Cli
         (new DatabaseStitcherFactory)->create($command->getOperand('path')->value())->stitch();
     }
 
-    public function decorate(): void
+    public function decorate(Command $command): void
     {
-        (new DecoratorFactory)->create()->decorate();
+        (new DecoratorFactory)->create($command->getOperand('path')->value())->decorate();
     }
 
-    public function generate(): void
+    public function generate(Command $command): void
     {
-        (new SiteGeneratorFactory)->create()->generate();
+        (new SiteGeneratorFactory)->create(
+            $command->getOperand('db-path')->value(),
+            $command->getOperand('output-path')->value()
+        )->generate();
     }
 }

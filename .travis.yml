@@ -27,7 +27,7 @@ env:
 
 cache:
   directories:
-    - .composer/cache
+    - ~/.composer/cache
 
 install:
   - alias composer=composer\ -n && composer selfupdate
@@ -35,12 +35,11 @@ install:
   - composer install --no-progress --no-suggest
 
 before_script:
-  - |
-    git clone --depth=1 https://github.com/Bilge/Steam-data.git ${datadir=~/Steam-data} && cd $_
-    git config user.name Travis
-    git config user.email bilge+travis@scriptfusion.com
-    git config credential.helper store
-    echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
+  - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
+  - git clone --depth=1 https://github.com/Bilge/Steam-data.git ${datadir=~/Steam-data}
+      -c user.name=Travis
+      -c user.email=bilge+travis@scriptfusion.com
+      -c credential.helper=store
 
   - mkdir -pv "${dbdir=${builddir=$datadir/$TRAVIS_BUILD_NUMBER}/db}"
   - S250() { "$TRAVIS_BUILD_DIR/bin/250" "$@"; }
@@ -58,19 +57,46 @@ jobs:
     - stage: Import app list
       script:
         - S250 applist > applist.json
-        - git add -A . &&
+        - git add . &&
           git commit -m "Added applist for $TRAVIS_COMMIT." &&
           git push origin HEAD:master
 
-    - stage: Merge data chunks
+    - stage: Stitch data chunks, decorate database and generate site
       script:
+        # Stitch
         - mapfile -t branches <<<"$(git ls-remote origin refs/heads/$TRAVIS_BUILD_NUMBER.* | cut -f2)" &&
           git pull --no-edit origin "${branches[@]}"
-        - S250 stitch "$dbdir"
-        - git add -A . &&
+          || exit
+
+        - S250 stitch "$dbdir" &&
+          git add -A . &&
           git commit -m "Added stitched database for $TRAVIS_COMMIT." &&
           git push &&
           git push -d origin "${branches[@]}"
+          || exit
+
+        # Decorate
+        - S250 decorate "$dbdir" &&
+          git commit -am "Decorated database for $TRAVIS_COMMIT." &&
+          git push
+          || exit
+
+        # Generate
+        - git clone -n https://github.com/$TRAVIS_REPO_SLUG "${out=$HOME/out}"
+            -c user.name=Travis
+            -c user.email=bilge+travis@scriptfusion.com
+            -c credential.helper=store &&
+          cd "$out" && pwd
+          || exit
+        - git checkout ${branch=gh-pages}
+          || git checkout --orphan $branch
+          || exit
+        - find -maxdepth 1 -path ./.git -prune -o -not -name . -exec rm -vr {} + &&
+          S250 generate "$dbdir" . &&
+          cp -va "$TRAVIS_BUILD_DIR"/site/* . &&
+          git add -A . &&
+          git commit -m "Built from $TRAVIS_COMMIT."
+          && git push origin HEAD:$branch
 
 stages:
   - Import app list

@@ -9,4 +9,9 @@ final class Application
     {
         (new Cli)->run();
     }
+
+    public static function getAppPath(string $path)
+    {
+        return __DIR__ . "/../$path";
+    }
 }

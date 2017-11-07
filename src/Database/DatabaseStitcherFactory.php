@@ -7,10 +7,10 @@ use Monolog\Logger;
 
 final class DatabaseStitcherFactory
 {
-    public function create(string $path): DatabaseStitcher
+    public function create(string $dbPath): DatabaseStitcher
     {
         return new DatabaseStitcher(
-            (new DatabaseFactory)->create("$path/steam.sqlite"),
+            (new DatabaseFactory)->create("$dbPath/steam.sqlite"),
             new Logger('Stitch')
         );
     }

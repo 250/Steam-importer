@@ -9,11 +9,11 @@ use ScriptFUSION\Steam250\PorterFactory;
 
 final class DecoratorFactory
 {
-    public function create(): Decorator
+    public function create(string $dbPath): Decorator
     {
         return new Decorator(
             (new PorterFactory)->create(),
-            (new DatabaseFactory)->create(),
+            (new DatabaseFactory)->create("$dbPath/steam.sqlite"),
             new Logger('Decorate')
         );
     }
