@@ -783,12 +783,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "5361a39c6b186d548f1b41502dc48be23509b78f"
+                "reference": "994c1d84f0301ab41463207c6b006887412b93a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/5361a39c6b186d548f1b41502dc48be23509b78f",
-                "reference": "5361a39c6b186d548f1b41502dc48be23509b78f",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/994c1d84f0301ab41463207c6b006887412b93a3",
+                "reference": "994c1d84f0301ab41463207c6b006887412b93a3",
                 "shasum": ""
             },
             "require": {
@@ -816,7 +816,7 @@
                 }
             ],
             "description": "Steam data provider for Porter.",
-            "time": "2017-11-07 20:16:34"
+            "time": "2017-11-08 14:21:46"
         },
         {
             "name": "psr/cache",
@@ -2442,16 +2442,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.4.3",
+            "version": "6.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "06b28548fd2b4a20c3cd6e247dc86331a7d4db13"
+                "reference": "562f7dc75d46510a4ed5d16189ae57fbe45a9932"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/06b28548fd2b4a20c3cd6e247dc86331a7d4db13",
-                "reference": "06b28548fd2b4a20c3cd6e247dc86331a7d4db13",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/562f7dc75d46510a4ed5d16189ae57fbe45a9932",
+                "reference": "562f7dc75d46510a4ed5d16189ae57fbe45a9932",
                 "shasum": ""
             },
             "require": {
@@ -2522,7 +2522,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-10-16T13:18:59+00:00"
+            "time": "2017-11-08T11:26:09+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
