@@ -1,6 +1,6 @@
 {
-  "name": "scriptfusion/steam-top-250",
-  "description": "Steam top 250 games as rated by players.",
+  "name": "250/steam-importer",
+  "description": "Imports Steam data using Porter.",
   "authors": [
     {
       "name": "Bilge",
@@ -15,12 +15,8 @@
     "connectors/http": "@dev",
     "joomla/di": "^2@dev",
     "doctrine/dbal": "^2",
-    "twig/twig": "^2",
     "monolog/monolog": "^1",
     "ulrichsg/getopt-php": "^3"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^6"
   },
   "autoload": {
     "psr-4": {

@@ -27,7 +27,7 @@ env:
 
 cache:
   directories:
-    - ~/.composer/cache
+    - vendor
 
 install:
   - alias composer=composer\ -n && composer selfupdate
@@ -36,7 +36,7 @@ install:
 
 before_script:
   - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
-  - git clone --depth=1 https://github.com/Bilge/Steam-data.git ${datadir=~/Steam-data}
+  - git clone --depth=1 https://github.com/250/Steam-data.git ${datadir=~/Steam-data}
       -c user.name=Travis
       -c user.email=bilge+travis@scriptfusion.com
       -c credential.helper=store
@@ -61,7 +61,7 @@ jobs:
           git commit -m "Added applist for $TRAVIS_COMMIT." &&
           git push origin HEAD:master
 
-    - stage: Stitch data chunks, decorate database and generate site
+    - stage: Stitch data chunks and decorate database
       script:
         # Stitch
         - mapfile -t branches <<<"$(git ls-remote origin refs/heads/$TRAVIS_BUILD_NUMBER.* | cut -f2)" &&
@@ -80,23 +80,6 @@ jobs:
           git commit -am "Decorated database for $TRAVIS_COMMIT." &&
           git push
           || exit
-
-        # Generate
-        - git clone -n https://github.com/$TRAVIS_REPO_SLUG "${out=$HOME/out}"
-            -c user.name=Travis
-            -c user.email=bilge+travis@scriptfusion.com
-            -c credential.helper=store &&
-          cd "$out" && pwd
-          || exit
-        - git checkout ${branch=gh-pages}
-          || git checkout --orphan $branch
-          || exit
-        - find -maxdepth 1 -path ./.git -prune -o -not -name . -exec rm -vr {} + &&
-          S250 generate "$dbdir" . &&
-          cp -va "$TRAVIS_BUILD_DIR"/site/* . &&
-          git add -A . &&
-          git commit -m "Built from $TRAVIS_COMMIT."
-          && git push origin HEAD:$branch
 
 stages:
   - Import app list

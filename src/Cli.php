@@ -12,7 +12,6 @@ use ScriptFUSION\Steam250\Database\DatabaseStitcherFactory;
 use ScriptFUSION\Steam250\Decorate\DecoratorFactory;
 use ScriptFUSION\Steam250\Import\Importer;
 use ScriptFUSION\Steam250\Import\ImporterFactory;
-use ScriptFUSION\Steam250\SiteGenerator\SiteGeneratorFactory;
 
 final class Cli
 {
@@ -60,14 +59,6 @@ final class Cli
                 ->addOperand(new Operand('path', Operand::REQUIRED))
                     ->setShortDescription('Path to database.')
             ,
-
-            (new Command('generate', [$this, 'generate']))
-                ->setShortDescription('Generate Steam Top 250 site content from database.')
-                ->addOperand(new Operand('db-path', Operand::REQUIRED))
-                    ->setShortDescription('Path to database.')
-                ->addOperand(new Operand('output-path', Operand::REQUIRED))
-                    ->setShortDescription('Path to database.')
-            ,
         ]);
     }
 
@@ -113,13 +104,5 @@ final class Cli
     public function decorate(Command $command): void
     {
         (new DecoratorFactory)->create($command->getOperand('path')->value())->decorate();
-    }
-
-    public function generate(Command $command): void
-    {
-        (new SiteGeneratorFactory)->create(
-            $command->getOperand('db-path')->value(),
-            $command->getOperand('output-path')->value()
-        )->generate();
     }
 }
