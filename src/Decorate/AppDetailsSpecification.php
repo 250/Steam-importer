@@ -26,6 +26,7 @@ class AppDetailsSpecification extends ImportSpecification
                             return $data['release_date'] ? $data['release_date']->getTimestamp() : null;
                         }
                     ),
+                    'genre' => new Copy('tags->0'),
                 ])
             )
         );

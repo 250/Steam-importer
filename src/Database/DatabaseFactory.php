@@ -20,7 +20,8 @@ final class DatabaseFactory
                 positive_reviews INTEGER NOT NULL,
                 negative_reviews INTEGER NOT NULL,
                 app_type TEXT,
-                release_date INTEGER
+                release_date INTEGER,
+                genre TEXT
             );'
         );
 

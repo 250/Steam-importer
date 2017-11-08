@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250\Decorate;
 
+use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use ScriptFUSION\Steam250\Database\DatabaseFactory;
 use ScriptFUSION\Steam250\PorterFactory;
@@ -14,7 +15,7 @@ final class DecoratorFactory
         return new Decorator(
             (new PorterFactory)->create(),
             (new DatabaseFactory)->create("$dbPath/steam.sqlite"),
-            new Logger('Decorate')
+            (new Logger('Decorate'))->pushHandler(new StreamHandler(STDERR, Logger::INFO))
         );
     }
 }
