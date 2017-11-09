@@ -9,6 +9,7 @@
   ],
   "require": {
     "php": "^7.1",
+    "250/shared": "dev-master",
     "provider/steam": "dev-master",
     "transformers/mapping-transformer": "4.0.x-dev",
     "scriptfusion/porter": "@dev",
