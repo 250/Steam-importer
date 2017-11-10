@@ -63,7 +63,7 @@ jobs:
 
     - stage: Stitch data chunks and decorate database
       script:
-        # Stitch
+        # Stitch.
         - mapfile -t branches <<<"$(git ls-remote origin refs/heads/$TRAVIS_BUILD_NUMBER.* | cut -f2)" &&
           git pull --no-edit origin "${branches[@]}"
           || exit
@@ -75,11 +75,19 @@ jobs:
           git push -d origin "${branches[@]}"
           || exit
 
-        # Decorate
+        # Decorate.
         - S250 decorate "$dbdir" &&
           git commit -am "Decorated database for $TRAVIS_COMMIT." &&
           git push
           || exit
+
+        # Trigger foreign repository build to generate site.
+        - 'curl -sf
+            -H ''Content-Type: application/json''
+            -H ''Travis-API-Version: 3''
+            -H "Authorization: token $TRAVIS_TOKEN"
+            -d ''{"request": {"branch": "master"}}''
+            https://api.travis-ci.org/repo/250%2FSteam-Top-250/requests'
 
 stages:
   - Import app list
