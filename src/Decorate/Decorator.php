@@ -8,8 +8,8 @@ use Psr\Log\LoggerInterface;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
 use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;
-use ScriptFUSION\Steam250\Algorithm;
 use ScriptFUSION\Steam250\Database\Queries;
+use ScriptFUSION\Top250\Shared\Algorithm;
 
 /**
  * Decorates Steam games with missing information, such as whether they're actually a game.
@@ -45,7 +45,9 @@ class Decorator
 
     public function decorate(int $targetCount = 250, string $targetType = 'game'): void
     {
-        $this->logger->info("Starting decoration of up to $targetCount apps of type \"$targetType\".");
+        $this->logger->info(
+            "Decorating up to $targetCount \"$targetType\" apps sorted by \"$this->algorithm\" ($this->weight)."
+        );
 
         $matched = 0;
         $cursor = Queries::fetchAppsSortedByScore($this->database, $this->algorithm, $this->weight);
@@ -75,11 +77,12 @@ class Decorator
             if ($app['app_type'] === $targetType) {
                 // Insert app rank into database.
                 $this->database->executeQuery(
-                    'INSERT OR REPLACE INTO rank (id, algorithm, rank) VALUES (?, ?, ?)',
+                    'INSERT OR REPLACE INTO rank (id, algorithm, rank, score) VALUES (?, ?, ?, ?)',
                     [
                         $app['id'],
                         "$this->algorithm$this->weight",
                         ++$matched,
+                        $app['score'],
                     ]
                 );
             }

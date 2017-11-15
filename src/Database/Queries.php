@@ -6,7 +6,7 @@ namespace ScriptFUSION\Steam250\Database;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\Statement;
 use ScriptFUSION\StaticClass;
-use ScriptFUSION\Steam250\Algorithm;
+use ScriptFUSION\Top250\Shared\Algorithm;
 
 final class Queries
 {

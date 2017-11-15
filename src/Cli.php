@@ -12,6 +12,7 @@ use ScriptFUSION\Steam250\Database\DatabaseStitcherFactory;
 use ScriptFUSION\Steam250\Decorate\DecoratorFactory;
 use ScriptFUSION\Steam250\Import\Importer;
 use ScriptFUSION\Steam250\Import\ImporterFactory;
+use ScriptFUSION\Top250\Shared\Algorithm;
 
 final class Cli
 {

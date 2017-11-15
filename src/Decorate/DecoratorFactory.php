@@ -5,9 +5,9 @@ namespace ScriptFUSION\Steam250\Decorate;
 
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use ScriptFUSION\Steam250\Algorithm;
 use ScriptFUSION\Steam250\Database\DatabaseFactory;
 use ScriptFUSION\Steam250\PorterFactory;
+use ScriptFUSION\Top250\Shared\Algorithm;
 
 final class DecoratorFactory
 {

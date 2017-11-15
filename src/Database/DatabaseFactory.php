@@ -27,6 +27,7 @@ final class DatabaseFactory
                 id INTEGER NOT NULL,
                 algorithm TEXT NOT NULL,
                 rank INTEGER NOT NULL,
+                score REAL NOT NULL,
                 PRIMARY KEY(id, algorithm)
             );'
         );

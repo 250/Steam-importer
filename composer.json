@@ -9,6 +9,7 @@
   ],
   "require": {
     "php": "^7.1",
+    "250/shared": "dev-algo",
     "provider/steam": "dev-master",
     "transformers/mapping-transformer": "4.0.x-dev",
     "scriptfusion/porter": "@dev",
@@ -16,7 +17,6 @@
     "joomla/di": "^2@dev",
     "doctrine/dbal": "^2",
     "monolog/monolog": "^1",
-    "eloquent/enumeration": "^5",
     "ulrichsg/getopt-php": "^3"
   },
   "autoload": {

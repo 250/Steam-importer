@@ -4,8 +4,42 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d79dc98bc33ff8458c22f63ecebe224",
+    "content-hash": "ef7f02559aa921a50825b00455d610bf",
     "packages": [
+        {
+            "name": "250/shared",
+            "version": "dev-algo",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/250/Shared.git",
+                "reference": "7045800645687a435557a1cb4e9b41844ec85b61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/250/Shared/zipball/7045800645687a435557a1cb4e9b41844ec85b61",
+                "reference": "7045800645687a435557a1cb4e9b41844ec85b61",
+                "shasum": ""
+            },
+            "require": {
+                "eloquent/enumeration": "^5",
+                "php": "^7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ScriptFUSION\\Top250\\Shared\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Bilge",
+                    "email": "bilge@scriptfusion.com"
+                }
+            ],
+            "description": "Top 250 shared code library.",
+            "time": "2017-11-15 06:37:28"
+        },
         {
             "name": "connectors/http",
             "version": "4.0.x-dev",
@@ -1717,6 +1751,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "250/shared": 20,
         "provider/steam": 20,
         "transformers/mapping-transformer": 20,
         "scriptfusion/porter": 20,
