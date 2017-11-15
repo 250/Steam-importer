@@ -6,19 +6,33 @@ namespace ScriptFUSION\Steam250\Database;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\Statement;
 use ScriptFUSION\StaticClass;
-use ScriptFUSION\Top250\Shared\SharedQueries;
+use ScriptFUSION\Steam250\Algorithm;
 
 final class Queries
 {
     use StaticClass;
 
-    public static function fetchAppsSortedByScore(Connection $database): Statement
-    {
+    public static function fetchAppsSortedByScore(
+        Connection $database,
+        Algorithm $algorithm,
+        float $weight
+    ): Statement {
         return $database->executeQuery(
             'SELECT *, '
-            . SharedQueries::APP_SCORE
-            . ' FROM review ORDER BY score DESC'
+            . self::getQueryFragment($algorithm, $weight)
+            . ' ORDER BY score DESC'
         );
+    }
+
+    private static function getQueryFragment(Algorithm $algorithm, float $weight): string
+    {
+        switch ($algorithm) {
+            case Algorithm::WILSON:
+                return QueryFragment::calculateWilsonScore();
+
+            case Algorithm::BAYESIAN:
+                return QueryFragment::calculateBayesianScore($weight);
+        }
     }
 
     public static function stitchReviewChunks(Connection $database, $chunkPath): bool

@@ -7,6 +7,8 @@ use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
+use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;
+use ScriptFUSION\Steam250\Algorithm;
 use ScriptFUSION\Steam250\Database\Queries;
 
 /**
@@ -23,11 +25,22 @@ class Decorator
 
     private $logger;
 
-    public function __construct(Porter $porter, Connection $database, LoggerInterface $logger)
-    {
+    private $algorithm;
+
+    private $weight;
+
+    public function __construct(
+        Porter $porter,
+        Connection $database,
+        LoggerInterface $logger,
+        Algorithm $algorithm,
+        float $weight
+    ) {
         $this->porter = $porter;
         $this->database = $database;
         $this->logger = $logger;
+        $this->algorithm = $algorithm;
+        $this->weight = $weight;
     }
 
     public function decorate(int $targetCount = 250, string $targetType = 'game'): void
@@ -35,7 +48,7 @@ class Decorator
         $this->logger->info("Starting decoration of up to $targetCount apps of type \"$targetType\".");
 
         $matched = 0;
-        $cursor = Queries::fetchAppsSortedByScore($this->database);
+        $cursor = Queries::fetchAppsSortedByScore($this->database, $this->algorithm, $this->weight);
 
         while ($matched < $targetCount && false !== $app = $cursor->fetch()) {
             // Data missing from database.
@@ -45,8 +58,8 @@ class Decorator
                 try {
                     // Import missing data.
                     $details = $this->porter->importOne(new AppDetailsSpecification(+$app['id']));
-                } catch (InvalidAppIdException $exception) {
-                    // App ID hidden or obsolete.
+                } catch (InvalidAppIdException | ParserException $exception) {
+                    // App ID hidden, obsolete or region locked.
                     $this->logger->warning($exception->getMessage());
 
                     continue;

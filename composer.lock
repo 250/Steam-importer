@@ -4,42 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "218894ccac0ddee62af0d59d94e38c93",
+    "content-hash": "2d79dc98bc33ff8458c22f63ecebe224",
     "packages": [
-        {
-            "name": "250/shared",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/250/Shared.git",
-                "reference": "5546de3ebc1eb2facb31ab3f7555407af95047c6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/5546de3ebc1eb2facb31ab3f7555407af95047c6",
-                "reference": "5546de3ebc1eb2facb31ab3f7555407af95047c6",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1",
-                "scriptfusion/static-class": "^1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ScriptFUSION\\Top250\\Shared\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Bilge",
-                    "email": "bilge@scriptfusion.com"
-                }
-            ],
-            "description": "Top 250 shared code library.",
-            "time": "2017-11-09 15:26:13"
-        },
         {
             "name": "connectors/http",
             "version": "4.0.x-dev",
@@ -817,12 +783,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "994c1d84f0301ab41463207c6b006887412b93a3"
+                "reference": "70512c8e6e84acd089491776b4f3c33fcd3dec4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/994c1d84f0301ab41463207c6b006887412b93a3",
-                "reference": "994c1d84f0301ab41463207c6b006887412b93a3",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/70512c8e6e84acd089491776b4f3c33fcd3dec4f",
+                "reference": "70512c8e6e84acd089491776b4f3c33fcd3dec4f",
                 "shasum": ""
             },
             "require": {
@@ -850,7 +816,7 @@
                 }
             ],
             "description": "Steam data provider for Porter.",
-            "time": "2017-11-08 14:21:46"
+            "time": "2017-11-14 22:56:55"
         },
         {
             "name": "psr/cache",
@@ -1130,12 +1096,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ScriptFUSION/Porter.git",
-                "reference": "61f643204cbab1797b88eaebdd8c3a76c8d03630"
+                "reference": "653774c2857c3c504bd60c948987124b181956cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ScriptFUSION/Porter/zipball/61f643204cbab1797b88eaebdd8c3a76c8d03630",
-                "reference": "61f643204cbab1797b88eaebdd8c3a76c8d03630",
+                "url": "https://api.github.com/repos/ScriptFUSION/Porter/zipball/653774c2857c3c504bd60c948987124b181956cd",
+                "reference": "653774c2857c3c504bd60c948987124b181956cd",
                 "shasum": ""
             },
             "require": {
@@ -1152,7 +1118,7 @@
             },
             "suggest": {
                 "connectors/http": "Provides an HTTP connector for Porter providers.",
-                "transformers/mapping": "Transforms records using Mappings."
+                "transformers/mapping-transformer": "Transforms records using Mappings."
             },
             "type": "library",
             "autoload": {
@@ -1171,7 +1137,7 @@
                 }
             ],
             "description": "Data import abstraction library.",
-            "time": "2017-10-26 14:52:58"
+            "time": "2017-11-10 14:54:25"
         },
         {
             "name": "scriptfusion/retry",
@@ -1287,16 +1253,16 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.3.10",
+            "version": "v3.3.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "07447650225ca9223bd5c97180fe7c8267f7d332"
+                "reference": "66e6e046032ebdf1f562c26928549f613d428bd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/07447650225ca9223bd5c97180fe7c8267f7d332",
-                "reference": "07447650225ca9223bd5c97180fe7c8267f7d332",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/66e6e046032ebdf1f562c26928549f613d428bd1",
+                "reference": "66e6e046032ebdf1f562c26928549f613d428bd1",
                 "shasum": ""
             },
             "require": {
@@ -1336,20 +1302,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-02T06:42:24+00:00"
+            "time": "2017-11-05T15:47:03+00:00"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.3.10",
+            "version": "v3.3.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "40dafd42d5dad7fe5ad4e958413d92a207522ac1"
+                "reference": "cebe3c068867956e012d9135282ba6a05d8a259e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/40dafd42d5dad7fe5ad4e958413d92a207522ac1",
-                "reference": "40dafd42d5dad7fe5ad4e958413d92a207522ac1",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/cebe3c068867956e012d9135282ba6a05d8a259e",
+                "reference": "cebe3c068867956e012d9135282ba6a05d8a259e",
                 "shasum": ""
             },
             "require": {
@@ -1392,7 +1358,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-02T06:42:24+00:00"
+            "time": "2017-11-05T15:47:03+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1751,7 +1717,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "250/shared": 20,
         "provider/steam": 20,
         "transformers/mapping-transformer": 20,
         "scriptfusion/porter": 20,
