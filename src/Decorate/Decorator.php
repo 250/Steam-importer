@@ -66,13 +66,23 @@ class Decorator
                 }
 
                 // Update database.
-                $this->database->update('review', $details, ['id' => $app['id']]);
+                $this->database->update('app', $details, ['id' => $app['id']]);
 
                 // Update local state representation.
                 $app = $details + $app;
             }
 
-            $app['app_type'] === $targetType && ++$matched;
+            if ($app['app_type'] === $targetType) {
+                // Insert app rank into database.
+                $this->database->executeQuery(
+                    'INSERT OR REPLACE INTO rank (id, algorithm, rank) VALUES (?, ?, ?)',
+                    [
+                        $app['id'],
+                        "$this->algorithm$this->weight",
+                        ++$matched,
+                    ]
+                );
+            }
 
             $this->logger->info("$matched/$targetCount #$app[id] ($app[app_name]) identifies as $app[app_type].");
         }

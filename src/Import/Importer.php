@@ -55,7 +55,7 @@ class Importer
             }
 
             try {
-                $this->database->insert('review', $review);
+                $this->database->insert('app', $review);
             } catch (UniqueConstraintViolationException $exception) {
                 $this->logger->warning("Skipped #$review[id] $review[app_name]: already exists.");
 

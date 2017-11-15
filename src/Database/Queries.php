@@ -39,7 +39,7 @@ final class Queries
     {
         return $database->exec(
             "ATTACH '$chunkPath' AS chunk;
-            INSERT OR IGNORE INTO review SELECT * FROM chunk.review;
+            INSERT OR IGNORE INTO app SELECT * FROM chunk.app;
             DETACH chunk"
         ) > 0;
     }
