@@ -9,15 +9,24 @@ final class QueryFragment
 {
     use StaticClass;
 
-    public static function calculateWilsonScore(): string
+    /**
+     * @param float $z Optional. Z value derived from confidence level (see probability table). Default value
+     *     represents 95% confidence.
+     *
+     * @return string
+     *
+     * @see http://www.evanmiller.org/how-not-to-sort-by-average-rating.html
+     * @see https://en.wikipedia.org/wiki/Checking_whether_a_coin_is_fair#Estimator_of_true_probability
+     */
+    public static function calculateWilsonScore(float $z = 1.96): string
     {
         return
-            '(
-                (positive_reviews + 1.9208) / total_reviews - 1.96
-                    * SQRT((positive_reviews * negative_reviews) / total_reviews + 0.9604)
+            "(
+                (positive_reviews + POWER($z, 2) / 2) / total_reviews - $z
+                    * SQRT((positive_reviews * negative_reviews) / total_reviews + POWER($z, 2) / 4)
                     / total_reviews
-            ) / (1 + 3.8416 / total_reviews) AS score
-            FROM app'
+            ) / (1 + POWER($z, 2) / total_reviews) AS score
+            FROM app"
         ;
     }
 
@@ -48,21 +57,21 @@ final class QueryFragment
         ;
     }
 
-    public static function calculateLaplaceLogScore(): string
+    public static function calculateLaplaceLogScore(float $weight): string
     {
         return
-            '(
-                positive_reviews * 1. / total_reviews * LOG10(total_reviews + 1) + .5
-            ) / (LOG10(total_reviews + 1) + 1) AS score
-            FROM app'
+            "(
+                positive_reviews * 1. / total_reviews * LOG10(total_reviews + 1) + $weight
+            ) / (LOG10(total_reviews + 1) + $weight * 2.) AS score
+            FROM app"
         ;
     }
 
     public static function calculateTornScore(): string
     {
-        return
-            '(positive_reviews * 1. / total_reviews)
-                - POWER(((positive_reviews * 1. / total_reviews) - .5) * 2, -LOG10(total_reviews + 1)) AS score
+        return '
+            (positive_reviews * 1. / total_reviews)
+                - ((positive_reviews * 1. / total_reviews) - .5) * POWER(2, -LOG10(total_reviews + 1)) AS score
             FROM app'
         ;
     }

@@ -28,7 +28,7 @@ final class Queries
     {
         switch ($algorithm) {
             case Algorithm::WILSON:
-                return QueryFragment::calculateWilsonScore();
+                return QueryFragment::calculateWilsonScore($weight);
 
             case Algorithm::BAYESIAN:
                 return QueryFragment::calculateBayesianScore($weight);
@@ -37,7 +37,7 @@ final class Queries
                 return QueryFragment::calculateLaplaceScore($weight);
 
             case Algorithm::LAPLACE_LOG:
-                return QueryFragment::calculateLaplaceLogScore();
+                return QueryFragment::calculateLaplaceLogScore($weight);
 
             case Algorithm::TORN:
                 return QueryFragment::calculateTornScore();
