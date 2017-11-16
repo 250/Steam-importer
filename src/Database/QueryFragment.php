@@ -39,4 +39,31 @@ final class QueryFragment
                 ) agg"
         ;
     }
+
+    public static function calculateLaplaceScore(float $weight): string
+    {
+        return
+            "(positive_reviews + $weight) / (total_reviews + $weight * 2.) AS score
+            FROM app"
+        ;
+    }
+
+    public static function calculateLaplaceLogScore(): string
+    {
+        return
+            '(
+                positive_reviews * 1. / total_reviews * LOG10(total_reviews + 1) + .5
+            ) / (LOG10(total_reviews + 1) + 1) AS score
+            FROM app'
+        ;
+    }
+
+    public static function calculateTornScore(): string
+    {
+        return
+            '(positive_reviews * 1. / total_reviews)
+                - POWER(((positive_reviews * 1. / total_reviews) - .5) * 2, -LOG10(total_reviews + 1)) AS score
+            FROM app'
+        ;
+    }
 }

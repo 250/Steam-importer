@@ -11,6 +11,7 @@ final class DatabaseFactory
     public function create(string $path): Connection
     {
         $connection = DriverManager::getConnection(['url' => "sqlite:///$path"]);
+        self::defineCustomFunctions($connection->getWrappedConnection());
 
         $connection->exec(
             'CREATE TABLE IF NOT EXISTS app (
@@ -33,5 +34,11 @@ final class DatabaseFactory
         );
 
         return $connection;
+    }
+
+    private static function defineCustomFunctions(\PDO $pdo): void
+    {
+        $pdo->sqliteCreateFunction('log10', 'log10', 1, \PDO::SQLITE_DETERMINISTIC);
+        $pdo->sqliteCreateFunction('power', 'pow', 2, \PDO::SQLITE_DETERMINISTIC);
     }
 }

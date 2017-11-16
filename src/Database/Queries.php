@@ -32,6 +32,15 @@ final class Queries
 
             case Algorithm::BAYESIAN:
                 return QueryFragment::calculateBayesianScore($weight);
+
+            case Algorithm::LAPLACE:
+                return QueryFragment::calculateLaplaceScore($weight);
+
+            case Algorithm::LAPLACE_LOG:
+                return QueryFragment::calculateLaplaceLogScore();
+
+            case Algorithm::TORN:
+                return QueryFragment::calculateTornScore();
         }
     }
 

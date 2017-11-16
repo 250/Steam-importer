@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Shared.git",
-                "reference": "7045800645687a435557a1cb4e9b41844ec85b61"
+                "reference": "0086af5786fa47508620d99c470300309899374d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/7045800645687a435557a1cb4e9b41844ec85b61",
-                "reference": "7045800645687a435557a1cb4e9b41844ec85b61",
+                "url": "https://api.github.com/repos/250/Shared/zipball/0086af5786fa47508620d99c470300309899374d",
+                "reference": "0086af5786fa47508620d99c470300309899374d",
                 "shasum": ""
             },
             "require": {
@@ -38,7 +38,7 @@
                 }
             ],
             "description": "Top 250 shared code library.",
-            "time": "2017-11-15 06:37:28"
+            "time": "2017-11-16 04:25:45"
         },
         {
             "name": "connectors/http",
