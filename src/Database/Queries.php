@@ -39,6 +39,12 @@ final class Queries
             case Algorithm::LAPLACE_LOG:
                 return QueryFragment::calculateLaplaceLogScore($weight);
 
+            case Algorithm::DIRICHLET_PRIOR:
+                return QueryFragment::calculateDirichletPriorScore($weight);
+
+            case Algorithm::DIRICHLET_PRIOR_LOG:
+                return QueryFragment::calculateDirichletPriorLogScore($weight);
+
             case Algorithm::TORN:
                 return QueryFragment::calculateTornScore($weight);
         }

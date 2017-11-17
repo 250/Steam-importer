@@ -10,7 +10,7 @@ final class QueryFragment
     use StaticClass;
 
     /**
-     * @param float $z Optional. Z value derived from confidence level (see probability table). Default value
+     * @param float $weight Optional. Z value derived from confidence level (see probability table). Default value
      *     represents 95% confidence.
      *
      * @return string
@@ -18,19 +18,19 @@ final class QueryFragment
      * @see http://www.evanmiller.org/how-not-to-sort-by-average-rating.html
      * @see https://en.wikipedia.org/wiki/Checking_whether_a_coin_is_fair#Estimator_of_true_probability
      */
-    public static function calculateWilsonScore(float $z = 1.96): string
+    public static function calculateWilsonScore(float $weight = 1.96): string
     {
         return
             "(
-                (positive_reviews + POWER($z, 2) / 2) / total_reviews - $z
-                    * SQRT((positive_reviews * negative_reviews) / total_reviews + POWER($z, 2) / 4)
+                (positive_reviews + POWER($weight, 2) / 2) / total_reviews - $weight
+                    * SQRT((positive_reviews * negative_reviews) / total_reviews + POWER($weight, 2) / 4)
                     / total_reviews
-            ) / (1 + POWER($z, 2) / total_reviews) AS score
+            ) / (1 + POWER($weight, 2) / total_reviews) AS score
             FROM app"
         ;
     }
 
-    public static function calculateBayesianScore(float $weight): string
+    public static function calculateBayesianScore(float $weight = 1): string
     {
         return
              "CASE 
@@ -64,6 +64,25 @@ final class QueryFragment
                 positive_reviews * 1. / total_reviews * LOG10(total_reviews + 1) + $weight
             ) / (LOG10(total_reviews + 1) + $weight * 2.) AS score
             FROM app"
+        ;
+    }
+
+    public static function calculateDirichletPriorScore(float $weight): string
+    {
+        return
+            "(positive_reviews + $weight * p) / (total_reviews + $weight) AS score
+            FROM app, (SELECT SUM(positive_reviews) * 1. / SUM(total_reviews) AS p FROM app)"
+        ;
+    }
+
+    public static function calculateDirichletPriorLogScore(float $weight): string
+    {
+        return
+            "(
+                (positive_reviews * 1. / total_reviews) * LOG10(total_reviews + 1) + $weight * p)
+                   / (LOG10(total_reviews + 1) + $weight
+            ) AS score
+            FROM app, (SELECT SUM(positive_reviews) * 1. / SUM(total_reviews) AS p FROM app)"
         ;
     }
 
