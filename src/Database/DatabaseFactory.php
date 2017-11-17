@@ -29,7 +29,7 @@ final class DatabaseFactory
                 algorithm TEXT NOT NULL,
                 rank INTEGER NOT NULL,
                 score REAL NOT NULL,
-                PRIMARY KEY(id, algorithm)
+                PRIMARY KEY(algorithm, rank)
             );'
         );
 
