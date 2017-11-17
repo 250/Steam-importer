@@ -87,7 +87,7 @@ class Decorator
                 );
             }
 
-            $this->logger->info("$matched/$targetCount #$app[id] ($app[app_name]) identifies as $app[app_type].");
+            $this->logger->info("$matched/$targetCount #$app[id] ($app[app_name]) is $app[app_type].");
         }
 
         $this->logger->info('Finished :^)');

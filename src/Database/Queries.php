@@ -40,7 +40,7 @@ final class Queries
                 return QueryFragment::calculateLaplaceLogScore($weight);
 
             case Algorithm::TORN:
-                return QueryFragment::calculateTornScore();
+                return QueryFragment::calculateTornScore($weight);
         }
     }
 

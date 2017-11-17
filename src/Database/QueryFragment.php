@@ -67,12 +67,18 @@ final class QueryFragment
         ;
     }
 
-    public static function calculateTornScore(): string
+    /**
+     * @param float $weight Optional. Weighting. Default value is given by log(10, 2).
+     *
+     * @return string
+     */
+    public static function calculateTornScore(float $weight = 3.3219280948874): string
     {
-        return '
-            (positive_reviews * 1. / total_reviews)
-                - ((positive_reviews * 1. / total_reviews) - .5) * POWER(2, -LOG10(total_reviews + 1)) AS score
-            FROM app'
+        return
+            "(positive_reviews * 1. / total_reviews) -
+                ((positive_reviews * 1. / total_reviews) - .5) * POWER(2, -LOG(total_reviews + 1, POWER(2, $weight)))
+                AS score
+            FROM app"
         ;
     }
 }
