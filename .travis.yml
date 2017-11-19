@@ -11,19 +11,6 @@ php:
 env:
   - chunk=1
   - chunk=2
-  - chunk=3
-  - chunk=4
-  - chunk=5
-  - chunk=6
-  - chunk=7
-  - chunk=8
-  - chunk=9
-  - chunk=10
-  - chunk=11
-  - chunk=12
-  - chunk=13
-  - chunk=14
-  - chunk=15
 
 cache:
   directories:
@@ -36,17 +23,18 @@ install:
 
 before_script:
   - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
-  - git clone --depth=1 https://github.com/250/Steam-data.git ${datadir=~/Steam-data}
+  - git clone --depth=1 https://github.com/Bilge/Steam-data-test.git ${datadir=~/Steam-data}
       -c user.name=Travis
       -c user.email=bilge+travis@scriptfusion.com
       -c credential.helper=store
+  - cd "$datadir" && git fetch origin $TRAVIS_BUILD_NUMBER && git checkout -b $TRAVIS_BUILD_NUMBER FETCH_HEAD || true
 
   - mkdir -pv "${dbdir=${builddir=$datadir/$TRAVIS_BUILD_NUMBER}/db}"
   - S250() { "$TRAVIS_BUILD_DIR/bin/250" "$@"; }
   - cd "$builddir"
 
 script:
-  - S250 reviews -c ${chunks=15} -i $chunk applist.json
+  - S250 reviews -c ${chunks=1000} -i $chunk applist.json
   - git add "$dbdir" &&
     git checkout -b ${branch=$TRAVIS_BUILD_NUMBER.$chunk} &&
     git commit -m "Added database chunk $chunk/$chunks for $TRAVIS_COMMIT." &&
@@ -59,7 +47,7 @@ jobs:
         - S250 applist > applist.json
         - git add . &&
           git commit -m "Added applist for $TRAVIS_COMMIT." &&
-          git push origin HEAD:master
+          git push origin HEAD:$TRAVIS_BUILD_NUMBER
 
     - stage: Stitch data chunks and decorate database
       script:
@@ -71,23 +59,23 @@ jobs:
         - S250 stitch "$dbdir" &&
           git add -A . &&
           git commit -m "Added stitched database for $TRAVIS_COMMIT." &&
-          git push &&
+          git push -u origin $TRAVIS_BUILD_NUMBER &&
           git push -d origin "${branches[@]}"
           || exit
 
         # Decorate.
-        - S250 decorate "$dbdir" &&
+        - S250 decorate "$dbdir/steam.sqlite" &&
           git commit -am "Decorated database for $TRAVIS_COMMIT." &&
           git push
           || exit
 
-        # Trigger foreign repository build to generate site.
-        - 'curl -sf
-            -H ''Content-Type: application/json''
-            -H ''Travis-API-Version: 3''
-            -H "Authorization: token $TRAVIS_TOKEN"
-            -d ''{"request": {"branch": "master"}}''
-            https://api.travis-ci.org/repo/250%2FSteam-Top-250/requests'
+        # Merge work.
+        - cd "$datadir" &&
+          git checkout master &&
+          git pull &&
+          git merge $TRAVIS_BUILD_NUMBER &&
+          git push &&
+          git push -d origin $TRAVIS_BUILD_NUMBER
 
 stages:
   - Import app list
