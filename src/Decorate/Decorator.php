@@ -7,6 +7,7 @@ use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
+use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;
 use ScriptFUSION\Steam250\Database\Queries;
 
 /**
@@ -45,8 +46,8 @@ class Decorator
                 try {
                     // Import missing data.
                     $details = $this->porter->importOne(new AppDetailsSpecification(+$app['id']));
-                } catch (InvalidAppIdException $exception) {
-                    // App ID hidden or obsolete.
+                } catch (InvalidAppIdException | ParserException $exception) {
+                    // App ID hidden, obsolete or region locked.
                     $this->logger->warning($exception->getMessage());
 
                     continue;
