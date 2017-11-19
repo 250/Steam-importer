@@ -10,6 +10,8 @@ final class QueryFragment
     use StaticClass;
 
     /**
+     * Wilson: approval <=> votes.
+     *
      * @param float $weight Optional. Z value derived from confidence level (see probability table). Default value
      *     represents 95% confidence.
      *
@@ -22,14 +24,21 @@ final class QueryFragment
     {
         return
             "(
-                (positive_reviews + POWER($weight, 2) / 2) / total_reviews - $weight
-                    * SQRT((positive_reviews * negative_reviews) / total_reviews + POWER($weight, 2) / 4)
+                (positive_reviews + POWER($weight, 2) / 2.) / total_reviews - $weight
+                    * SQRT((positive_reviews * negative_reviews) / total_reviews + POWER($weight, 2) / 4.)
                     / total_reviews
-            ) / (1 + POWER($weight, 2) / total_reviews) AS score
+            ) / (1 + POWER($weight, 2) * 1. / total_reviews) AS score
             FROM app"
         ;
     }
 
+    /**
+     * Bayesian: votes <=> approval.
+     *
+     * @param float $weight Optional. Lower numbers favour confidence over approval.
+     *
+     * @return string
+     */
     public static function calculateBayesianScore(float $weight = 1): string
     {
         return
@@ -49,6 +58,13 @@ final class QueryFragment
         ;
     }
 
+    /**
+     * Laplace: approval <=> votes.
+     *
+     * @param float $weight
+     *
+     * @return string
+     */
     public static function calculateLaplaceScore(float $weight): string
     {
         return

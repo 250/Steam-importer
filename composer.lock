@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef7f02559aa921a50825b00455d610bf",
+    "content-hash": "218894ccac0ddee62af0d59d94e38c93",
     "packages": [
         {
             "name": "250/shared",
-            "version": "dev-algo",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Shared.git",
-                "reference": "75df938e4a236dd4027f6098766c016a5cc35a26"
+                "reference": "1965f0b8026bf86cd96145b1bf7576eab6690ab6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/75df938e4a236dd4027f6098766c016a5cc35a26",
-                "reference": "75df938e4a236dd4027f6098766c016a5cc35a26",
+                "url": "https://api.github.com/repos/250/Shared/zipball/1965f0b8026bf86cd96145b1bf7576eab6690ab6",
+                "reference": "1965f0b8026bf86cd96145b1bf7576eab6690ab6",
                 "shasum": ""
             },
             "require": {
@@ -38,7 +38,7 @@
                 }
             ],
             "description": "Top 250 shared code library.",
-            "time": "2017-11-17 05:50:51"
+            "time": "2017-11-19 03:37:26"
         },
         {
             "name": "connectors/http",
