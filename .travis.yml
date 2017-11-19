@@ -25,6 +25,8 @@ env:
   - chunk=14
   - chunk=15
   - chunk=16
+  - chunk=17
+  - chunk=18
 
 cache:
   directories:
@@ -43,13 +45,13 @@ before_script:
       -c credential.helper=store
   - cd "$datadir" && git fetch origin $TRAVIS_BUILD_NUMBER && git checkout -b $TRAVIS_BUILD_NUMBER FETCH_HEAD || true
 
-  - mkdir -pv "${dbdir=${builddir=$datadir/$TRAVIS_BUILD_NUMBER}/db}"
+  - mkdir -pv "${builddir=$datadir/$TRAVIS_BUILD_NUMBER}"
   - S250() { "$TRAVIS_BUILD_DIR/bin/250" "$@"; }
   - cd "$builddir"
 
 script:
-  - S250 reviews -c ${chunks=16} -i $chunk applist.json
-  - git add "$dbdir" &&
+  - S250 reviews -c ${chunks=18} -i $chunk applist.json
+  - git add . &&
     git checkout -b ${branch=$TRAVIS_BUILD_NUMBER.$chunk} &&
     git commit -m "Added database chunk $chunk/$chunks for $TRAVIS_COMMIT." &&
     git push -f origin HEAD:$branch
@@ -70,7 +72,7 @@ jobs:
           git pull --no-edit origin "${branches[@]}"
           || exit
 
-        - S250 stitch "$dbdir" &&
+        - S250 stitch . &&
           git add -A . &&
           git commit -m "Added stitched database for $TRAVIS_COMMIT." &&
           git push -u origin $TRAVIS_BUILD_NUMBER &&
@@ -78,7 +80,7 @@ jobs:
           || exit
 
         # Decorate.
-        - S250 decorate "$dbdir/steam.sqlite" &&
+        - S250 decorate steam.sqlite &&
           git commit -am "Decorated database for $TRAVIS_COMMIT." &&
           git push
           || exit
