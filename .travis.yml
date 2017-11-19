@@ -24,6 +24,7 @@ env:
   - chunk=13
   - chunk=14
   - chunk=15
+  - chunk=16
 
 cache:
   directories:
@@ -40,13 +41,14 @@ before_script:
       -c user.name=Travis
       -c user.email=bilge+travis@scriptfusion.com
       -c credential.helper=store
+  - cd "$datadir" && git fetch origin $TRAVIS_BUILD_NUMBER && git checkout -b $TRAVIS_BUILD_NUMBER FETCH_HEAD || true
 
   - mkdir -pv "${dbdir=${builddir=$datadir/$TRAVIS_BUILD_NUMBER}/db}"
   - S250() { "$TRAVIS_BUILD_DIR/bin/250" "$@"; }
   - cd "$builddir"
 
 script:
-  - S250 reviews -c ${chunks=15} -i $chunk applist.json
+  - S250 reviews -c ${chunks=16} -i $chunk applist.json
   - git add "$dbdir" &&
     git checkout -b ${branch=$TRAVIS_BUILD_NUMBER.$chunk} &&
     git commit -m "Added database chunk $chunk/$chunks for $TRAVIS_COMMIT." &&
@@ -59,7 +61,7 @@ jobs:
         - S250 applist > applist.json
         - git add . &&
           git commit -m "Added applist for $TRAVIS_COMMIT." &&
-          git push origin HEAD:master
+          git push origin HEAD:$TRAVIS_BUILD_NUMBER
 
     - stage: Stitch data chunks and decorate database
       script:
@@ -71,15 +73,23 @@ jobs:
         - S250 stitch "$dbdir" &&
           git add -A . &&
           git commit -m "Added stitched database for $TRAVIS_COMMIT." &&
-          git push &&
+          git push -u origin $TRAVIS_BUILD_NUMBER &&
           git push -d origin "${branches[@]}"
           || exit
 
         # Decorate.
-        - S250 decorate "$dbdir" &&
+        - S250 decorate "$dbdir/steam.sqlite" &&
           git commit -am "Decorated database for $TRAVIS_COMMIT." &&
           git push
           || exit
+
+        # Merge work.
+        - cd "$datadir" &&
+          git checkout master &&
+          git pull &&
+          git merge $TRAVIS_BUILD_NUMBER &&
+          git push &&
+          git push -d origin $TRAVIS_BUILD_NUMBER
 
         # Trigger foreign repository build to generate site.
         - 'curl -sf

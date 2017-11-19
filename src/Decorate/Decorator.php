@@ -9,6 +9,7 @@ use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
 use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;
 use ScriptFUSION\Steam250\Database\Queries;
+use ScriptFUSION\Top250\Shared\Algorithm;
 
 /**
  * Decorates Steam games with missing information, such as whether they're actually a game.
@@ -24,19 +25,32 @@ class Decorator
 
     private $logger;
 
-    public function __construct(Porter $porter, Connection $database, LoggerInterface $logger)
-    {
+    private $algorithm;
+
+    private $weight;
+
+    public function __construct(
+        Porter $porter,
+        Connection $database,
+        LoggerInterface $logger,
+        Algorithm $algorithm,
+        float $weight
+    ) {
         $this->porter = $porter;
         $this->database = $database;
         $this->logger = $logger;
+        $this->algorithm = $algorithm;
+        $this->weight = $weight;
     }
 
     public function decorate(int $targetCount = 250, string $targetType = 'game'): void
     {
-        $this->logger->info("Starting decoration of up to $targetCount apps of type \"$targetType\".");
+        $this->logger->info(
+            "Decorating up to $targetCount \"$targetType\" apps sorted by \"$this->algorithm\" ($this->weight)."
+        );
 
         $matched = 0;
-        $cursor = Queries::fetchAppsSortedByScore($this->database);
+        $cursor = Queries::fetchAppsSortedByScore($this->database, $this->algorithm, $this->weight);
 
         while ($matched < $targetCount && false !== $app = $cursor->fetch()) {
             // Data missing from database.
@@ -54,15 +68,26 @@ class Decorator
                 }
 
                 // Update database.
-                $this->database->update('review', $details, ['id' => $app['id']]);
+                $this->database->update('app', $details, ['id' => $app['id']]);
 
                 // Update local state representation.
                 $app = $details + $app;
             }
 
-            $app['app_type'] === $targetType && ++$matched;
+            if ($app['app_type'] === $targetType) {
+                // Insert app rank into database.
+                $this->database->executeQuery(
+                    'INSERT OR REPLACE INTO rank (id, algorithm, rank, score) VALUES (?, ?, ?, ?)',
+                    [
+                        $app['id'],
+                        "$this->algorithm$this->weight",
+                        ++$matched,
+                        $app['score'],
+                    ]
+                );
+            }
 
-            $this->logger->info("$matched/$targetCount #$app[id] ($app[app_name]) identifies as $app[app_type].");
+            $this->logger->info("$matched/$targetCount #$app[id] ($app[app_name]) is $app[app_type].");
         }
 
         $this->logger->info('Finished :^)');

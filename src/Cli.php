@@ -12,6 +12,7 @@ use ScriptFUSION\Steam250\Database\DatabaseStitcherFactory;
 use ScriptFUSION\Steam250\Decorate\DecoratorFactory;
 use ScriptFUSION\Steam250\Import\Importer;
 use ScriptFUSION\Steam250\Import\ImporterFactory;
+use ScriptFUSION\Top250\Shared\Algorithm;
 
 final class Cli
 {
@@ -56,6 +57,22 @@ final class Cli
 
             (new Command('decorate', [$this, 'decorate']))
                 ->setShortDescription('Decorate each Steam game with additional information in database.')
+                ->addOptions([
+                    [
+                        'a',
+                        'algorithm',
+                        GetOpt::REQUIRED_ARGUMENT,
+                        'Algorithm to select top games.',
+                        Algorithm::WILSON,
+                    ],
+                    [
+                        'w',
+                        'weight',
+                        GetOpt::REQUIRED_ARGUMENT,
+                        'Algorithm-defined weighting coefficient.',
+                        1.,
+                    ],
+                ])
                 ->addOperand(new Operand('path', Operand::REQUIRED))
                     ->setShortDescription('Path to database.')
             ,
@@ -103,6 +120,10 @@ final class Cli
 
     public function decorate(Command $command): void
     {
-        (new DecoratorFactory)->create($command->getOperand('path')->value())->decorate();
+        (new DecoratorFactory)->create(
+            $command->getOperand('path')->value(),
+            Algorithm::memberByKey($command->getOption('algorithm')->value(), false),
+            (float)$command->getOption('weight')->value()
+        )->decorate();
     }
 }
