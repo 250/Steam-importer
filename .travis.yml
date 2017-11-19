@@ -80,7 +80,7 @@ jobs:
           || exit
 
         # Decorate.
-        - S250 decorate steam.sqlite &&
+        - S250 decorate -w 4.4172 steam.sqlite &&
           git commit -am "Decorated database for $TRAVIS_COMMIT." &&
           git push
           || exit
