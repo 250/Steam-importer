@@ -10,6 +10,11 @@ final class Queries
 {
     use StaticClass;
 
+    public static function doesAppExist(Connection $database, int $appId): bool
+    {
+        return $database->fetchColumn("SELECT id FROM app WHERE id = $appId") !== false;
+    }
+
     public static function stitchReviewChunks(Connection $database, $chunkPath): bool
     {
         return $database->exec(

@@ -16,9 +16,9 @@ final class DatabaseFactory
             'CREATE TABLE IF NOT EXISTS app (
                 id INTEGER PRIMARY KEY NOT NULL,
                 app_name TEXT NOT NULL,
-                total_reviews INTEGER NOT NULL,
-                positive_reviews INTEGER NOT NULL,
-                negative_reviews INTEGER NOT NULL,
+                total_reviews INTEGER,
+                positive_reviews INTEGER,
+                negative_reviews INTEGER,
                 app_type TEXT,
                 release_date INTEGER,
                 genre TEXT
