@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace ScriptFUSION\Steam250\Database;
+namespace ScriptFUSION\Steam250\Stitch;
 
 use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
+use ScriptFUSION\Steam250\Database\Queries;
 
 final class DatabaseStitcher
 {

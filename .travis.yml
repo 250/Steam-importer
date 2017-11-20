@@ -19,11 +19,6 @@ env:
   - chunk=8
   - chunk=9
   - chunk=10
-  - chunk=11
-  - chunk=12
-  - chunk=13
-  - chunk=14
-  - chunk=15
 
 cache:
   directories:
@@ -47,7 +42,7 @@ before_script:
   - cd "$builddir"
 
 script:
-  - S250 reviews -c ${chunks=15} -i $chunk applist.json
+  - S250 import --lite -c ${chunks=10} -i $chunk applist.json
   - git add . &&
     git checkout -b ${branch=$TRAVIS_BUILD_NUMBER.$chunk} &&
     git commit -m "Added database chunk $chunk/$chunks for $TRAVIS_COMMIT." &&

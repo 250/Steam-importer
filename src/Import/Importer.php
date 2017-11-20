@@ -21,6 +21,7 @@ class Importer
     private $appListPath;
     private $chunks = self::DEFAULT_CHUNKS;
     private $chunkIndex = self::DEFAULT_CHUNK_INDEX;
+    private $lite = false;
 
     public function __construct(Porter $porter, Connection $database, LoggerInterface $logger, string $appListPath)
     {
@@ -36,7 +37,7 @@ class Importer
         $this->chunks && $this->logger->info("Processing chunk $this->chunkIndex of $this->chunks.");
 
         $reviews = $this->porter->import(
-            new GameReviewsListSpecification($this->appListPath, $this->chunks, $this->chunkIndex)
+            new AppListSpecification($this->appListPath, $this->chunks, $this->chunkIndex)
         );
 
         $total = count($reviews);
@@ -54,20 +55,39 @@ class Importer
             }
 
             try {
-                $review += $this->porter->importOne(new GameReviewsSpecification($review['id']));
+                // Decorate app with full data set.
+                $review += $this->porter->importOne(new AppSpecification($review['id']));
             } catch (InvalidAppIdException | ParserException $exception) {
-                // This is fine.
+                // This is fine 🔥.
             }
 
+            // Data unavailable.
             if (!isset($review['app_type'])) {
-                $this->logger->warning("#$review[id] $review[app_name]: invalid.");
+                if ($this->lite) {
+                    $this->logger->warning(
+                        "Skipped $count/$total ($percent%) #$review[id] $review[app_name]: invalid."
+                    );
+
+                    continue;
+                }
+
+                $this->logger->debug("#$review[id] $review[app_name]: invalid.");
             }
 
+            // No reviews.
             if (isset($review['total_reviews']) && $review['total_reviews'] < 1) {
-                $this->logger->warning("#$review[id] $review[app_name]: no reviews.");
+                if ($this->lite) {
+                    $this->logger->warning(
+                        "Skipped $count/$total ($percent%) #$review[id] $review[app_name]: no reviews."
+                    );
+
+                    continue;
+                }
+
+                $this->logger->debug("#$review[id] $review[app_name]: no reviews.");
             }
 
-            // Insert data.
+            // Insert data. In normal mode we insert undecorated records for idempotence.
             $this->database->insert('app', $review);
             $this->logger->info("Inserted $count/$total ($percent%) #$review[id] $review[app_name].");
         }
@@ -83,5 +103,10 @@ class Importer
     public function setChunkIndex(int $chunkIndex): void
     {
         $this->chunkIndex = $chunkIndex;
+    }
+
+    public function setLite(bool $lite): void
+    {
+        $this->lite = $lite;
     }
 }

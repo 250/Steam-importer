@@ -16,7 +16,7 @@
     "joomla/di": "^2@dev",
     "doctrine/dbal": "^2",
     "monolog/monolog": "^1",
-    "ulrichsg/getopt-php": "^3"
+    "symfony/console": "^3"
   },
   "autoload": {
     "psr-4": {

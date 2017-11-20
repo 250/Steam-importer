@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace ScriptFUSION\Steam250\Database;
+namespace ScriptFUSION\Steam250\Stitch;
 
 use Monolog\Logger;
+use ScriptFUSION\Steam250\Database\DatabaseFactory;
 
 final class DatabaseStitcherFactory
 {

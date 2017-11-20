@@ -10,7 +10,7 @@ use ScriptFUSION\Porter\Provider\Steam\Resource\ScrapeAppDetails;
 use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
 
-class GameReviewsSpecification extends ImportSpecification
+class AppSpecification extends ImportSpecification
 {
     public function __construct(int $appId)
     {
