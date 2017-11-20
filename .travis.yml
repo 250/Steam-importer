@@ -75,17 +75,11 @@ jobs:
         - S250 stitch . &&
           git add -A . &&
           git commit -m "Added stitched database for $TRAVIS_COMMIT." &&
-          git push -u origin $TRAVIS_BUILD_NUMBER &&
+          git push origin $TRAVIS_BUILD_NUMBER &&
           git push -d origin "${branches[@]}"
           || exit
 
-        # Decorate.
-        - S250 decorate -w 4.4172 steam.sqlite &&
-          git commit -am "Decorated database for $TRAVIS_COMMIT." &&
-          git push
-          || exit
-
-        # Merge work.
+        # Merge feature into master.
         - cd "$datadir" &&
           git checkout master &&
           git pull &&

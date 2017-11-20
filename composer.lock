@@ -4,42 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "218894ccac0ddee62af0d59d94e38c93",
+    "content-hash": "09bd411c209594650dc98942e7b2cbd1",
     "packages": [
-        {
-            "name": "250/shared",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/250/Shared.git",
-                "reference": "1965f0b8026bf86cd96145b1bf7576eab6690ab6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/1965f0b8026bf86cd96145b1bf7576eab6690ab6",
-                "reference": "1965f0b8026bf86cd96145b1bf7576eab6690ab6",
-                "shasum": ""
-            },
-            "require": {
-                "eloquent/enumeration": "^5",
-                "php": "^7.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ScriptFUSION\\Top250\\Shared\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Bilge",
-                    "email": "bilge@scriptfusion.com"
-                }
-            ],
-            "description": "Top 250 shared code library.",
-            "time": "2017-11-19 03:37:26"
-        },
         {
             "name": "connectors/http",
             "version": "4.0.x-dev",
@@ -438,16 +404,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.6.2",
+            "version": "v2.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "1a4ee83a5a709555f2c6f9057a3aacf892451c7e"
+                "reference": "e3eed9b1facbb0ced3a0995244843a189e7d1b13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1a4ee83a5a709555f2c6f9057a3aacf892451c7e",
-                "reference": "1a4ee83a5a709555f2c6f9057a3aacf892451c7e",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/e3eed9b1facbb0ced3a0995244843a189e7d1b13",
+                "reference": "e3eed9b1facbb0ced3a0995244843a189e7d1b13",
                 "shasum": ""
             },
             "require": {
@@ -507,7 +473,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-08-28T11:02:56+00:00"
+            "time": "2017-11-19T13:38:54+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -1751,7 +1717,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "250/shared": 20,
         "provider/steam": 20,
         "transformers/mapping-transformer": 20,
         "scriptfusion/porter": 20,

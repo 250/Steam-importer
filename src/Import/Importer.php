@@ -49,7 +49,7 @@ class Importer
             $percent = (++$count / $total) * 100 | 0;
 
             if (!isset($review['total_reviews']) || $review['total_reviews'] < 1) {
-                $this->logger->warning("Skipped #$review[id] $review[app_name]: no reviews");
+                $this->logger->warning("Skipped $count/$total ($percent%) #$review[id] $review[app_name]: no reviews");
 
                 continue;
             }
@@ -57,7 +57,9 @@ class Importer
             try {
                 $this->database->insert('app', $review);
             } catch (UniqueConstraintViolationException $exception) {
-                $this->logger->warning("Skipped #$review[id] $review[app_name]: already exists.");
+                $this->logger->warning(
+                    "Skipped $count/$total ($percent%) #$review[id] $review[app_name]: already exists."
+                );
 
                 continue;
             }

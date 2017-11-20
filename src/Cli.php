@@ -9,10 +9,8 @@ use GetOpt\GetOpt;
 use GetOpt\Operand;
 use ScriptFUSION\Porter\Provider\Steam\Resource\GetAppList;
 use ScriptFUSION\Steam250\Database\DatabaseStitcherFactory;
-use ScriptFUSION\Steam250\Decorate\DecoratorFactory;
 use ScriptFUSION\Steam250\Import\Importer;
 use ScriptFUSION\Steam250\Import\ImporterFactory;
-use ScriptFUSION\Top250\Shared\Algorithm;
 
 final class Cli
 {
@@ -54,28 +52,6 @@ final class Cli
                 ->addOperand(new Operand('path', Operand::REQUIRED))
                     ->setShortDescription('Path to database chunks.')
             ,
-
-            (new Command('decorate', [$this, 'decorate']))
-                ->setShortDescription('Decorate each Steam game with additional information in database.')
-                ->addOptions([
-                    [
-                        'a',
-                        'algorithm',
-                        GetOpt::REQUIRED_ARGUMENT,
-                        'Algorithm to select top games.',
-                        Algorithm::WILSON,
-                    ],
-                    [
-                        'w',
-                        'weight',
-                        GetOpt::REQUIRED_ARGUMENT,
-                        'Algorithm-defined weighting coefficient.',
-                        1.,
-                    ],
-                ])
-                ->addOperand(new Operand('path', Operand::REQUIRED))
-                    ->setShortDescription('Path to database.')
-            ,
         ]);
     }
 
@@ -116,14 +92,5 @@ final class Cli
     public function stitch(Command $command): void
     {
         (new DatabaseStitcherFactory)->create($command->getOperand('path')->value())->stitch();
-    }
-
-    public function decorate(Command $command): void
-    {
-        (new DecoratorFactory)->create(
-            $command->getOperand('path')->value(),
-            Algorithm::memberByKey($command->getOption('algorithm')->value(), false),
-            (float)$command->getOption('weight')->value()
-        )->decorate();
     }
 }
