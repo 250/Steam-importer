@@ -57,7 +57,7 @@ jobs:
           git commit -m "Added applist for $TRAVIS_COMMIT." &&
           git push origin HEAD:$TRAVIS_BUILD_NUMBER
 
-    - stage: Stitch data chunks and decorate database
+    - stage: Stitch data chunks
       script:
         # Stitch.
         - mapfile -t branches <<<"$(git ls-remote origin refs/heads/$TRAVIS_BUILD_NUMBER.* | cut -f2)" &&
@@ -78,6 +78,7 @@ jobs:
           git merge $TRAVIS_BUILD_NUMBER &&
           git push &&
           git push -d origin $TRAVIS_BUILD_NUMBER
+          || exit
 
         # Trigger foreign repository build to generate site.
         - 'curl -sf

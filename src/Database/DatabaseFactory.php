@@ -15,13 +15,14 @@ final class DatabaseFactory
         $connection->exec(
             'CREATE TABLE IF NOT EXISTS app (
                 id INTEGER PRIMARY KEY NOT NULL,
-                app_name TEXT NOT NULL,
+                name TEXT NOT NULL,
+                type TEXT,
                 total_reviews INTEGER,
                 positive_reviews INTEGER,
                 negative_reviews INTEGER,
-                app_type TEXT,
                 release_date INTEGER,
-                genre TEXT
+                tags TEXT,
+                platforms INTEGER
             );'
         );
 

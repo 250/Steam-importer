@@ -9,6 +9,7 @@ use ScriptFUSION\Mapper\Strategy\Copy;
 use ScriptFUSION\Porter\Provider\Steam\Resource\ScrapeAppDetails;
 use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
+use ScriptFUSION\Top250\Shared\Platform;
 
 class AppSpecification extends ImportSpecification
 {
@@ -19,19 +20,29 @@ class AppSpecification extends ImportSpecification
         $this->addTransformer(
             new MappingTransformer(
                 new AnonymousMapping([
-                    'app_name' => new Copy('name'),
-                    'app_type' => new Copy('type'),
+                    'name' => new Copy('name'),
+                    'type' => new Copy('type'),
                     'release_date' => new Callback(
                         function (array $data): ?int {
                             return $data['release_date'] ? $data['release_date']->getTimestamp() : null;
                         }
                     ),
-                    'genre' => new Copy('tags->0'),
+                    'tags' => new Copy('tags->0'),
                     'positive_reviews' => new Copy('positive_reviews'),
                     'negative_reviews' => new Copy('negative_reviews'),
                     'total_reviews' => new Callback(
                         function (array $data): int {
                             return $data['positive_reviews'] + $data['negative_reviews'];
+                        }
+                    ),
+                    'platforms' => new Callback(
+                        function (array $data): int {
+                            $platforms = 0;
+                            $data['windows'] && $platforms |= Platform::WINDOWS;
+                            $data['linux'] && $platforms |= Platform::LINUX;
+                            $data['mac'] && $platforms |= Platform::MAC;
+
+                            return $platforms;
                         }
                     ),
                 ])

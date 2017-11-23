@@ -48,7 +48,7 @@ class Importer
 
             if (Queries::doesAppExist($this->database, $review['id'])) {
                 $this->logger->warning(
-                    "Skipped $count/$total ($percent%) #$review[id] $review[app_name]: already exists."
+                    "Skipped $count/$total ($percent%) #$review[id] $review[name]: already exists."
                 );
 
                 continue;
@@ -62,34 +62,37 @@ class Importer
             }
 
             // Data unavailable.
-            if (!isset($review['app_type'])) {
+            if (!isset($review['type'])) {
                 if ($this->lite) {
                     $this->logger->warning(
-                        "Skipped $count/$total ($percent%) #$review[id] $review[app_name]: invalid."
+                        "Skipped $count/$total ($percent%) #$review[id] $review[name]: invalid."
                     );
 
                     continue;
                 }
 
-                $this->logger->debug("#$review[id] $review[app_name]: invalid.");
+                $this->logger->debug("#$review[id] $review[name]: invalid.");
             }
 
             // No reviews.
             if (isset($review['total_reviews']) && $review['total_reviews'] < 1) {
                 if ($this->lite) {
                     $this->logger->warning(
-                        "Skipped $count/$total ($percent%) #$review[id] $review[app_name]: no reviews."
+                        "Skipped $count/$total ($percent%) #$review[id] $review[name]: no reviews."
                     );
 
                     continue;
                 }
 
-                $this->logger->debug("#$review[id] $review[app_name]: no reviews.");
+                $this->logger->debug("#$review[id] $review[name]: no reviews.");
             }
 
-            // Insert data. In normal mode we insert undecorated records for idempotence.
+            /*
+             * Insert data. In normal mode undecorated records are inserted for idempotence, allowing import to be
+             * quickly resumed later.
+             */
             $this->database->insert('app', $review);
-            $this->logger->info("Inserted $count/$total ($percent%) #$review[id] $review[app_name].");
+            $this->logger->info("Inserted $count/$total ($percent%) #$review[id] $review[name].");
         }
 
         $this->logger->info('Finished :^)');

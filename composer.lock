@@ -4,8 +4,42 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0957edba1efd6956b975a0bf9861b60e",
+    "content-hash": "22a6a411cf2b7873ec8408ea5401ab25",
     "packages": [
+        {
+            "name": "250/shared",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/250/Shared.git",
+                "reference": "7b54d15342b0b88477f287637718a20cbe23b4c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/250/Shared/zipball/7b54d15342b0b88477f287637718a20cbe23b4c7",
+                "reference": "7b54d15342b0b88477f287637718a20cbe23b4c7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "scriptfusion/static-class": "^1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ScriptFUSION\\Top250\\Shared\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Bilge",
+                    "email": "bilge@scriptfusion.com"
+                }
+            ],
+            "description": "Top 250 shared code library.",
+            "time": "2017-11-23 06:35:10"
+        },
         {
             "name": "connectors/http",
             "version": "4.0.x-dev",
@@ -783,12 +817,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "74e8833b4e53fc14f870f42ee336150d4469201f"
+                "reference": "4f96cac8c28c285fd09014a8aaba9f3aaa316175"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/74e8833b4e53fc14f870f42ee336150d4469201f",
-                "reference": "74e8833b4e53fc14f870f42ee336150d4469201f",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/4f96cac8c28c285fd09014a8aaba9f3aaa316175",
+                "reference": "4f96cac8c28c285fd09014a8aaba9f3aaa316175",
                 "shasum": ""
             },
             "require": {
@@ -816,7 +850,7 @@
                 }
             ],
             "description": "Steam data provider for Porter.",
-            "time": "2017-11-20 10:43:10"
+            "time": "2017-11-23 06:06:07"
         },
         {
             "name": "psr/cache",
@@ -1796,6 +1830,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "250/shared": 20,
         "provider/steam": 20,
         "transformers/mapping-transformer": 20,
         "scriptfusion/porter": 20,

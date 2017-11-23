@@ -21,7 +21,7 @@ class AppListSpecification extends ImportSpecification
             new MappingTransformer(
                 new AnonymousMapping([
                     'id' => new Copy('appid'),
-                    'app_name' => new Copy('name'),
+                    'name' => new Copy('name'),
                 ])
             ),
         ]);
