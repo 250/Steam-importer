@@ -23,6 +23,7 @@ final class DatabaseFactory
                 release_date INTEGER,
                 tags TEXT,
                 platforms INTEGER,
+                xtags INTEGER,
                 players INTEGER
             );'
         );

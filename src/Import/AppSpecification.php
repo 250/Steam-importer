@@ -45,6 +45,17 @@ class AppSpecification extends ImportSpecification
                             return $platforms;
                         }
                     ),
+                    // Excluded tags.
+                    'xtags' => new Callback(
+                        function (array $data): int {
+                            return (int)(bool)array_intersect(
+                                $data['tags'],
+                                [
+                                    'Visual Novel',
+                                ]
+                            );
+                        }
+                    ),
                 ])
             )
         );
