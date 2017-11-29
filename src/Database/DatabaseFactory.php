@@ -22,7 +22,8 @@ final class DatabaseFactory
                 negative_reviews INTEGER,
                 release_date INTEGER,
                 tags TEXT,
-                platforms INTEGER
+                platforms INTEGER,
+                players INTEGER
             );'
         );
 

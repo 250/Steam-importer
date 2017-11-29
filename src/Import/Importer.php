@@ -23,6 +23,8 @@ class Importer
     private $chunkIndex = self::DEFAULT_CHUNK_INDEX;
     private $lite = false;
 
+    private static $players;
+
     public function __construct(Porter $porter, Connection $database, LoggerInterface $logger, string $appListPath)
     {
         $this->porter = $porter;
@@ -40,7 +42,7 @@ class Importer
             new AppListSpecification($this->appListPath, $this->chunks, $this->chunkIndex)
         );
 
-        $total = count($reviews);
+        $total = \count($reviews);
         $count = 0;
 
         foreach ($reviews as $review) {
@@ -87,6 +89,8 @@ class Importer
                 $this->logger->debug("#$review[id] $review[name]: no reviews.");
             }
 
+            $this->decorateWithPlayers($review);
+
             /*
              * Insert data. In normal mode undecorated records are inserted for idempotence, allowing import to be
              * quickly resumed later.
@@ -96,6 +100,19 @@ class Importer
         }
 
         $this->logger->info('Finished :^)');
+    }
+
+    private function decorateWithPlayers(array &$review): void
+    {
+        self::$players || self::$players = iterator_to_array($this->porter->import(new PlayersSpecification));
+
+        if (!isset(self::$players[$review['id']])) {
+            $this->logger->debug("Players not found for $review[id] $review[name].");
+
+            return;
+        }
+
+        $review['players'] = self::$players[$review['id']];
     }
 
     public function setChunks(int $chunks): void
