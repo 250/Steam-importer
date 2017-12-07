@@ -41,6 +41,9 @@ class AppSpecification extends ImportSpecification
                             $data['windows'] && $platforms |= Platform::WINDOWS;
                             $data['linux'] && $platforms |= Platform::LINUX;
                             $data['mac'] && $platforms |= Platform::MAC;
+                            $data['vive'] && $platforms |= Platform::VIVE;
+                            $data['occulus'] && $platforms |= Platform::OCCULUS;
+                            $data['wmr'] && $platforms |= Platform::WMR;
 
                             return $platforms;
                         }
