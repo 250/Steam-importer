@@ -17,9 +17,10 @@ class PlayersSpecification extends ImportSpecification
 
         $this->addTransformer(
             new MappingTransformer(
-                new AnonymousMapping(
-                    new Copy('players_forever')
-                )
+                new AnonymousMapping([
+                    'players' => new Copy('players_forever'),
+                    'players_2w' => new Copy('players_2weeks'),
+                ])
             )
         );
     }

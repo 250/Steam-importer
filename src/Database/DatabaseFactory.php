@@ -24,7 +24,8 @@ final class DatabaseFactory
                 tags TEXT,
                 platforms INTEGER,
                 xtags INTEGER,
-                players INTEGER
+                players INTEGER,
+                players_2w INTEGER
             );'
         );
 

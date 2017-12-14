@@ -112,7 +112,7 @@ class Importer
             return;
         }
 
-        $review['players'] = self::$players[$review['id']];
+        $review += self::$players[$review['id']];
     }
 
     public function setChunks(int $chunks): void
