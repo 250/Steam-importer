@@ -20,6 +20,7 @@ final class Queries
         return $database->exec(
             "ATTACH '$chunkPath' AS chunk;
             INSERT OR IGNORE INTO app SELECT * FROM chunk.app;
+            INSERT OR IGNORE INTO app_tag SELECT * FROM chunk.app_tag;
             DETACH chunk"
         ) > 0;
     }

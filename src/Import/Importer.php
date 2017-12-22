@@ -10,6 +10,15 @@ use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
 use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;
 use ScriptFUSION\Steam250\Database\Queries;
 
+/**
+ * Imports Steam app data into a database with chunking support.
+ *
+ * The specified list of apps is decorated by downloading additional data for each app.
+ *
+ * By default every app is saved in the database whether or not it was successfully decorated. This is to avoid pausing
+ * to redecorate the same item if the import is restarted. "Lite" mode avoids saving undecorated records to the
+ * database, to save space, creating a "lighter" database.
+ */
 class Importer
 {
     public const DEFAULT_CHUNKS = 0;
@@ -90,6 +99,19 @@ class Importer
             }
 
             $this->decorateWithPlayers($review);
+
+            // Insert tags. TODO: Genres?
+            foreach ($review['tags'] ?? [] as $index => $tag) {
+                $this->database->insert(
+                    'app_tag',
+                    [
+                        'app_id' => $review['id'],
+                        'tag' => $tag,
+                        '`index`' => $index,
+                    ]
+                );
+            }
+            unset($review['tags']);
 
             /*
              * Insert data. In normal mode undecorated records are inserted for idempotence, allowing import to be

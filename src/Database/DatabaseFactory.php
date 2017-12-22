@@ -21,13 +21,17 @@ final class DatabaseFactory
                 positive_reviews INTEGER,
                 negative_reviews INTEGER,
                 release_date INTEGER,
-                tags TEXT,
                 platforms INTEGER,
-                xtags INTEGER,
                 players INTEGER,
                 players_2w INTEGER
-            );'
-        );
+            );
+            CREATE TABLE IF NOT EXISTS app_tag (
+                app_id INTEGER NOT NULL,
+                tag TEXT NOT NULL,
+                `index` INTEGER NOT NULL,
+                PRIMARY KEY(app_id, tag, `index`)
+            );
+        ');
 
         return $connection;
     }

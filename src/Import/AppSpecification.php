@@ -27,7 +27,7 @@ class AppSpecification extends ImportSpecification
                             return $data['release_date'] ? $data['release_date']->getTimestamp() : null;
                         }
                     ),
-                    'tags' => new Copy('tags->0'),
+                    'tags' => new Copy('tags'),
                     'positive_reviews' => new Copy('positive_reviews'),
                     'negative_reviews' => new Copy('negative_reviews'),
                     'total_reviews' => new Callback(
@@ -46,17 +46,6 @@ class AppSpecification extends ImportSpecification
                             $data['wmr'] && $platforms |= Platform::WMR;
 
                             return $platforms;
-                        }
-                    ),
-                    // Excluded tags.
-                    'xtags' => new Callback(
-                        function (array $data): int {
-                            return (int)(bool)array_intersect(
-                                $data['tags'],
-                                [
-                                    'Visual Novel',
-                                ]
-                            );
                         }
                     ),
                 ])
