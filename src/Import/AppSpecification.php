@@ -28,6 +28,7 @@ class AppSpecification extends ImportSpecification
                         }
                     ),
                     'tags' => new Copy('tags'),
+                    'discount' => new Copy('discount'),
                     'positive_reviews' => new Copy('positive_reviews'),
                     'negative_reviews' => new Copy('negative_reviews'),
                     'total_reviews' => new Callback(

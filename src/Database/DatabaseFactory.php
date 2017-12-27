@@ -22,6 +22,7 @@ final class DatabaseFactory
                 negative_reviews INTEGER,
                 release_date INTEGER,
                 platforms INTEGER,
+                discount INTEGER,
                 players INTEGER,
                 players_2w INTEGER
             );
