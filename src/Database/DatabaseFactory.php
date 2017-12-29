@@ -23,6 +23,7 @@ final class DatabaseFactory
                 release_date INTEGER,
                 platforms INTEGER,
                 discount INTEGER,
+                english INTEGER,
                 players INTEGER,
                 players_2w INTEGER
             );

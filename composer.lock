@@ -38,7 +38,7 @@
                 }
             ],
             "description": "Top 250 shared code library.",
-            "time": "2017-12-07T11:18:25+00:00"
+            "time": "2017-12-07 11:18:25"
         },
         {
             "name": "connectors/http",
@@ -82,7 +82,7 @@
                 }
             ],
             "description": "Provides an HTTP connector for Porter.",
-            "time": "2017-10-30T23:33:43+00:00"
+            "time": "2017-10-30 23:33:43"
         },
         {
             "name": "connectors/ssl",
@@ -731,7 +731,7 @@
                 "ioc",
                 "joomla"
             ],
-            "time": "2017-12-02T20:36:16+00:00"
+            "time": "2017-12-02 20:36:16"
         },
         {
             "name": "monolog/monolog",
@@ -817,12 +817,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "6f88e2d3ae3b18814cd7625381510fc892e5a25a"
+                "reference": "34a43c1469ada775aca3dd7fdbd34d51e86ce3f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/6f88e2d3ae3b18814cd7625381510fc892e5a25a",
-                "reference": "6f88e2d3ae3b18814cd7625381510fc892e5a25a",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/34a43c1469ada775aca3dd7fdbd34d51e86ce3f6",
+                "reference": "34a43c1469ada775aca3dd7fdbd34d51e86ce3f6",
                 "shasum": ""
             },
             "require": {
@@ -850,7 +850,7 @@
                 }
             ],
             "description": "Steam data provider for Porter.",
-            "time": "2017-12-27T12:24:42+00:00"
+            "time": "2017-12-29 18:21:54"
         },
         {
             "name": "psr/cache",
@@ -1171,7 +1171,7 @@
                 }
             ],
             "description": "Data import abstraction library.",
-            "time": "2017-11-10T14:54:25+00:00"
+            "time": "2017-11-10 14:54:25"
         },
         {
             "name": "scriptfusion/retry",
@@ -1617,7 +1617,7 @@
                 }
             ],
             "description": "Integrates Mapper to transform array collections using Mappings.",
-            "time": "2017-10-28T18:31:22+00:00"
+            "time": "2017-10-28 18:31:22"
         },
         {
             "name": "zendframework/zend-escaper",
