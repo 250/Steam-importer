@@ -1,7 +1,7 @@
 notifications:
   email: false
 
-sudo: false
+sudo: true
 
 language: php
 
