@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace ScriptFUSION\Steam250\Import;
+namespace ScriptFUSION\Steam250\Import\SteamSpy;
 
 use ScriptFUSION\Mapper\AnonymousMapping;
 use ScriptFUSION\Mapper\Strategy\Copy;
 use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
-use ScriptFUSION\Steam250\Import\SteamSpy\SpeamSpyResource;
 
 class PlayersSpecification extends ImportSpecification
 {

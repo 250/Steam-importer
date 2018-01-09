@@ -21,7 +21,7 @@ final class DatabaseStitcher
 
     public function stitch()
     {
-        $dbDir = dirname($this->database->getParams()['path']);
+        $dbDir = \dirname($this->database->getParams()['path']);
         $this->logger->info("Starting stitch in \"$dbDir\".");
 
         $chunks = [];

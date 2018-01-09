@@ -8,7 +8,7 @@ use Doctrine\DBAL\DriverManager;
 
 final class DatabaseFactory
 {
-    public function create(string $path): Connection
+    public function create(string $path = 'steam.sqlite'): Connection
     {
         $connection = DriverManager::getConnection(['url' => "sqlite:///$path"]);
 
@@ -23,7 +23,6 @@ final class DatabaseFactory
                 release_date INTEGER,
                 platforms INTEGER,
                 discount INTEGER,
-                english INTEGER,
                 players INTEGER,
                 players_2w INTEGER
             );
@@ -32,6 +31,16 @@ final class DatabaseFactory
                 tag TEXT NOT NULL,
                 `index` INTEGER NOT NULL,
                 PRIMARY KEY(app_id, tag, `index`)
+            );
+            CREATE TABLE IF NOT EXISTS patron_review (
+                app_id INTEGER NOT NULL,
+                profile_id TEXT NOT NULL,
+                positive INTEGER NOT NULL,
+                PRIMARY KEY(app_id, profile_id)
+            );
+            CREATE TABLE IF NOT EXISTS steam_profile (
+                profile_id TEXT PRIMARY KEY NOT NULL,
+                avatar_url TEXT NOT NULL
             );
         ');
 

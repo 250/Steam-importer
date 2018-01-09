@@ -55,6 +55,7 @@ jobs:
     - stage: Import app list
       script:
         - S250 applist > applist.json || exit
+        - S250 patron-import || exit
         - git add . &&
           git commit -m "Added applist for $TRAVIS_COMMIT." &&
           git push origin HEAD:$TRAVIS_BUILD_NUMBER

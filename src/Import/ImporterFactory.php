@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250\Import;
 
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 use ScriptFUSION\Steam250\Database\DatabaseFactory;
+use ScriptFUSION\Steam250\LoggerFactory;
 use ScriptFUSION\Steam250\PorterFactory;
 
 final class ImporterFactory
@@ -18,7 +17,7 @@ final class ImporterFactory
         $importer = new Importer(
             (new PorterFactory)->create(),
             (new DatabaseFactory)->create("steam.$extension"),
-            new Logger('Import', [new StreamHandler(STDERR, $verbose ? Logger::DEBUG : Logger::INFO)]),
+            (new LoggerFactory)->create('Import', $verbose),
             $appListPath
         );
         $importer->setChunks($chunks);

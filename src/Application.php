@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace ScriptFUSION\Steam250;
 
 use ScriptFUSION\Steam250\Import\ImportCommand;
+use ScriptFUSION\Steam250\Import\Patreon\PatronImportCommand;
 use ScriptFUSION\Steam250\Stitch\StitchCommand;
 
 final class Application
@@ -18,6 +19,7 @@ final class Application
             new ApplistCommand,
             new ImportCommand,
             new StitchCommand,
+            new PatronImportCommand,
         ]);
     }
 

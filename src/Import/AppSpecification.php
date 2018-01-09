@@ -29,11 +29,6 @@ class AppSpecification extends ImportSpecification
                     ),
                     'tags' => new Copy('tags'),
                     'discount' => new Copy('discount'),
-                    'english' => new Callback(
-                        function (array $data): int {
-                            return (int)\in_array('English', $data['languages'], true);
-                        }
-                    ),
                     'positive_reviews' => new Copy('positive_reviews'),
                     'negative_reviews' => new Copy('negative_reviews'),
                     'total_reviews' => new Callback(

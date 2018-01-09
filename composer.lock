@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "22a6a411cf2b7873ec8408ea5401ab25",
+    "content-hash": "8153165d12cff5bb744f34a002aabd7e",
     "packages": [
         {
             "name": "250/shared",
@@ -38,7 +38,7 @@
                 }
             ],
             "description": "Top 250 shared code library.",
-            "time": "2017-12-07 11:18:25"
+            "time": "2017-12-07T11:18:25+00:00"
         },
         {
             "name": "connectors/http",
@@ -46,12 +46,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Porter-connectors/HttpConnector.git",
-                "reference": "95ce3e1c4c0b13ef34a036c203c73d6d85630b41"
+                "reference": "493285a8b98b93be28ff0cf97620b629d959ead1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Porter-connectors/HttpConnector/zipball/95ce3e1c4c0b13ef34a036c203c73d6d85630b41",
-                "reference": "95ce3e1c4c0b13ef34a036c203c73d6d85630b41",
+                "url": "https://api.github.com/repos/Porter-connectors/HttpConnector/zipball/493285a8b98b93be28ff0cf97620b629d959ead1",
+                "reference": "493285a8b98b93be28ff0cf97620b629d959ead1",
                 "shasum": ""
             },
             "require": {
@@ -82,7 +82,7 @@
                 }
             ],
             "description": "Provides an HTTP connector for Porter.",
-            "time": "2017-10-30 23:33:43"
+            "time": "2018-01-01T12:51:48+00:00"
         },
         {
             "name": "connectors/ssl",
@@ -731,7 +731,7 @@
                 "ioc",
                 "joomla"
             ],
-            "time": "2017-12-02 20:36:16"
+            "time": "2017-12-02T20:36:16+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -812,17 +812,56 @@
             "time": "2017-06-19T01:22:40+00:00"
         },
         {
+            "name": "provider/patreon",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Provider/Patreon.git",
+                "reference": "32b23a58251c04d6ffcf5b510f9762b808db83bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Provider/Patreon/zipball/32b23a58251c04d6ffcf5b510f9762b808db83bc",
+                "reference": "32b23a58251c04d6ffcf5b510f9762b808db83bc",
+                "shasum": ""
+            },
+            "require": {
+                "connectors/http": "4.0.x-dev",
+                "php": "^7.1",
+                "scriptfusion/porter": "4.0.x-dev"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1",
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ScriptFUSION\\Porter\\Provider\\Patreon\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Bilge",
+                    "email": "bilge@scriptfusion.com"
+                }
+            ],
+            "description": "Patreon data provider for Porter.",
+            "time": "2018-01-05T19:41:31+00:00"
+        },
+        {
             "name": "provider/steam",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "34a43c1469ada775aca3dd7fdbd34d51e86ce3f6"
+                "reference": "4724ce139f7fc08921c3280c4e288e3bfeee4754"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/34a43c1469ada775aca3dd7fdbd34d51e86ce3f6",
-                "reference": "34a43c1469ada775aca3dd7fdbd34d51e86ce3f6",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/4724ce139f7fc08921c3280c4e288e3bfeee4754",
+                "reference": "4724ce139f7fc08921c3280c4e288e3bfeee4754",
                 "shasum": ""
             },
             "require": {
@@ -850,7 +889,7 @@
                 }
             ],
             "description": "Steam data provider for Porter.",
-            "time": "2017-12-29 18:21:54"
+            "time": "2018-01-07T19:31:14+00:00"
         },
         {
             "name": "psr/cache",
@@ -1171,7 +1210,7 @@
                 }
             ],
             "description": "Data import abstraction library.",
-            "time": "2017-11-10 14:54:25"
+            "time": "2017-11-10T14:54:25+00:00"
         },
         {
             "name": "scriptfusion/retry",
@@ -1287,16 +1326,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.4.2",
+            "version": "v3.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "9f21adfb92a9315b73ae2ed43138988ee4913d4e"
+                "reference": "8394c8ef121949e8f858f13bc1e34f05169e4e7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/9f21adfb92a9315b73ae2ed43138988ee4913d4e",
-                "reference": "9f21adfb92a9315b73ae2ed43138988ee4913d4e",
+                "url": "https://api.github.com/repos/symfony/console/zipball/8394c8ef121949e8f858f13bc1e34f05169e4e7d",
+                "reference": "8394c8ef121949e8f858f13bc1e34f05169e4e7d",
                 "shasum": ""
             },
             "require": {
@@ -1352,20 +1391,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14T19:40:10+00:00"
+            "time": "2018-01-03T07:37:34+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.4.2",
+            "version": "v3.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "eac760b414cf1f64362c3dd047b989e4db121332"
+                "reference": "e66394bc7610e69279bfdb3ab11b4fe65403f556"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/eac760b414cf1f64362c3dd047b989e4db121332",
-                "reference": "eac760b414cf1f64362c3dd047b989e4db121332",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/e66394bc7610e69279bfdb3ab11b4fe65403f556",
+                "reference": "e66394bc7610e69279bfdb3ab11b4fe65403f556",
                 "shasum": ""
             },
             "require": {
@@ -1405,20 +1444,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14T19:40:10+00:00"
+            "time": "2018-01-03T07:37:34+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v4.0.2",
+            "version": "v4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "8c3e709209ce3b952a31c0f4a31ac7703c3d0226"
+                "reference": "9ae4223a661b56a9abdce144de4886cca37f198f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/8c3e709209ce3b952a31c0f4a31ac7703c3d0226",
-                "reference": "8c3e709209ce3b952a31c0f4a31ac7703c3d0226",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/9ae4223a661b56a9abdce144de4886cca37f198f",
+                "reference": "9ae4223a661b56a9abdce144de4886cca37f198f",
                 "shasum": ""
             },
             "require": {
@@ -1461,20 +1500,20 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-12T08:41:51+00:00"
+            "time": "2018-01-03T17:15:19+00:00"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.4.2",
+            "version": "v3.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "dc847845c66fa68ad4522ed27e62b9b9dd12ab3b"
+                "reference": "09bd97b844b3151fab82f2fdd62db9c464b3910a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/dc847845c66fa68ad4522ed27e62b9b9dd12ab3b",
-                "reference": "dc847845c66fa68ad4522ed27e62b9b9dd12ab3b",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/09bd97b844b3151fab82f2fdd62db9c464b3910a",
+                "reference": "09bd97b844b3151fab82f2fdd62db9c464b3910a",
                 "shasum": ""
             },
             "require": {
@@ -1517,7 +1556,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14T19:40:10+00:00"
+            "time": "2018-01-03T07:37:34+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1617,7 +1656,7 @@
                 }
             ],
             "description": "Integrates Mapper to transform array collections using Mappings.",
-            "time": "2017-10-28 18:31:22"
+            "time": "2017-10-28T18:31:22+00:00"
         },
         {
             "name": "zendframework/zend-escaper",
@@ -1833,6 +1872,7 @@
     "stability-flags": {
         "250/shared": 20,
         "provider/steam": 20,
+        "provider/patreon": 20,
         "transformers/mapping-transformer": 20,
         "scriptfusion/porter": 20,
         "connectors/http": 20,

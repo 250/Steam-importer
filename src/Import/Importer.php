@@ -9,6 +9,7 @@ use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
 use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;
 use ScriptFUSION\Steam250\Database\Queries;
+use ScriptFUSION\Steam250\Import\SteamSpy\PlayersSpecification;
 
 /**
  * Imports Steam app data into a database with chunking support.
@@ -100,7 +101,7 @@ class Importer
 
             $this->decorateWithPlayers($review);
 
-            // Insert tags. TODO: Genres?
+            // Insert tags.
             foreach ($review['tags'] ?? [] as $index => $tag) {
                 $this->database->insert(
                     'app_tag',
