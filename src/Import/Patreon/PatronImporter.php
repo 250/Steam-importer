@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Collection\UsersReviewsRecords;
 use ScriptFUSION\Porter\Provider\Steam\Resource\ScrapeUserReviews;
+use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;
 use ScriptFUSION\Porter\Specification\ImportSpecification;
 
 class PatronImporter
@@ -28,7 +29,7 @@ class PatronImporter
         $pledges = $this->porter->import(new PledgesSpecification);
 
         foreach ($pledges as $pledge) {
-            if (!preg_match('[https?://steamcommunity.com/(id/[^/]+|profiles/\d+)/]', "$pledge[about]", $matches)) {
+            if (!preg_match('[https?://steamcommunity.com/(id/[^/]+?|profiles/\d+)/?\b]', "$pledge[about]", $matches)) {
                 $this->logger->debug("Could not extract Steam ID from: \"$pledge[about]\"");
 
                 continue;
@@ -37,7 +38,13 @@ class PatronImporter
             $profileId = $matches[1];
             $this->logger->info("Importing \"$profileId\"...");
 
-            $reviews = $this->porter->import(new ImportSpecification(new ScrapeUserReviews($matches[0])));
+            try {
+                $reviews = $this->porter->import(new ImportSpecification(new ScrapeUserReviews($matches[0])));
+            } catch (ParserException $exception) {
+                $this->logger->error("Could not parse \"$profileId\". Maybe there are no public reviews?");
+
+                continue;
+            }
             /** @var UsersReviewsRecords $meta */
             $meta = $reviews->findFirstCollection();
 
