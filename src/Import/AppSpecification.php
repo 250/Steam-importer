@@ -4,10 +4,8 @@ declare(strict_types=1);
 namespace ScriptFUSION\Steam250\Import;
 
 use ScriptFUSION\Mapper\AnonymousMapping;
-use ScriptFUSION\Mapper\DataType;
 use ScriptFUSION\Mapper\Strategy\Callback;
 use ScriptFUSION\Mapper\Strategy\Copy;
-use ScriptFUSION\Mapper\Strategy\Type;
 use ScriptFUSION\Porter\Provider\Steam\Resource\ScrapeAppDetails;
 use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
@@ -30,8 +28,9 @@ class AppSpecification extends ImportSpecification
                         }
                     ),
                     'tags' => new Copy('tags'),
+                    'price' => new Copy('price'),
+                    'discount_price' => new Copy('discount_price'),
                     'discount' => new Copy('discount'),
-                    'free' => new Type(DataType::INTEGER(), new Copy('is_free')),
                     'positive_reviews' => new Copy('positive_reviews'),
                     'negative_reviews' => new Copy('negative_reviews'),
                     'total_reviews' => new Callback(
