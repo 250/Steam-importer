@@ -31,8 +31,8 @@ final class DatabaseFactory
             CREATE TABLE IF NOT EXISTS app_tag (
                 app_id INTEGER NOT NULL,
                 tag TEXT NOT NULL,
-                `index` INTEGER NOT NULL,
-                PRIMARY KEY(app_id, tag, `index`)
+                votes INTEGER NOT NULL,
+                PRIMARY KEY(app_id, tag)
             );
             CREATE TABLE IF NOT EXISTS patron_review (
                 app_id INTEGER NOT NULL,

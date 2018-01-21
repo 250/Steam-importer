@@ -18,7 +18,9 @@ final class PorterFactory
 
         $container->set(SteamProvider::class, new SteamProvider);
         $container->set(SteamSpyProvider::class, new SteamSpyProvider);
-        $container->set(PatreonProvider::class, new PatreonProvider(new PatreonConnector($_SERVER['PATREON_API_KEY'])));
+        $container->set(PatreonProvider::class, function () {
+            return new PatreonProvider(new PatreonConnector($_SERVER['PATREON_API_KEY']));
+        });
 
         return $porter;
     }

@@ -39,12 +39,13 @@ before_script:
       -c credential.helper=store
   - cd "$datadir" && git fetch origin $TRAVIS_BUILD_NUMBER && git checkout -b $TRAVIS_BUILD_NUMBER FETCH_HEAD || true
 
-  - mkdir -pv "${builddir=$datadir/$(date -u +%Y%m/%d)/$TRAVIS_BUILD_NUMBER}"
+  - date=$([[ -e date ]] && cat date || date -u +%Y%m/%d)
+  - mkdir -pv "${builddir=$datadir/$date/$TRAVIS_BUILD_NUMBER}"
   - S250() { "$TRAVIS_BUILD_DIR/bin/250" "$@"; }
   - cd "$builddir"
 
 script:
-  - S250 import --lite -c ${chunks=12} -i $chunk applist.json || exit
+  - S250 import --lite -c ${chunks=12} -i $chunk --steam-spy steamspy.json applist.json || exit
   - git add . &&
     git checkout -b ${branch=$TRAVIS_BUILD_NUMBER.$chunk} &&
     git commit -m "Added database chunk $chunk/$chunks for $TRAVIS_COMMIT." &&
@@ -54,7 +55,9 @@ jobs:
   include:
     - stage: Import app list
       script:
+        - echo "$date" > date
         - S250 applist > applist.json || exit
+        - S250 steam-spy > steamspy.json || exit
         - S250 patron-import || exit
         - git add . &&
           git commit -m "Added applist for $TRAVIS_COMMIT." &&

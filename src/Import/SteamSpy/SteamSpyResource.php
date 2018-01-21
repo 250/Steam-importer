@@ -7,7 +7,7 @@ use ScriptFUSION\Porter\Connector\ImportConnector;
 use ScriptFUSION\Porter\Options\EncapsulatedOptions;
 use ScriptFUSION\Porter\Provider\Resource\ProviderResource;
 
-class SpeamSpyResource implements ProviderResource
+class SteamSpyResource implements ProviderResource
 {
     public function getProviderClassName(): string
     {

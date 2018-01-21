@@ -32,6 +32,7 @@ final class ImportCommand extends Command
                 Importer::DEFAULT_CHUNK_INDEX
             )
             ->addOption('lite', null, null, 'Do not insert invalid apps or apps with no reviews.')
+            ->addOption('steam-spy', null, InputOption::VALUE_REQUIRED, 'Path to Steam Spy data in JSON format.')
         ;
     }
 
@@ -44,6 +45,7 @@ final class ImportCommand extends Command
             $input->getOption('verbose')
         );
         $importer->setLite($input->getOption('lite'));
+        $importer->setSteamSpyPath($input->getOption('steam-spy'));
 
         $importer->import();
 

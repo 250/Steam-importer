@@ -32,6 +32,7 @@ class Importer
     private $chunks = self::DEFAULT_CHUNKS;
     private $chunkIndex = self::DEFAULT_CHUNK_INDEX;
     private $lite = false;
+    private $steamSpyPath;
 
     private static $players;
 
@@ -99,16 +100,18 @@ class Importer
                 $this->logger->debug("#$review[id] $review[name]: no reviews.");
             }
 
-            $this->decorateWithPlayers($review);
+            if ($this->steamSpyPath) {
+                $this->decorateWithPlayers($review);
+            }
 
             // Insert tags.
-            foreach ($review['tags'] ?? [] as $index => $tag) {
+            foreach ($review['tags'] ?? [] as $tag) {
                 $this->database->insert(
                     'app_tag',
                     [
                         'app_id' => $review['id'],
-                        'tag' => $tag,
-                        '`index`' => $index,
+                        'tag' => $tag['name'],
+                        'votes' => $tag['count'],
                     ]
                 );
             }
@@ -127,7 +130,8 @@ class Importer
 
     private function decorateWithPlayers(array &$review): void
     {
-        self::$players || self::$players = iterator_to_array($this->porter->import(new PlayersSpecification));
+        self::$players || self::$players =
+            iterator_to_array($this->porter->import(new PlayersSpecification($this->steamSpyPath)));
 
         if (!isset(self::$players[$review['id']])) {
             $this->logger->debug("Players not found for $review[id] $review[name].");
@@ -151,5 +155,10 @@ class Importer
     public function setLite(bool $lite): void
     {
         $this->lite = $lite;
+    }
+
+    public function setSteamSpyPath(string $steamSpyPath): void
+    {
+        $this->steamSpyPath = $steamSpyPath;
     }
 }

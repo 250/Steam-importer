@@ -17,6 +17,7 @@ final class Application
 
         $app->addCommands([
             new ApplistCommand,
+            new SteamSpyCommand,
             new ImportCommand,
             new StitchCommand,
             new PatronImportCommand,
