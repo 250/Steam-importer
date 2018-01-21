@@ -48,6 +48,15 @@ class PatronImporter
             /** @var UsersReviewsRecords $meta */
             $meta = $reviews->findFirstCollection();
 
+            $this->database->executeUpdate(
+                'INSERT OR REPLACE INTO steam_profile (profile_id, avatar_url)
+                        VALUES (:profile_id, :avatar_url)',
+                [
+                    'profile_id' => $profileId,
+                    'avatar_url' => $meta->getAvatarUrl(),
+                ]
+            );
+
             foreach ($reviews as $review) {
                 $appId = $review['app_id'];
                 $positive = (int)$review['positive'];
@@ -56,15 +65,6 @@ class PatronImporter
                     "INSERT OR REPLACE INTO patron_review (app_id, profile_id, positive)
                         VALUES ($appId, :profile_id, $positive)",
                     ['profile_id' => $profileId]
-                );
-
-                $this->database->executeUpdate(
-                    "INSERT OR REPLACE INTO steam_profile (profile_id, avatar_url)
-                        VALUES (:profile_id, :avatar_url)",
-                    [
-                        'profile_id' => $profileId,
-                        'avatar_url' => $meta->getAvatarUrl(),
-                    ]
                 );
 
                 $this->logger->info("App ID $appId is " . ($positive ? 'positive' : 'negative') . '.');

@@ -20,8 +20,7 @@ class PledgesSpecification extends ImportSpecification
         parent::__construct(new GetPledges(1405455));
 
         $this->addTransformers([
-            new class extends MappingTransformer
-            {
+            new class extends MappingTransformer {
                 public function __construct()
                 {
                     parent::__construct(new AnonymousMapping([
@@ -47,7 +46,7 @@ class PledgesSpecification extends ImportSpecification
             },
             new FilterTransformer(function (array $data) {
                 return $data['reward'] >= 500;
-            })
+            }),
         ]);
     }
 }

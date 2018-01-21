@@ -39,7 +39,8 @@ before_script:
       -c credential.helper=store
   - cd "$datadir" && git fetch origin $TRAVIS_BUILD_NUMBER && git checkout -b $TRAVIS_BUILD_NUMBER FETCH_HEAD || true
 
-  - date=$([[ -e date ]] && cat date || date -u +%Y%m/%d)
+  - marker=$TRAVIS_BUILD_NUMBER.date; [[ -e $marker ]] && echo Date marker found. || echo No date marker.
+  - date=$([[ -e $marker ]] && cat $marker || date -u +%Y%m/%d | tee $marker); echo $date
   - mkdir -pv "${builddir=$datadir/$date/$TRAVIS_BUILD_NUMBER}"
   - S250() { "$TRAVIS_BUILD_DIR/bin/250" "$@"; }
   - cd "$builddir"
@@ -55,11 +56,10 @@ jobs:
   include:
     - stage: Import app list
       script:
-        - echo "$date" > date
         - S250 applist > applist.json || exit
         - S250 steam-spy > steamspy.json || exit
         - S250 patron-import || exit
-        - git add . &&
+        - git add "$datadir" &&
           git commit -m "Added applist for $TRAVIS_COMMIT." &&
           git push origin HEAD:$TRAVIS_BUILD_NUMBER
 
@@ -72,6 +72,7 @@ jobs:
 
         - S250 stitch . &&
           git add -A . &&
+          git rm "$datadir/$marker" &&
           git commit -m "Added stitched database for $TRAVIS_COMMIT." &&
           git push origin $TRAVIS_BUILD_NUMBER &&
           git push -d origin "${branches[@]}"
