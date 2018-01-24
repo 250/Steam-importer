@@ -21,6 +21,9 @@ env:
   - chunk=10
   - chunk=11
   - chunk=12
+  - chunk=13
+  - chunk=14
+  - chunk=15
 
 cache:
   directories:
@@ -46,7 +49,7 @@ before_script:
   - cd "$builddir"
 
 script:
-  - S250 import --lite -c ${chunks=12} -i $chunk --steam-spy steamspy.json applist.json || exit
+  - S250 import --lite -c ${chunks=15} -i $chunk --steam-spy steamspy.json applist.json || exit
   - git add . &&
     git checkout -b ${branch=$TRAVIS_BUILD_NUMBER.$chunk} &&
     git commit -m "Added database chunk $chunk/$chunks for $TRAVIS_COMMIT." &&
