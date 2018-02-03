@@ -9,7 +9,7 @@ use ScriptFUSION\Porter\Provider\Resource\StaticResource;
 use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
 
-class PlayersSpecification extends ImportSpecification
+class SteamSpySpecification extends ImportSpecification
 {
     public function __construct(string $steamSpyDataPath)
     {
@@ -20,6 +20,7 @@ class PlayersSpecification extends ImportSpecification
         $this->addTransformer(
             new MappingTransformer(
                 new AnonymousMapping([
+                    'owners' => new Copy('owners'),
                     'players' => new Copy('players_forever'),
                     'players_2w' => new Copy('players_2weeks'),
                 ])

@@ -9,7 +9,7 @@ use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
 use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;
 use ScriptFUSION\Steam250\Database\Queries;
-use ScriptFUSION\Steam250\Import\SteamSpy\PlayersSpecification;
+use ScriptFUSION\Steam250\Import\SteamSpy\SteamSpySpecification;
 
 /**
  * Imports Steam app data into a database with chunking support.
@@ -34,7 +34,7 @@ class Importer
     private $lite = false;
     private $steamSpyPath;
 
-    private static $players;
+    private static $steamSpyData;
 
     public function __construct(Porter $porter, Connection $database, LoggerInterface $logger, string $appListPath)
     {
@@ -101,7 +101,7 @@ class Importer
             }
 
             if ($this->steamSpyPath) {
-                $this->decorateWithPlayers($review);
+                $this->decorateWithSteamSpyData($review);
             }
 
             // Insert tags.
@@ -128,18 +128,18 @@ class Importer
         $this->logger->info('Finished :^)');
     }
 
-    private function decorateWithPlayers(array &$review): void
+    private function decorateWithSteamSpyData(array &$review): void
     {
-        self::$players || self::$players =
-            iterator_to_array($this->porter->import(new PlayersSpecification($this->steamSpyPath)));
+        self::$steamSpyData || self::$steamSpyData =
+            iterator_to_array($this->porter->import(new SteamSpySpecification($this->steamSpyPath)));
 
-        if (!isset(self::$players[$review['id']])) {
+        if (!isset(self::$steamSpyData[$review['id']])) {
             $this->logger->debug("Players not found for $review[id] $review[name].");
 
             return;
         }
 
-        $review += self::$players[$review['id']];
+        $review += self::$steamSpyData[$review['id']];
     }
 
     public function setChunks(int $chunks): void

@@ -25,6 +25,7 @@ final class DatabaseFactory
                 price INTEGER,
                 discount_price INTEGER,
                 discount INTEGER,
+                owners INTEGER,
                 players INTEGER,
                 players_2w INTEGER
             );
