@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8153165d12cff5bb744f34a002aabd7e",
+    "content-hash": "5d160dee6877fdb33972ebdaf0478828",
     "packages": [
         {
             "name": "250/shared",
@@ -683,33 +683,33 @@
         },
         {
             "name": "joomla/di",
-            "version": "dev-2.0-dev",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joomla-framework/di.git",
-                "reference": "5e373c5530d6c8e8ca2cbae3ecadc0314838d2e5"
+                "reference": "da21d37589706da13eca0bb075452c851821ea3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla-framework/di/zipball/5e373c5530d6c8e8ca2cbae3ecadc0314838d2e5",
-                "reference": "5e373c5530d6c8e8ca2cbae3ecadc0314838d2e5",
+                "url": "https://api.github.com/repos/joomla-framework/di/zipball/da21d37589706da13eca0bb075452c851821ea3b",
+                "reference": "da21d37589706da13eca0bb075452c851821ea3b",
                 "shasum": ""
             },
             "require": {
-                "php": "~7.0",
+                "php": "^5.3.10|~7.0",
                 "psr/container": "~1.0"
             },
             "provide": {
                 "psr/container-implementation": "~1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~6.3",
+                "phpunit/phpunit": "^4.8.35|^5.4.3|~6.0",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "type": "joomla-package",
             "extra": {
                 "branch-alias": {
-                    "dev-2.0-dev": "2.0-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -719,7 +719,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "description": "Joomla DI Package",
             "homepage": "https://github.com/joomla-framework/di",
@@ -731,7 +731,7 @@
                 "ioc",
                 "joomla"
             ],
-            "time": "2017-12-02T20:36:16+00:00"
+            "time": "2018-02-09T00:35:34+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -856,12 +856,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "254cf7f323ae7423180ed1517030a614ca313365"
+                "reference": "a86432e26313b87b110f0b5816d9a59a676a9ac7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/254cf7f323ae7423180ed1517030a614ca313365",
-                "reference": "254cf7f323ae7423180ed1517030a614ca313365",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/a86432e26313b87b110f0b5816d9a59a676a9ac7",
+                "reference": "a86432e26313b87b110f0b5816d9a59a676a9ac7",
                 "shasum": ""
             },
             "require": {
@@ -889,7 +889,7 @@
                 }
             ],
             "description": "Steam data provider for Porter.",
-            "time": "2018-01-20T23:11:40+00:00"
+            "time": "2018-02-21T14:27:56+00:00"
         },
         {
             "name": "psr/cache",
@@ -1326,16 +1326,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.4.3",
+            "version": "v3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "8394c8ef121949e8f858f13bc1e34f05169e4e7d"
+                "reference": "26b6f419edda16c19775211987651cb27baea7f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/8394c8ef121949e8f858f13bc1e34f05169e4e7d",
-                "reference": "8394c8ef121949e8f858f13bc1e34f05169e4e7d",
+                "url": "https://api.github.com/repos/symfony/console/zipball/26b6f419edda16c19775211987651cb27baea7f1",
+                "reference": "26b6f419edda16c19775211987651cb27baea7f1",
                 "shasum": ""
             },
             "require": {
@@ -1391,11 +1391,11 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:37:34+00:00"
+            "time": "2018-01-29T09:03:43+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.4.3",
+            "version": "v3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -1448,16 +1448,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v4.0.3",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "9ae4223a661b56a9abdce144de4886cca37f198f"
+                "reference": "c77bb31d0f6310a2ac11e657475d396a92e5dc54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/9ae4223a661b56a9abdce144de4886cca37f198f",
-                "reference": "9ae4223a661b56a9abdce144de4886cca37f198f",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/c77bb31d0f6310a2ac11e657475d396a92e5dc54",
+                "reference": "c77bb31d0f6310a2ac11e657475d396a92e5dc54",
                 "shasum": ""
             },
             "require": {
@@ -1500,11 +1500,11 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T17:15:19+00:00"
+            "time": "2018-01-18T22:19:33+00:00"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.4.3",
+            "version": "v3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
@@ -1560,16 +1560,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.6.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296"
+                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
-                "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
                 "shasum": ""
             },
             "require": {
@@ -1581,7 +1581,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -1615,7 +1615,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-10-11T12:05:26+00:00"
+            "time": "2018-01-30T19:27:44+00:00"
         },
         {
             "name": "transformers/mapping-transformer",
@@ -1796,16 +1796,16 @@
         },
         {
             "name": "zendframework/zend-validator",
-            "version": "2.10.1",
+            "version": "2.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-validator.git",
-                "reference": "010084ddbd33299bf51ea6f0e07f8f4e8bd832a8"
+                "reference": "38109ed7d8e46cfa71bccbe7e6ca80cdd035f8c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/010084ddbd33299bf51ea6f0e07f8f4e8bd832a8",
-                "reference": "010084ddbd33299bf51ea6f0e07f8f4e8bd832a8",
+                "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/38109ed7d8e46cfa71bccbe7e6ca80cdd035f8c9",
+                "reference": "38109ed7d8e46cfa71bccbe7e6ca80cdd035f8c9",
                 "shasum": ""
             },
             "require": {
@@ -1840,8 +1840,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.10-dev",
-                    "dev-develop": "2.11-dev"
+                    "dev-master": "2.10.x-dev",
+                    "dev-develop": "2.11.x-dev"
                 },
                 "zf": {
                     "component": "Zend\\Validator",
@@ -1863,7 +1863,7 @@
                 "validator",
                 "zf2"
             ],
-            "time": "2017-08-22T14:19:23+00:00"
+            "time": "2018-02-01T17:05:33+00:00"
         }
     ],
     "packages-dev": [],
@@ -1875,8 +1875,7 @@
         "provider/patreon": 20,
         "transformers/mapping-transformer": 20,
         "scriptfusion/porter": 20,
-        "connectors/http": 20,
-        "joomla/di": 20
+        "connectors/http": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
