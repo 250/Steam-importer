@@ -5,7 +5,9 @@ namespace ScriptFUSION\Steam250\Import;
 
 use Amp\Artax\Client;
 use Amp\Artax\DefaultClient;
+use Amp\Artax\Response;
 use Amp\Loop;
+use Amp\Promise;
 use Psr\Log\LoggerInterface;
 use ScriptFUSION\Porter\Collection\CountablePorterRecords;
 use ScriptFUSION\Porter\Porter;
@@ -70,32 +72,35 @@ class ImportAsync
 
     private function request(string $url, array $app, int $current, int $total): void
     {
-        ++$this->requests;
-        ++$this->requestId;
-        ++$this->activeRequests;
+        \Amp\call(function () use ($url, $app, $current, $total) {
+            ++$this->requests;
+            ++$this->requestId;
+            ++$this->activeRequests;
 
-        $this->client->request($url)->onResolve(function ($error, $response) use ($app, $current, $total) {
-            --$this->activeRequests;
-
-            if ($error) {
-                $this->logger->error("REQ $app[id]: $error");
+            try {
+                /** @var Response $response */
+                $response = yield $this->client->request($url);
+            } catch (\Throwable $throwable) {
+                $this->logger->error("REQ $app[id]: $throwable");
 
                 return;
             }
 
-            $response->getBody()->onResolve(function ($error, $body) use ($app) {
-                if ($error) {
-                    $this->logger->error("BODY $app[id]: $error");
+            --$this->activeRequests;
 
-                    return;
-                }
+            try {
+                $body = yield $response->getBody();
+            } catch (\Throwable $throwable) {
+                $this->logger->error("BODY $app[id]: $throwable");
 
-                file_put_contents('php://memory', $body);
-//                        file_put_contents("$app[id].html", $body);
-            });
+                return;
+            }
 
-//            $this->logger->debug("Completed app #$app[id] ($current/$total)... AR: $this->activeRequests");
-            $this->logger->debug("Completed app #$app[id] ($current/$total)... HTTP: {$response->getStatus()}");
+            file_put_contents('php://memory', $body);
+//            file_put_contents("$app[id].html", $body);
+
+            $this->logger->debug("Completed app #$app[id] ($current/$total)... AR: $this->activeRequests");
+//            $this->logger->debug("Completed app #$app[id] ($current/$total)... HTTP: {$response->getStatus()}");
         });
     }
 
