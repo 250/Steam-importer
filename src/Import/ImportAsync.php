@@ -13,12 +13,19 @@ use ScriptFUSION\Porter\Porter;
 class ImportAsync
 {
     private const MAX_REQUESTS = 40;
+    private const REQ_PER_SEC = 20;
 
     private $porter;
     private $logger;
     private $client;
-    private $activeRequests = 0;
     private $requestId = 1;
+
+    // Concurrency limit.
+    private $activeRequests = 0;
+    private $requests = 0;
+
+    // Rate limit.
+    private $startTime;
 
     public function __construct(Porter $porter, LoggerInterface $logger)
     {
@@ -30,9 +37,11 @@ class ImportAsync
 
     public function import(string $appListPath): bool
     {
-        $appList = $this->porter->import(new AppListSpecification($appListPath, 15, 14));
+        $appList = $this->porter->import(new AppListSpecification($appListPath, 1000, 14));
 
         Loop::run(function () use ($appList) {
+            $this->startTime = time();
+
             $this->scheduleRequests(null, $appList);
         });
 
@@ -45,10 +54,10 @@ class ImportAsync
     {
         $total = \count($appList);
 
-        while ($appList->valid() && $this->activeRequests < self::MAX_REQUESTS) {
+        while ($appList->valid() && $this->canRequest()) {
             $app = $appList->current();
-            $url = "http://store.steampowered.com/app/$app[id]/?cc=us";
-//        $url = 'http://example.com';
+//            $url = "http://store.steampowered.com/app/$app[id]/?cc=us";
+            $url = 'http://example.com';
 
             $this->logger->debug("Importing app #$app[id] ($this->requestId/$total)...");
             $this->request($url, $app, $this->requestId, $total);
@@ -61,6 +70,7 @@ class ImportAsync
 
     private function request(string $url, array $app, int $current, int $total): void
     {
+        ++$this->requests;
         ++$this->requestId;
         ++$this->activeRequests;
 
@@ -87,5 +97,10 @@ class ImportAsync
 //            $this->logger->debug("Completed app #$app[id] ($current/$total)... AR: $this->activeRequests");
             $this->logger->debug("Completed app #$app[id] ($current/$total)... HTTP: {$response->getStatus()}");
         });
+    }
+
+    private function canRequest(): bool
+    {
+        return $this->requests / max(1, time() - $this->startTime) < self::REQ_PER_SEC;
     }
 }
