@@ -42,6 +42,13 @@ class RequestThrottle
         return $promise->promise();
     }
 
+    public function finish(): Promise
+    {
+        return \Amp\call(function () {
+            yield $this->requests;
+        });
+    }
+
     public function registerRequest(Promise $request): void
     {
         $this->startTime === null && $this->startTime = self::getTime();

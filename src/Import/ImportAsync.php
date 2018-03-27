@@ -66,6 +66,8 @@ class ImportAsync
 
                 $appList->next();
             }
+
+            yield $this->throttle->finish();
          });
     }
 
