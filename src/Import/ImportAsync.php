@@ -21,6 +21,7 @@ class ImportAsync
     private $logger;
     private $client;
     private $requestId = 1;
+    private $throttle;
 
     // Concurrency limit.
     private $activeRequests = 0;
@@ -35,16 +36,15 @@ class ImportAsync
         $this->logger = $logger;
         $this->client = new DefaultClient;
         $this->client->setOption(Client::OP_MAX_REDIRECTS, 0);
+        $this->throttle = new Throttle;
     }
 
     public function import(string $appListPath): bool
     {
-        $appList = $this->porter->import(new AppListSpecification($appListPath, 1000, 14));
+        $appList = $this->porter->import(new AppListSpecification($appListPath, 1, 1));
 
         Loop::run(function () use ($appList) {
-            $this->startTime = time();
-
-            $this->scheduleRequests(null, $appList);
+            $this->scheduleRequests($appList);
         });
 
         $this->logger->info('We did it REDDIT!');
@@ -52,27 +52,42 @@ class ImportAsync
         return true;
     }
 
-    public function scheduleRequests(?string $watcherId, CountablePorterRecords $appList): void
+    public function scheduleRequests(CountablePorterRecords $appList): void
     {
-        $total = \count($appList);
+        $this->startTime = time();
 
-        while ($appList->valid() && $this->canRequest()) {
-            $app = $appList->current();
-//            $url = "http://store.steampowered.com/app/$app[id]/?cc=us";
-            $url = 'http://example.com';
-
-            $this->logger->debug("Importing app #$app[id] ($this->requestId/$total)...");
-            $this->request($url, $app, $this->requestId, $total);
-
-            $appList->next();
-        }
-
-        $appList->valid() && Loop::delay(100, [$this, __FUNCTION__], $appList);
+        $this->scheduleNextRequests($appList);
     }
 
-    private function request(string $url, array $app, int $current, int $total): void
+    private function scheduleNextRequests(CountablePorterRecords $appList): void
     {
-        \Amp\call(function () use ($url, $app, $current, $total) {
+        \Amp\call(function () use ($appList) {
+            $total = \count($appList);
+
+            while ($appList->valid()) {
+                $app = $appList->current();
+                $url = "http://store.steampowered.com/app/$app[id]/?cc=us";
+//                $url = 'http://example.com';
+
+                $this->logger->debug("Importing app #$app[id] ($this->requestId/$total)...");
+                $this->throttle->registerRequest($this->request($url, $app, $this->requestId, $total));
+                yield $this->throttle->await();
+
+                $appList->next();
+            }
+
+            $appList->valid() && Loop::delay(
+                100,
+                function () use ($appList) {
+                    $this->scheduleNextRequests($appList);
+                }
+            );
+        });
+    }
+
+    private function request(string $url, array $app, int $current, int $total): Promise
+    {
+        return \Amp\call(function () use ($url, $app, $current, $total) {
             ++$this->requests;
             ++$this->requestId;
             ++$this->activeRequests;
@@ -84,9 +99,9 @@ class ImportAsync
                 $this->logger->error("REQ $app[id]: $throwable");
 
                 return;
+            } finally {
+                --$this->activeRequests;
             }
-
-            --$this->activeRequests;
 
             try {
                 $body = yield $response->getBody();
@@ -96,16 +111,19 @@ class ImportAsync
                 return;
             }
 
-            file_put_contents('php://memory', $body);
+//            file_put_contents('php://memory', $body);
 //            file_put_contents("$app[id].html", $body);
 
-            $this->logger->debug("Completed app #$app[id] ($current/$total)... AR: $this->activeRequests");
-//            $this->logger->debug("Completed app #$app[id] ($current/$total)... HTTP: {$response->getStatus()}");
+            $this->logger->debug(
+                "Completed app #$app[id] ($current/$total)... HTTP: {$response->getStatus()}"
+                    . " AR: $this->activeRequests"
+            );
         });
     }
 
     private function canRequest(): bool
     {
-        return $this->requests / max(1, time() - $this->startTime) < self::REQ_PER_SEC;
+        #return $this->requests / max(1, time() - $this->startTime) < self::REQ_PER_SEC;
+        return $this->activeRequests < self::MAX_REQUESTS;
     }
 }
