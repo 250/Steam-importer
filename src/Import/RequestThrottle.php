@@ -10,7 +10,7 @@ use Amp\Promise;
 class RequestThrottle
 {
     /**
-     * The number of milliseconds to wait when the request frequency crosses the threshold.
+     * Milliseconds to wait when the request frequency crosses the threshold.
      */
     private const RETRY_DELAY = 100;
 
@@ -40,6 +40,13 @@ class RequestThrottle
         $this->tryFulfilPromises();
 
         return $promise->promise();
+    }
+
+    public function finish(): Promise
+    {
+        return \Amp\call(function () {
+            yield $this->requests;
+        });
     }
 
     public function registerRequest(Promise $request): void
