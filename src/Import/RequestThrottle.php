@@ -26,7 +26,7 @@ class RequestThrottle
 
     private $maxConcurrentRequests = 20;
 
-    private $maxRequestsPerSecond = 20;
+    private $maxRequestsPerSecond = 200;
 
     private $totalRequests = 0;
 

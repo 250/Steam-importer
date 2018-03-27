@@ -7,6 +7,7 @@ use Amp\Artax\Client;
 use Amp\Artax\DefaultClient;
 use Amp\Artax\Response;
 use Amp\Loop;
+use Amp\Producer;
 use Amp\Promise;
 use Psr\Log\LoggerInterface;
 use ScriptFUSION\Porter\Collection\CountablePorterRecords;
@@ -35,19 +36,23 @@ class ImportAsync
     {
         $appList = $this->porter->import(new AppListSpecification($appListPath, 1500, 14));
 
-//        Loop::run(function () use ($appList) {
-//            yield $this->scheduleRequests($appList);
-//        });
-        \Amp\Promise\wait($this->scheduleRequests($appList));
+        $plainResponses = [];
+        Loop::run(function () use ($appList, &$plainResponses) {
+            $responses = $this->scheduleRequests($appList);
+
+            while (yield $responses->advance()) {
+                $plainResponses[] = $responses->getCurrent();
+            }
+        });
 
         $this->logger->info('We did it REDDIT!');
 
         return true;
     }
 
-    private function scheduleRequests(CountablePorterRecords $appList): Promise
+    private function scheduleRequests(CountablePorterRecords $appList): Producer
     {
-         return \Amp\call(function () use ($appList) {
+         return new Producer(function (\Closure $emit) use ($appList) {
             $total = \count($appList);
 
             while ($appList->valid()) {
@@ -56,7 +61,7 @@ class ImportAsync
                 $url = 'http://example.com';
 
                 $this->logger->debug("Importing app #$app[id] ($this->requestId/$total)...");
-                $this->throttle->registerRequest($this->request($url, $app, $this->requestId, $total));
+                $this->throttle->registerRequest($emit($this->request($url, $app, $this->requestId, $total)));
                 yield $this->throttle->await();
 
                 $appList->next();
@@ -94,6 +99,8 @@ class ImportAsync
                 "Completed app #$app[id] ($current/$total)... HTTP: {$response->getStatus()}"
                     . " AR: {$this->throttle->getActiveRequests()}"
             );
+
+            return $response->getStatus();
         });
     }
 }
