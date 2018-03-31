@@ -24,9 +24,9 @@ class RequestThrottle
      */
     private $promises = [];
 
-    private $maxConcurrentRequests = 20;
+    private $maxConcurrentRequests = 30;
 
-    private $maxRequestsPerSecond = 20;
+    private $maxRequestsPerSecond = 75;
 
     private $totalRequests = 0;
 
@@ -83,8 +83,8 @@ class RequestThrottle
     {
         if ($this->canRequest()) {
             foreach ($this->promises as $promise) {
-                $promise->resolve();
                 unset($this->promises[spl_object_hash($promise)]);
+                $promise->resolve();
             }
         }
 

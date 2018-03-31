@@ -34,7 +34,7 @@ class ImportAsync
 
     public function import(string $appListPath): bool
     {
-        $appList = $this->porter->import(new AppListSpecification($appListPath, 1500, 14));
+        $appList = $this->porter->import(new AppListSpecification($appListPath, 1, 1));
 
         $plainResponses = [];
         Loop::run(function () use ($appList, &$plainResponses) {
@@ -57,8 +57,8 @@ class ImportAsync
 
             while ($appList->valid()) {
                 $app = $appList->current();
-//                $url = "http://store.steampowered.com/app/$app[id]/?cc=us";
-                $url = 'http://example.com';
+                $url = "http://store.steampowered.com/app/$app[id]/?cc=us";
+//                $url = 'http://example.com';
 
                 $this->logger->debug("Importing app #$app[id] ($this->requestId/$total)...");
                 $this->throttle->registerRequest($emit($this->request($url, $app, $this->requestId, $total)));
