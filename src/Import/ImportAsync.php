@@ -29,7 +29,7 @@ class ImportAsync
         $this->logger = $logger;
         $this->client = new DefaultClient;
         $this->client->setOption(Client::OP_MAX_REDIRECTS, 0);
-        $this->throttle = new RequestThrottle;
+        $this->throttle = new Throttle;
     }
 
     public function import(string $appListPath): bool
@@ -61,8 +61,7 @@ class ImportAsync
 //                $url = 'http://example.com';
 
                 $this->logger->debug("Importing app #$app[id] ($this->requestId/$total)...");
-                $this->throttle->registerRequest($emit($this->request($url, $app, $this->requestId, $total)));
-                yield $this->throttle->await();
+                yield $this->throttle->await($emit($this->request($url, $app, $this->requestId, $total)));
 
                 $appList->next();
             }
@@ -99,7 +98,7 @@ class ImportAsync
 
             $this->logger->debug(
                 "Completed app #$app[id] ($current/$total)... HTTP: {$response->getStatus()}"
-                    . " AR: {$this->throttle->getActiveRequests()}"
+                    . " AR: {$this->throttle->getActive()}"
             );
 
             return $response->getStatus();
