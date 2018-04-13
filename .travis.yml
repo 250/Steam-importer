@@ -35,6 +35,7 @@ install:
   - composer install --no-progress --no-suggest
 
 before_script:
+  - '[[ $TRAVIS_BRANCH = master ]]'
   - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
   - git clone --depth=1 https://github.com/250/Steam-data.git ${datadir=~/Steam-data}
       -c user.name=Travis
@@ -49,7 +50,8 @@ before_script:
   - cd "$builddir"
 
 script:
-  - S250 import --lite -c ${chunks=15} -i $chunk --steam-spy steamspy.json applist.json || exit
+  - S250 import --lite -c ${chunks=15} -i $chunk --steam-spy "$TRAVIS_BUILD_DIR/data/steamspy 20180411.json"
+      applist.json || exit
   - git add . &&
     git checkout -b ${branch=$TRAVIS_BUILD_NUMBER.$chunk} &&
     git commit -m "Added database chunk $chunk/$chunks for $TRAVIS_COMMIT." &&
@@ -60,7 +62,6 @@ jobs:
     - stage: Import app list
       script:
         - S250 applist > applist.json || exit
-        - S250 steam-spy > steamspy.json || exit
         - S250 patron-import || exit
         - git add "$datadir" &&
           git commit -m "Added applist for $TRAVIS_COMMIT." &&
