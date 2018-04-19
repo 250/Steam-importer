@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace ScriptFUSION\Steam250\Import\Patreon;
 
 use ScriptFUSION\Steam250\Database\DatabaseFactory;
-use ScriptFUSION\Steam250\LoggerFactory;
+use ScriptFUSION\Steam250\Log\LoggerFactory;
 use ScriptFUSION\Steam250\PorterFactory;
 
 final class PatreonImporterFactory

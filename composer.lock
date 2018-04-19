@@ -804,12 +804,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Porter-connectors/HttpConnector.git",
-                "reference": "1bb503608aa499ca2e813201f88bf7652085201a"
+                "reference": "9ff2fa4da6d305412b64377d9ada15a9027b3659"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Porter-connectors/HttpConnector/zipball/1bb503608aa499ca2e813201f88bf7652085201a",
-                "reference": "1bb503608aa499ca2e813201f88bf7652085201a",
+                "url": "https://api.github.com/repos/Porter-connectors/HttpConnector/zipball/9ff2fa4da6d305412b64377d9ada15a9027b3659",
+                "reference": "9ff2fa4da6d305412b64377d9ada15a9027b3659",
                 "shasum": ""
             },
             "require": {
@@ -840,7 +840,7 @@
                 }
             ],
             "description": "Provides an HTTP connector for Porter.",
-            "time": "2018-04-19T10:21:40+00:00"
+            "time": "2018-04-19T22:54:28+00:00"
         },
         {
             "name": "connectors/ssl",
@@ -1712,12 +1712,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "2c8566c012b9c57a2a3a4155269c1c260a2f775a"
+                "reference": "0844725b69284ec31b2becbaf2fac3f826bab575"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/2c8566c012b9c57a2a3a4155269c1c260a2f775a",
-                "reference": "2c8566c012b9c57a2a3a4155269c1c260a2f775a",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/0844725b69284ec31b2becbaf2fac3f826bab575",
+                "reference": "0844725b69284ec31b2becbaf2fac3f826bab575",
                 "shasum": ""
             },
             "require": {
@@ -1746,7 +1746,7 @@
                 }
             ],
             "description": "Steam data provider for Porter.",
-            "time": "2018-04-18T09:21:13+00:00"
+            "time": "2018-04-20T00:08:30+00:00"
         },
         {
             "name": "psr/cache",
@@ -1976,12 +1976,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ScriptFUSION/Porter.git",
-                "reference": "840dc13fd97483d0be653addcc5b8dd25918c00c"
+                "reference": "15bb4c93fcaae3e1349294686677305ef191f153"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ScriptFUSION/Porter/zipball/840dc13fd97483d0be653addcc5b8dd25918c00c",
-                "reference": "840dc13fd97483d0be653addcc5b8dd25918c00c",
+                "url": "https://api.github.com/repos/ScriptFUSION/Porter/zipball/15bb4c93fcaae3e1349294686677305ef191f153",
+                "reference": "15bb4c93fcaae3e1349294686677305ef191f153",
                 "shasum": ""
             },
             "require": {
@@ -1989,7 +1989,7 @@
                 "php": "^7.1",
                 "psr/cache": "^1",
                 "psr/container": "^1",
-                "scriptfusion/retry": "^1.2",
+                "scriptfusion/retry": "^2",
                 "scriptfusion/retry-exception-handlers": "^1.1",
                 "scriptfusion/static-class": "^1"
             },
@@ -2018,20 +2018,20 @@
                 }
             ],
             "description": "Data import abstraction library.",
-            "time": "2018-04-18T23:23:10+00:00"
+            "time": "2018-04-19T18:18:55+00:00"
         },
         {
             "name": "scriptfusion/retry",
-            "version": "1.2.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ScriptFUSION/Retry.git",
-                "reference": "96b585175008aa3a2e435475b1d8e2f0216fc8f9"
+                "reference": "a67d3363788cf39d7733df1d38e775ccddfa7194"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ScriptFUSION/Retry/zipball/96b585175008aa3a2e435475b1d8e2f0216fc8f9",
-                "reference": "96b585175008aa3a2e435475b1d8e2f0216fc8f9",
+                "url": "https://api.github.com/repos/ScriptFUSION/Retry/zipball/a67d3363788cf39d7733df1d38e775ccddfa7194",
+                "reference": "a67d3363788cf39d7733df1d38e775ccddfa7194",
                 "shasum": ""
             },
             "require": {
@@ -2065,24 +2065,24 @@
                 }
             ],
             "description": "Retries failing operations.",
-            "time": "2018-04-18T22:40:27+00:00"
+            "time": "2018-04-19T10:04:41+00:00"
         },
         {
             "name": "scriptfusion/retry-exception-handlers",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ScriptFUSION/Retry-exception-handlers.git",
-                "reference": "fc9dc434a5ba528cb100f1c48be591ea97241dff"
+                "reference": "cd6a0c82314b44678a2078545fdc515f48a3bf46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ScriptFUSION/Retry-exception-handlers/zipball/fc9dc434a5ba528cb100f1c48be591ea97241dff",
-                "reference": "fc9dc434a5ba528cb100f1c48be591ea97241dff",
+                "url": "https://api.github.com/repos/ScriptFUSION/Retry-exception-handlers/zipball/cd6a0c82314b44678a2078545fdc515f48a3bf46",
+                "reference": "cd6a0c82314b44678a2078545fdc515f48a3bf46",
                 "shasum": ""
             },
             "require": {
-                "scriptfusion/retry": "^1"
+                "scriptfusion/retry": "^1|^2"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8"
@@ -2101,7 +2101,7 @@
                 }
             ],
             "description": "Exception handlers for Retry.",
-            "time": "2018-04-05T22:12:06+00:00"
+            "time": "2018-04-19T18:30:04+00:00"
         },
         {
             "name": "scriptfusion/static-class",

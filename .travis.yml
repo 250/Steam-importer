@@ -10,6 +10,9 @@ php:
 
 env:
   - chunk=1
+  - chunk=2
+  - chunk=3
+  - chunk=4
 
 cache:
   directories:
@@ -24,6 +27,7 @@ before_script:
   - '[[ $TRAVIS_BRANCH = async ]]'
   - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
   - git clone --depth=1 https://github.com/250/Steam-data.git ${datadir=~/Steam-data}
+      -b $TRAVIS_BRANCH
       -c user.name=Travis
       -c user.email=bilge+travis@scriptfusion.com
       -c credential.helper=store
@@ -35,6 +39,14 @@ before_script:
   - S250() { "$TRAVIS_BUILD_DIR/bin/250" "$@"; }
   - cd "$builddir"
 
+script:
+  - S250 import-async --lite -c ${chunks=4} -i $chunk --steam-spy "$TRAVIS_BUILD_DIR/data/steamspy 20180411.json"
+      applist.json || exit
+  - git add . &&
+    git checkout -b ${branch=$TRAVIS_BUILD_NUMBER.$chunk} &&
+    git commit -m "Added database chunk $chunk/$chunks for $TRAVIS_COMMIT." &&
+    git push -f origin HEAD:$branch
+
 jobs:
   include:
     - stage: Import app list
@@ -44,40 +56,32 @@ jobs:
         - git add "$datadir" &&
           git commit -m "Added applist for $TRAVIS_COMMIT." &&
           git push origin HEAD:$TRAVIS_BUILD_NUMBER
-    - stage: Import apps
-      script:
-        - S250 import-async --lite -c ${chunks=1} -i $chunk --steam-spy "$TRAVIS_BUILD_DIR/data/steamspy 20180411.json"
-            applist.json || exit
-        - git add . &&
-          git checkout -b ${branch=$TRAVIS_BUILD_NUMBER.$chunk} &&
-          git commit -m "Added database chunk $chunk/$chunks for $TRAVIS_COMMIT." &&
-          git push -f origin HEAD:$branch
 
-#    - stage: Stitch data chunks
-#      script:
-#        # Stitch.
-#        - mapfile -t branches <<<"$(git ls-remote origin refs/heads/$TRAVIS_BUILD_NUMBER.* | cut -f2)" &&
-#          git pull --no-edit origin "${branches[@]}"
-#          || exit
-#
-#        - S250 stitch . &&
-#          git add -A . &&
-#          git rm "$datadir/$marker" &&
-#          git commit -m "Added stitched database for $TRAVIS_COMMIT." &&
-#          git push origin $TRAVIS_BUILD_NUMBER &&
-#          git push -d origin "${branches[@]}"
-#          || exit
-#
-#         Merge feature into master.
-#        - cd "$datadir" &&
-#          git checkout master &&
-#          git pull &&
-#          git merge $TRAVIS_BUILD_NUMBER.1 &&
-#          git push &&
-#          git push -d origin $TRAVIS_BUILD_NUMBER.1
-#          || exit
-#
-#        # Trigger foreign repository build to generate site.
+    - stage: Stitch data chunks
+      script:
+        # Stitch.
+        - mapfile -t branches <<<"$(git ls-remote origin refs/heads/$TRAVIS_BUILD_NUMBER.* | cut -f2)" &&
+          git pull --no-edit origin "${branches[@]}"
+          || exit
+
+        - S250 stitch . &&
+          git add -A . &&
+          git rm "$datadir/$marker" &&
+          git commit -m "Added stitched database for $TRAVIS_COMMIT." &&
+          git push origin $TRAVIS_BUILD_NUMBER &&
+          git push -d origin "${branches[@]}"
+          || exit
+
+        # Merge feature into $TRAVIS_BRANCH.
+        - cd "$datadir" &&
+          git checkout $TRAVIS_BRANCH &&
+          git pull &&
+          git merge $TRAVIS_BUILD_NUMBER &&
+          git push &&
+          git push -d origin $TRAVIS_BUILD_NUMBER
+          || exit
+
+        # Trigger foreign repository build to generate site.
 #        - 'curl -sf
 #            -H ''Content-Type: application/json''
 #            -H ''Travis-API-Version: 3''
@@ -85,5 +89,5 @@ jobs:
 #            -d ''{"request": {"branch": "master"}}''
 #            https://api.travis-ci.org/repo/250%2FSteam-Top-250/requests'
 
-#stages:
-#  - Import app list
+stages:
+  - Import app list

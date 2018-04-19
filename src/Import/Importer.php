@@ -70,18 +70,19 @@ class Importer
             $count = 0;
 
             foreach ($apps as $app) {
-                $percent = (++$count / $total) * 100 | 0;
+                ++$count;
 
                 if (Queries::doesAppExist($this->database, $app['id'])) {
                     $this->logger->warning(
-                        "Skipped $count/$total ($percent%) #$app[id] $app[name]: already exists."
+                        'Skipped %app%: already exists.',
+                        compact('app', 'total', 'count')
                     );
 
                     continue;
                 }
 
                 yield $this->throttle->await($emit(
-                    \Amp\call(function () use ($app, $count, $percent) {
+                    \Amp\call(function () use ($app, $count) {
                         try {
                             // Decorate app with full data set.
                             $app += yield ($this->appDetailsImporter)($this->porter, $app['id']);
@@ -89,7 +90,7 @@ class Importer
                             // This is fine 🔥.
                         }
 
-                        return [$app, $count, $percent];
+                        return [$app, $count];
                     })
                 ));
             }
@@ -98,12 +99,14 @@ class Importer
         });
 
         Loop::run(function () use ($appDetails, $total) {
-            $count = 0;
+            $payloadCount = 0;
 
             while (yield $appDetails->advance()) {
                 $this->processAppPayload($appDetails->getCurrent(), $total);
 
-                if (!(++$count % $this->throttle->getMaxConcurrency()) && $this->database->isTransactionActive()) {
+                if (!(++$payloadCount % $this->throttle->getMaxConcurrency())
+                    && $this->database->isTransactionActive()
+                ) {
                     $this->database->commit();
                     $this->logger->debug("Committed batch of {$this->throttle->getMaxConcurrency()}.");
                 }
@@ -117,32 +120,29 @@ class Importer
 
     private function processAppPayload(array $payload, int $total): void
     {
-        [$app, $count, $percent] = $payload;
+        [$app, $count] = $payload;
+        $logContext = compact('app', 'total', 'count') + ['throttle' => $this->throttle];
 
         // Data unavailable.
         if (!isset($app['type'])) {
             if ($this->lite) {
-                $this->logger->warning(
-                    "Skipped $count/$total ($percent%) #$app[id] $app[name]: invalid."
-                );
+                $this->logger->notice('Skipped %app%: invalid.', $logContext);
 
                 return;
             }
 
-            $this->logger->debug("#$app[id] $app[name]: invalid.");
+            $this->logger->debug("#$app[id] $app[name]: invalid.", $logContext);
         }
 
         // No reviews.
         if (isset($app['total_reviews']) && $app['total_reviews'] < 1) {
             if ($this->lite) {
-                $this->logger->warning(
-                    "Skipped $count/$total ($percent%) #$app[id] $app[name]: no reviews."
-                );
+                $this->logger->notice('Skipped %app%: no reviews.', $logContext);
 
                 return;
             }
 
-            $this->logger->debug("#$app[id] $app[name]: no reviews.");
+            $this->logger->debug('%app%: no reviews.', $logContext);
         }
 
         if ($this->steamSpyPath) {
@@ -170,23 +170,21 @@ class Importer
          */
         $this->database->insert('app', $app);
 
-        $this->logger->info(
-            "Inserted $count/$total ($percent%) #$app[id] $app[name]. AR: {$this->throttle->getActive()}"
-        );
+        $this->logger->info('Inserted %app%.', $logContext);
     }
 
-    private function decorateWithSteamSpyData(array &$review): void
+    private function decorateWithSteamSpyData(array &$app): void
     {
         self::$steamSpyData || self::$steamSpyData =
             iterator_to_array($this->porter->import(new SteamSpySpecification($this->steamSpyPath)));
 
-        if (!isset(self::$steamSpyData[$review['id']])) {
-            $this->logger->debug("No Steam Spy data found for $review[id] $review[name].");
+        if (!isset(self::$steamSpyData[$app['id']])) {
+            $this->logger->debug('No Steam Spy data found for %app%.', compact('app'));
 
             return;
         }
 
-        $review += self::$steamSpyData[$review['id']];
+        $app += self::$steamSpyData[$app['id']];
     }
 
     public function setChunks(int $chunks): void
