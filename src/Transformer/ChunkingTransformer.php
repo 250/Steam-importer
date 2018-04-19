@@ -33,6 +33,7 @@ class ChunkingTransformer implements Transformer
 
         $chunkSize = $this->chunks > 0 ? count($records) / $this->chunks : count($records);
         $start = ceil($chunkSize * ($this->chunkIndex - 1));
+        // TODO: Fix this. ceil() is causing chunk overlaps.
         $end = ceil($start + $chunkSize);
 
         return new ChunkedRecords(

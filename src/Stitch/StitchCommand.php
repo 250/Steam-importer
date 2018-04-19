@@ -14,7 +14,7 @@ final class StitchCommand extends Command
     {
         $this
             ->setName('stitch')
-            ->setDescription('Stitch database chunks back together.')
+            ->setDescription('Stitch database chunks back together into a single database.')
             ->addArgument('path', InputArgument::REQUIRED, 'Path to database chunks.')
         ;
     }

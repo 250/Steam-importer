@@ -21,8 +21,6 @@ class SteamSpySpecification extends ImportSpecification
             new MappingTransformer(
                 new AnonymousMapping([
                     'owners' => new Copy('owners'),
-                    'players' => new Copy('players_forever'),
-                    'players_2w' => new Copy('players_2weeks'),
                 ])
             )
         );
