@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250\Import\Patreon;
 
+use http\Env\Response;
 use ScriptFUSION\Mapper\AnonymousMapping;
 use ScriptFUSION\Mapper\Strategy\Copy;
 use ScriptFUSION\Porter\Collection\RecordCollection;
@@ -35,7 +36,7 @@ class PledgesSpecification extends ImportSpecification
                     ]));
                 }
 
-                public function transform(RecordCollection $records, $context)
+                public function transform(RecordCollection $records, $context): RecordCollection
                 {
                     if (!$records instanceof PledgeRecords) {
                         throw new \InvalidArgumentException('Records must be of type: PledgeRecords.');

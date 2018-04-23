@@ -804,12 +804,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Porter-connectors/HttpConnector.git",
-                "reference": "9ff2fa4da6d305412b64377d9ada15a9027b3659"
+                "reference": "a9499ac3907ee583ee7ee10f344c649d0740a65b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Porter-connectors/HttpConnector/zipball/9ff2fa4da6d305412b64377d9ada15a9027b3659",
-                "reference": "9ff2fa4da6d305412b64377d9ada15a9027b3659",
+                "url": "https://api.github.com/repos/Porter-connectors/HttpConnector/zipball/a9499ac3907ee583ee7ee10f344c649d0740a65b",
+                "reference": "a9499ac3907ee583ee7ee10f344c649d0740a65b",
                 "shasum": ""
             },
             "require": {
@@ -840,7 +840,7 @@
                 }
             ],
             "description": "Provides an HTTP connector for Porter.",
-            "time": "2018-04-19T22:54:28+00:00"
+            "time": "2018-04-23T14:28:14+00:00"
         },
         {
             "name": "connectors/ssl",
@@ -1712,12 +1712,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "0844725b69284ec31b2becbaf2fac3f826bab575"
+                "reference": "73e3ffa2d1dc9473e6bd149c740a7910f3e2cc78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/0844725b69284ec31b2becbaf2fac3f826bab575",
-                "reference": "0844725b69284ec31b2becbaf2fac3f826bab575",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/73e3ffa2d1dc9473e6bd149c740a7910f3e2cc78",
+                "reference": "73e3ffa2d1dc9473e6bd149c740a7910f3e2cc78",
                 "shasum": ""
             },
             "require": {
@@ -1746,7 +1746,7 @@
                 }
             ],
             "description": "Steam data provider for Porter.",
-            "time": "2018-04-20T00:08:30+00:00"
+            "time": "2018-04-23T14:48:01+00:00"
         },
         {
             "name": "psr/cache",
@@ -1976,12 +1976,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ScriptFUSION/Porter.git",
-                "reference": "15bb4c93fcaae3e1349294686677305ef191f153"
+                "reference": "bb363bb5fba91563441a7ac3a5dd5ac6327b27c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ScriptFUSION/Porter/zipball/15bb4c93fcaae3e1349294686677305ef191f153",
-                "reference": "15bb4c93fcaae3e1349294686677305ef191f153",
+                "url": "https://api.github.com/repos/ScriptFUSION/Porter/zipball/bb363bb5fba91563441a7ac3a5dd5ac6327b27c9",
+                "reference": "bb363bb5fba91563441a7ac3a5dd5ac6327b27c9",
                 "shasum": ""
             },
             "require": {
@@ -2018,7 +2018,7 @@
                 }
             ],
             "description": "Data import abstraction library.",
-            "time": "2018-04-19T18:18:55+00:00"
+            "time": "2018-04-23T15:10:07+00:00"
         },
         {
             "name": "scriptfusion/retry",
