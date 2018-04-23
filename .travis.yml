@@ -24,7 +24,7 @@ install:
   - composer install --no-progress --no-suggest
 
 before_script:
-  - '[[ $TRAVIS_BRANCH = async ]]'
+  - '[[ $TRAVIS_BRANCH = master ]]'
   - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
   - git clone --depth=1 https://github.com/250/Steam-data.git ${datadir=~/Steam-data}
       -b $TRAVIS_BRANCH
@@ -82,12 +82,12 @@ jobs:
           || exit
 
         # Trigger foreign repository build to generate site.
-#        - 'curl -sf
-#            -H ''Content-Type: application/json''
-#            -H ''Travis-API-Version: 3''
-#            -H "Authorization: token $TRAVIS_TOKEN"
-#            -d ''{"request": {"branch": "master"}}''
-#            https://api.travis-ci.org/repo/250%2FSteam-Top-250/requests'
+        - 'curl -sf
+            -H ''Content-Type: application/json''
+            -H ''Travis-API-Version: 3''
+            -H "Authorization: token $TRAVIS_TOKEN"
+            -d ''{"request": {"branch": "master"}}''
+            https://api.travis-ci.org/repo/250%2FSteam-Top-250/requests'
 
 stages:
   - Import app list

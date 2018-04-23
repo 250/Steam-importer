@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250\Import\Patreon;
 
-use http\Env\Response;
 use ScriptFUSION\Mapper\AnonymousMapping;
 use ScriptFUSION\Mapper\Strategy\Copy;
 use ScriptFUSION\Porter\Collection\RecordCollection;
