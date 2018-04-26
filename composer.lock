@@ -804,12 +804,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Porter-connectors/HttpConnector.git",
-                "reference": "a9499ac3907ee583ee7ee10f344c649d0740a65b"
+                "reference": "a0d692ef65635909be6bfcbb9cbac7267f87bdcd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Porter-connectors/HttpConnector/zipball/a9499ac3907ee583ee7ee10f344c649d0740a65b",
-                "reference": "a9499ac3907ee583ee7ee10f344c649d0740a65b",
+                "url": "https://api.github.com/repos/Porter-connectors/HttpConnector/zipball/a0d692ef65635909be6bfcbb9cbac7267f87bdcd",
+                "reference": "a0d692ef65635909be6bfcbb9cbac7267f87bdcd",
                 "shasum": ""
             },
             "require": {
@@ -840,7 +840,7 @@
                 }
             ],
             "description": "Provides an HTTP connector for Porter.",
-            "time": "2018-04-23T14:28:14+00:00"
+            "time": "2018-04-26T10:15:36+00:00"
         },
         {
             "name": "connectors/ssl",
@@ -1976,12 +1976,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ScriptFUSION/Porter.git",
-                "reference": "bb363bb5fba91563441a7ac3a5dd5ac6327b27c9"
+                "reference": "ec859410068af477ffde4d1b78704ed7bc868908"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ScriptFUSION/Porter/zipball/bb363bb5fba91563441a7ac3a5dd5ac6327b27c9",
-                "reference": "bb363bb5fba91563441a7ac3a5dd5ac6327b27c9",
+                "url": "https://api.github.com/repos/ScriptFUSION/Porter/zipball/ec859410068af477ffde4d1b78704ed7bc868908",
+                "reference": "ec859410068af477ffde4d1b78704ed7bc868908",
                 "shasum": ""
             },
             "require": {
@@ -2018,7 +2018,7 @@
                 }
             ],
             "description": "Data import abstraction library.",
-            "time": "2018-04-23T15:10:07+00:00"
+            "time": "2018-04-26T21:05:01+00:00"
         },
         {
             "name": "scriptfusion/retry",
@@ -2432,12 +2432,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Porter-transformers/MappingTransformer.git",
-                "reference": "8d8cbcab92e4bb0dfbcde9c4ca99d3028b04c80c"
+                "reference": "b8d19a17cdb8361a91abd6708a1c3411e65dffb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Porter-transformers/MappingTransformer/zipball/8d8cbcab92e4bb0dfbcde9c4ca99d3028b04c80c",
-                "reference": "8d8cbcab92e4bb0dfbcde9c4ca99d3028b04c80c",
+                "url": "https://api.github.com/repos/Porter-transformers/MappingTransformer/zipball/b8d19a17cdb8361a91abd6708a1c3411e65dffb7",
+                "reference": "b8d19a17cdb8361a91abd6708a1c3411e65dffb7",
                 "shasum": ""
             },
             "require": {
@@ -2465,7 +2465,7 @@
                 }
             ],
             "description": "Integrates Mapper to transform array collections using Mappings.",
-            "time": "2018-04-14T22:28:48+00:00"
+            "time": "2018-04-26T21:22:07+00:00"
         }
     ],
     "packages-dev": [],
