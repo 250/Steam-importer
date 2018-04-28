@@ -87,7 +87,7 @@ jobs:
             -H ''Travis-API-Version: 3''
             -H "Authorization: token $TRAVIS_TOKEN"
             -d ''{"request": {"branch": "master"}}''
-            https://api.travis-ci.org/repo/250%2FSteam-Top-250/requests'
+            https://api.travis-ci.org/repo/250%2FSteam-250/requests'
 
 stages:
   - Import app list
