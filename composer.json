@@ -16,6 +16,7 @@
     "scriptfusion/porter": "@dev",
     "connectors/http": "@dev",
     "connectors/ssl": "@dev",
+    "async/throttle": "^1",
     "joomla/di": "^1.5",
     "doctrine/dbal": "^2",
     "monolog/monolog": "^1",
@@ -25,8 +26,5 @@
     "psr-4": {
       "ScriptFUSION\\Steam250\\": "src"
     }
-  },
-  "scripts": {
-    "test": "phpunit -c test"
   }
 }

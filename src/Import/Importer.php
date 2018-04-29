@@ -7,6 +7,7 @@ use Amp\Loop;
 use Amp\Producer;
 use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
+use ScriptFUSION\Async\Throttle\Throttle;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
 use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;

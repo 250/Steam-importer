@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250\Log;
 
-use ScriptFUSION\Steam250\Import\Throttle;
+use ScriptFUSION\Async\Throttle\Throttle;
 
 final class ThrottleProcessor
 {
