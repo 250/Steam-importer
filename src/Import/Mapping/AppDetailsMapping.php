@@ -17,6 +17,8 @@ final class AppDetailsMapping extends Mapping
         return [
             'name' => new Copy('name'),
             'type' => new Copy('type'),
+            'developers' => new Copy('developers'),
+            'publishers' => new Copy('publishers'),
             'release_date' => new Callback(
                 function (array $data): ?int {
                     return $data['release_date'] ? $data['release_date']->getTimestamp() : null;

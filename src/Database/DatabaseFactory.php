@@ -34,6 +34,16 @@ final class DatabaseFactory
                 votes INTEGER NOT NULL,
                 PRIMARY KEY(app_id, tag)
             );
+            CREATE TABLE IF NOT EXISTS app_developer (
+                app_id INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                PRIMARY KEY(app_id, name)
+            );
+            CREATE TABLE IF NOT EXISTS app_publisher (
+                app_id INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                PRIMARY KEY(app_id, name)
+            );
             CREATE TABLE IF NOT EXISTS patron_review (
                 app_id INTEGER NOT NULL,
                 profile_id TEXT NOT NULL,
@@ -43,8 +53,8 @@ final class DatabaseFactory
             CREATE TABLE IF NOT EXISTS steam_profile (
                 profile_id TEXT PRIMARY KEY NOT NULL,
                 avatar_url TEXT NOT NULL
-            );
-        ');
+            );'
+        );
 
         return $connection;
     }

@@ -5,6 +5,7 @@ namespace ScriptFUSION\Steam250\Import;
 
 use Amp\Loop;
 use Amp\Producer;
+use Amp\Success;
 use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
 use ScriptFUSION\Async\Throttle\Throttle;
@@ -164,6 +165,18 @@ class Importer
             );
         }
         unset($app['tags']);
+
+        // Insert developers.
+        foreach ($app['developers'] ?? [] as $developer) {
+            Queries::insertDeveloper($this->database, [$app['id'], $developer]);
+        }
+        unset($app['developers']);
+
+        // Insert publishers.
+        foreach ($app['publishers'] ?? [] as $publisher) {
+            Queries::insertPublisher($this->database, [$app['id'], $publisher]);
+        }
+        unset($app['publishers']);
 
         /*
          * Insert data. In normal mode undecorated records are inserted for idempotence, allowing import to be

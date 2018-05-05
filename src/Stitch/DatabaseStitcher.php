@@ -19,7 +19,7 @@ final class DatabaseStitcher
         $this->logger = $logger;
     }
 
-    public function stitch()
+    public function stitch(): void
     {
         $dbDir = \dirname($this->database->getParams()['path']);
         $this->logger->info("Starting stitch in \"$dbDir\".");
