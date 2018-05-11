@@ -1839,12 +1839,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "39719bda9af7df029b5f2a0a275815add00003db"
+                "reference": "a6681181d36ecd615634115fc9a9877da7e61e77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/39719bda9af7df029b5f2a0a275815add00003db",
-                "reference": "39719bda9af7df029b5f2a0a275815add00003db",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/a6681181d36ecd615634115fc9a9877da7e61e77",
+                "reference": "a6681181d36ecd615634115fc9a9877da7e61e77",
                 "shasum": ""
             },
             "require": {
@@ -1875,7 +1875,7 @@
                 }
             ],
             "description": "Steam data provider for Porter.",
-            "time": "2018-05-04T23:45:33+00:00"
+            "time": "2018-05-11T11:54:03+00:00"
         },
         {
             "name": "psr/cache",
