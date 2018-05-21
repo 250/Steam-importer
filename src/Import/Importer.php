@@ -5,7 +5,6 @@ namespace ScriptFUSION\Steam250\Import;
 
 use Amp\Loop;
 use Amp\Producer;
-use Amp\Success;
 use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
 use ScriptFUSION\Async\Throttle\Throttle;

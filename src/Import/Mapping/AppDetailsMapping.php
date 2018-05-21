@@ -8,7 +8,7 @@ use ScriptFUSION\Mapper\Mapping;
 use ScriptFUSION\Mapper\Strategy\Callback;
 use ScriptFUSION\Mapper\Strategy\Copy;
 use ScriptFUSION\Mapper\Strategy\Type;
-use ScriptFUSION\Top250\Shared\Platform;
+use ScriptFUSION\Steam250\Shared\Platform;
 
 final class AppDetailsMapping extends Mapping
 {
