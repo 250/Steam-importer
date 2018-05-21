@@ -19,7 +19,7 @@ final class PatronImportCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
-        $importer = (new PatreonImporterFactory)->create($input->getOption('verbose'));
+        $importer = (new PatreonImporterFactory)->create($output->isVeryVerbose());
         $importer->import();
 
         return 0;

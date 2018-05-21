@@ -42,7 +42,7 @@ class ImportCommand extends Command
             $input->getArgument('applist'),
             (int)$input->getOption('chunks'),
             (int)$input->getOption('chunk-index'),
-            $input->getOption('verbose')
+            $output->isVeryVerbose()
         );
         $importer->setLite($input->getOption('lite'));
         $importer->setSteamSpyPath($input->getOption('steam-spy'));

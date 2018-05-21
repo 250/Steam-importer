@@ -5,10 +5,14 @@ sudo: false
 
 language: php
 
-php:
-  - 7.1
+php: 7.1
+
+branches:
+  only:
+    - master
 
 env:
+  # Ensure the main script is always updated to match the number of chunks.
   - chunk=1
   - chunk=2
   - chunk=3
@@ -24,28 +28,23 @@ install:
   - composer install --no-progress --no-suggest
 
 before_script:
-  - '[[ $TRAVIS_BRANCH = master ]]'
-  - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
-  - git clone --depth=1 https://github.com/250/Steam-data.git ${datadir=~/Steam-data}
-      -b $TRAVIS_BRANCH
-      -c user.name=Travis
-      -c user.email=bilge+travis@scriptfusion.com
-      -c credential.helper=store
-  - cd "$datadir" && git fetch origin $TRAVIS_BUILD_NUMBER && git checkout -b $TRAVIS_BUILD_NUMBER FETCH_HEAD || true
+  - S250() { "$TRAVIS_BUILD_DIR/bin/250" -v "$@"; }
+  - data() { "$TRAVIS_BUILD_DIR/vendor/bin/250 data" -v "$@"; }
 
-  - marker=$TRAVIS_BUILD_NUMBER.date; [[ -e $marker ]] && echo Date marker found. || echo No date marker.
+  - mkdir -v ${datadir=~/Steam-data} && cd "$datadir"
+  - marker=$TRAVIS_BUILD_NUMBER.date
+  - data download -w $marker || true
+  - '[[ -e $marker ]] && echo Date marker found. || { echo No date marker.; newmarker=1; }'
   - date=$([[ -e $marker ]] && cat $marker || date -u +%Y%m/%d | tee $marker); echo $date
+  - if ((newmarker)); then data upload $marker; fi
   - mkdir -pv "${builddir=$datadir/$date/$TRAVIS_BUILD_NUMBER}"
-  - S250() { "$TRAVIS_BUILD_DIR/bin/250" "$@"; }
   - cd "$builddir"
+  - data download -w "${rbuilddir=${builddir#$datadir/}}" || true
 
 script:
-  - S250 import-async --lite -c ${chunks=4} -i $chunk --steam-spy "$TRAVIS_BUILD_DIR/data/steamspy 20180411.json"
+  - S250 import-async --lite --chunks 4 -i $chunk --steam-spy "$TRAVIS_BUILD_DIR/data/steamspy 20180411.json"
       applist.json || exit
-  - git add . &&
-    git checkout -b ${branch=$TRAVIS_BUILD_NUMBER.$chunk} &&
-    git commit -m "Added database chunk $chunk/$chunks for $TRAVIS_COMMIT." &&
-    git push -f origin HEAD:$branch
+  - data upload "$builddir" "$rbuilddir" || exit
 
 jobs:
   include:
@@ -53,41 +52,24 @@ jobs:
       script:
         - S250 applist > applist.json || exit
         - S250 patron-import || exit
-        - git add "$datadir" &&
-          git commit -m "Added applist for $TRAVIS_COMMIT." &&
-          git push origin HEAD:$TRAVIS_BUILD_NUMBER
+        - data upload "$builddir" "$rbuilddir" || exit
 
     - stage: Stitch data chunks
       script:
-        # Stitch.
-        - mapfile -t branches <<<"$(git ls-remote origin refs/heads/$TRAVIS_BUILD_NUMBER.* | cut -f2)" &&
-          git pull --no-edit origin "${branches[@]}"
-          || exit
-
         - S250 stitch . &&
-          git add -A . &&
-          git rm "$datadir/$marker" &&
-          git commit -m "Added stitched database for $TRAVIS_COMMIT." &&
-          git push origin $TRAVIS_BUILD_NUMBER &&
-          git push -d origin "${branches[@]}"
-          || exit
-
-        # Merge feature into $TRAVIS_BRANCH.
-        - cd "$datadir" &&
-          git checkout $TRAVIS_BRANCH &&
-          git pull &&
-          git merge $TRAVIS_BUILD_NUMBER &&
-          git push &&
-          git push -d origin $TRAVIS_BUILD_NUMBER
+          data upload "$builddir" "$rbuilddir" &&
+          data delete "$rbuilddir" -p '\.p\d\d?$' &&
+          data move "$rbuilddir" &&
+          data delete $marker
           || exit
 
         # Trigger foreign repository build to generate site.
         - 'curl -sf
-            -H ''Content-Type: application/json''
-            -H ''Travis-API-Version: 3''
-            -H "Authorization: token $TRAVIS_TOKEN"
-            -d ''{"request": {"branch": "master"}}''
-            https://api.travis-ci.org/repo/250%2FSteam-250/requests'
+          -H ''Content-Type: application/json''
+          -H ''Travis-API-Version: 3''
+          -H "Authorization: token $TRAVIS_TOKEN"
+          -d ''{"request": {"branch": "master"}}''
+          https://api.travis-ci.org/repo/250%2FSteam-250/requests'
 
 stages:
   - Import app list
