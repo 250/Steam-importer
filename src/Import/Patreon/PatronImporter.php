@@ -50,7 +50,7 @@ class PatronImporter
 
             $this->database->executeUpdate(
                 'INSERT OR REPLACE INTO steam_profile (profile_id, avatar_url)
-                        VALUES (:profile_id, :avatar_url)',
+                    VALUES (:profile_id, :avatar_url)',
                 [
                     'profile_id' => $profileId,
                     'avatar_url' => $meta->getAvatarUrl(),

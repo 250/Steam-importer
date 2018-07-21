@@ -154,13 +154,12 @@ class Importer
 
         // Insert tags.
         foreach ($app['tags'] ?? [] as $tag) {
-            $this->database->insert(
-                'app_tag',
-                [
-                    'app_id' => $app['id'],
-                    'tag' => $tag['name'],
-                    'votes' => $tag['count'],
-                ]
+            $this->database->executeUpdate(
+                /* On 2018/07/21 "Early Access" started appearing twice with different counts. To avoid violating
+                   the unique integrity constraint, take the greater of the two and discard any others. */
+                "INSERT OR IGNORE INTO app_tag (app_id, tag, votes)
+                    VALUES ($app[id], :name, :count)",
+                $tag
             );
         }
         unset($app['tags']);
