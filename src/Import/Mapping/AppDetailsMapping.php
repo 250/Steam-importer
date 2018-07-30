@@ -20,7 +20,7 @@ final class AppDetailsMapping extends Mapping
             'developers' => new Copy('developers'),
             'publishers' => new Copy('publishers'),
             'release_date' => new Callback(
-                function (array $data): ?int {
+                static function (array $data): ?int {
                     return $data['release_date'] ? $data['release_date']->getTimestamp() : null;
                 }
             ),
@@ -29,15 +29,22 @@ final class AppDetailsMapping extends Mapping
             'discount_price' => new Copy('discount_price'),
             'discount' => new Copy('discount'),
             'vrx' => new Type(DataType::INTEGER(), new Copy('vrx')),
+            'ea' => new Callback(
+                static function (array $data): int {
+                    return (int)from($data['tags'])->any(static function (array $data): bool {
+                        return $data['name'] === 'Early Access' && !isset($data['browseable']);
+                    });
+                }
+            ),
             'positive_reviews' => new Copy('positive_reviews'),
             'negative_reviews' => new Copy('negative_reviews'),
             'total_reviews' => new Callback(
-                function (array $data): int {
+                static function (array $data): int {
                     return $data['positive_reviews'] + $data['negative_reviews'];
                 }
             ),
             'platforms' => new Callback(
-                function (array $data): int {
+                static function (array $data): int {
                     $platforms = 0;
                     $data['windows'] && $platforms |= Platform::WINDOWS;
                     $data['linux'] && $platforms |= Platform::LINUX;

@@ -26,6 +26,7 @@ final class DatabaseFactory
                 discount_price INTEGER,
                 discount INTEGER,
                 vrx INTEGER,
+                ea INTEGER,
                 owners INTEGER
             );
             CREATE TABLE IF NOT EXISTS app_tag (
