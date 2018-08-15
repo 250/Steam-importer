@@ -16,7 +16,6 @@ env:
   - chunk=1
   - chunk=2
   - chunk=3
-  - chunk=4
 
 cache:
   directories:
@@ -42,7 +41,7 @@ before_script:
   - data download -w "${rbuilddir=${builddir#$datadir/}}" || true
 
 script:
-  - S250 import-async --lite --chunks 4 -i $chunk --steam-spy "$TRAVIS_BUILD_DIR/data/steamspy 20180411.json"
+  - S250 import-async --lite --chunks 3 -i $chunk --steam-spy "$TRAVIS_BUILD_DIR/data/steamspy 20180411.json"
       applist.json || exit
   - data upload "$builddir" "$rbuilddir" || exit
 
