@@ -83,12 +83,17 @@ class Importer
                 }
 
                 yield $this->throttle->await($emit(
-                    \Amp\call(function () use ($app, $count) {
+                    \Amp\call(function () use ($app, $count, $total) {
                         try {
                             // Decorate app with full data set.
                             $app += yield ($this->appDetailsImporter)($this->porter, $app['id']);
                         } catch (InvalidAppIdException | ParserException $exception) {
                             // This is fine 🔥.
+                        } catch (FatalServerException $exception) {
+                            $this->logger->error(
+                                "Error %app%: {$exception->getMessage()}",
+                                compact('app', 'total', 'count')
+                            );
                         }
 
                         return [$app, $count];
