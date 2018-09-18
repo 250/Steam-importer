@@ -9,6 +9,7 @@
   ],
   "require": {
     "php": "^7.1",
+    "ext-json": "*",
     "250/shared": "dev-master",
     "provider/steam": "dev-async",
     "provider/patreon": "5.0.x-dev",
@@ -20,6 +21,7 @@
     "joomla/di": "^1.5",
     "doctrine/dbal": "^2",
     "monolog/monolog": "^1",
+    "symfony/dom-crawler": "^4.2@dev",
     "symfony/console": "^3"
   },
   "autoload": {

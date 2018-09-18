@@ -89,7 +89,7 @@ class Importer
                             $app += yield ($this->appDetailsImporter)($this->porter, $app['id']);
                         } catch (InvalidAppIdException | ParserException $exception) {
                             // This is fine 🔥.
-                        } catch (FatalServerException $exception) {
+                        } catch (ServerFatalException $exception) {
                             $this->logger->error(
                                 "Error %app%: {$exception->getMessage()}",
                                 compact('app', 'total', 'count')
