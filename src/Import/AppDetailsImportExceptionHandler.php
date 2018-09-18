@@ -21,7 +21,7 @@ final class AppDetailsImportExceptionHandler extends StatelessRecoverableExcepti
             /* Treat 500 errors as unrecoverable.
                TODO: Consider only treating as unrecoverable if it reaches retry limit.
                TODO: Expose retry count callback parameter in Retry library. */
-            throw new FatalServerException('Server returned HTTP 500 and empty body.', 0, $exception);
+            throw new ServerFatalException('Server returned HTTP 500 and empty body.', 0, $exception);
         }
     }
 }

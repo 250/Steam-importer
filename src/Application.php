@@ -6,6 +6,7 @@ namespace ScriptFUSION\Steam250;
 use ScriptFUSION\Steam250\Import\ImportAsyncCommand;
 use ScriptFUSION\Steam250\Import\ImportCommand;
 use ScriptFUSION\Steam250\Import\Patreon\PatronImportCommand;
+use ScriptFUSION\Steam250\Import\SteamCharts\PlayersImportCommand;
 use ScriptFUSION\Steam250\Stitch\StitchCommand;
 
 final class Application
@@ -18,6 +19,7 @@ final class Application
 
         $app->addCommands([
             new ApplistCommand,
+            new PlayersImportCommand,
             new SteamSpyCommand,
             new ImportCommand,
             new ImportAsyncCommand,
