@@ -27,4 +27,38 @@ final class SteamChartsParser
             ];
         });
     }
+
+    private static function parseChartData(Crawler $crawler): array
+    {
+        return $crawler->filter('script')->each(static function (Crawler $script) {
+            return self::parseChartJavaScript($script->text());
+        });
+    }
+
+    private static function parseChartJavaScript(string $javaScript): array
+    {
+        if (!self::validateChartJavaScript($javaScript)) {
+            return null;
+        }
+
+        static $nl = "\n";
+
+        $line = trim(strtok($javaScript, $nl));
+
+        do {
+            if ($line === '') {
+                continue;
+            }
+
+            /*
+             * Regex parser:
+             * elem = app\.e\('spark_(?<app_id>\d+)'\);.*?elem\.datay = \[(?<hours>[\d,]+)\];
+             */
+        } while (($line = trim(strtok($nl))) !== false);
+    }
+
+    private static function validateChartJavaScript(string $javascript): bool
+    {
+        return (bool)preg_match('[elem = app\.e\(\'spark_\d+\'\);$.*elem\.datay = \[[\d,]+\];$]', $javascript);
+    }
 }
