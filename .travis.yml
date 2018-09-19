@@ -51,6 +51,7 @@ jobs:
       script:
         - S250 applist > applist.json || exit
         - S250 patron-import || exit
+        - S250 players-import || exit
         - data upload "$builddir" "$rbuilddir" || exit
 
     - stage: Stitch data chunks
