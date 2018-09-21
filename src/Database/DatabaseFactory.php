@@ -47,7 +47,7 @@ final class DatabaseFactory
             );
             CREATE TABLE IF NOT EXISTS app_players (
                 app_id INTEGER PRIMARY KEY NOT NULL,
-                peak_concurrent_players_30d INTEGER NOT NULL
+                average_players_7d INTEGER NOT NULL
             );
             CREATE TABLE IF NOT EXISTS patron_review (
                 app_id INTEGER NOT NULL,
