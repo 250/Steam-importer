@@ -45,7 +45,7 @@ class PlayersImporter
             arsort($averagePlayers);
 
             $count = 0;
-            $total = 250;
+            $total = 300;
             foreach ($averagePlayers as $appId => $average) {
                 if (++$count > $total) {
                     break;
