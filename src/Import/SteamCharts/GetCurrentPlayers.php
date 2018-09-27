@@ -16,7 +16,7 @@ class GetCurrentPlayers implements AsyncResource
 {
     private const BASE_URL = 'https://steamcharts.com/top/p.';
 
-    private const PAGES = 40;
+    private const PAGES = 80;
 
     /**
      * @var LoggerInterface

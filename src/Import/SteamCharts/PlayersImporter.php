@@ -86,7 +86,7 @@ class PlayersImporter
 
                         $this->logger->info(
                             "Fetching app #$appId player history...",
-                            compact('throttle') + ['count' => ++$count, 'total' => 1000]
+                            compact('throttle') + ['count' => ++$count, 'total' => 2000]
                         );
 
                         try {
