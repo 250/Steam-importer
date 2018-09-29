@@ -68,7 +68,7 @@ class PlayersImporter
     private function fetchAveragePlayers(): Iterator
     {
         return new Producer(function (\Closure $emit): \Generator {
-            $throttle = new Throttle;
+            $throttle = new Throttle(150, 60);
 
             $resource = new GetCurrentPlayers;
             $resource->setLogger($this->logger);
