@@ -30,7 +30,7 @@ jobs:
 - job: Import
   dependsOn: Initialize
   strategy:
-    parallel: 8
+    parallel: 5
   steps:
   - template: system.yml
 

@@ -32,20 +32,21 @@ steps:
 
 - script: |
     marker=$AZURE_BUILD_NUMBER.date
-    data download -w $marker
-    [[ -e $marker ]] && echo Date marker found. || {
-      echo No date marker.
-      newmarker=1
-    }
 
-    date=$([[ -e $marker ]] && cat $marker || date -u +%Y%m/%d | tee $marker)
+    if [[ $SYSTEM_PHASENAME = Initialize ]]; then
+      date=$(date -u +%Y%m/%d | tee $marker)
+      data upload $marker
+    else
+      data download -w $marker
+      date=$(cat $marker)
+    fi
+
     echo $date
-
-    ((newmarker)) && data upload $marker
-
     echo "##vso[task.setvariable variable=DATE]$date"
     echo "##vso[task.setvariable variable=MARKER]$marker"
-  displayName: Import/export date marker
+
+    [[ -r $marker ]]
+  displayName: Upload/download date marker
 
 - script: |
     mkdir -pv "${builddir=$DATADIR/$DATE/$AZURE_BUILD_NUMBER}"
@@ -60,3 +61,4 @@ steps:
 - script: data download -w "$RBUILDDIR" || true
   displayName: Restore build directory state
   workingDirectory: $(BUILDDIR)
+  condition: not(eq(variables['System.PhaseName'], 'Initialize'))

@@ -26,6 +26,7 @@ steps:
 
 - script: composer validate
   displayName: Validate Composer file
+  condition: eq(variables['System.PhaseName'], 'Initialize')
 
 - script: |
     composer global require hirak/prestissimo
