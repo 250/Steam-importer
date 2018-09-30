@@ -1,75 +1,78 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/php
 
-trigger:
-  branches:
-    include: [master]
+#trigger:
+#  branches:
+#    include: [master]
 
 variables:
   phpVersion: 7.1
-  chunks: 5
 
 jobs:
 - job: Initialize
   steps:
-  - template: system.yml
-
-  - script: 250 applist > applist.json
-    displayName: Download app list
-    workingDirectory: $(BUILDDIR)
-
-  - script: PATREON_API_KEY=$(PATREON_API_KEY) 250 patron-import
-    displayName: Import patron reviews
-    workingDirectory: $(BUILDDIR)
-
-  - script: 250 players-import
-    displayName: Import player stats
-    workingDirectory: $(BUILDDIR)
-
-  - script: data upload "$BUILDDIR" "$RBUILDDIR"
-    displayName: Upload build artifacts
+  - script: env
+  - script: echo $(System.PhaseName)
+#  - template: system.yml
+#
+#  - script: 250 applist > applist.json
+#    displayName: Download app list
+#    workingDirectory: $(BUILDDIR)
+#
+#  - script: PATREON_API_KEY=$(PATREON_API_KEY) 250 patron-import
+#    displayName: Import patron reviews
+#    workingDirectory: $(BUILDDIR)
+#
+#  - script: 250 players-import
+#    displayName: Import player stats
+#    workingDirectory: $(BUILDDIR)
+#
+#  - script: data upload "$BUILDDIR" "$RBUILDDIR"
+#    displayName: Upload build artifacts
 
 - job: Import
   dependsOn: Initialize
   strategy:
-    parallel: $(chunks)
+    parallel: 5
   steps:
-  - template: system.yml
-
-  - script: dig +short myip.opendns.com @resolver1.opendns.com
-    displayName: WAN IP
-
-  - script: 250 import-async --lite --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase)
-      --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json || exit
-    displayName: Import apps ($(System.JobPositionInPhase)/$(System.TotalJobsInPhase))
-    workingDirectory: $(BUILDDIR)
-
-  - script: data upload "$BUILDDIR" "$RBUILDDIR"
-    displayName: Upload build artifacts
+  - script: env
+#  - template: system.yml
+#
+#  - script: dig +short myip.opendns.com @resolver1.opendns.com
+#    displayName: WAN IP
+#
+#  - script: 250 import-async --lite --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase)
+#      --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json || exit
+#    displayName: Import apps ($(System.JobPositionInPhase)/$(System.TotalJobsInPhase))
+#    workingDirectory: $(BUILDDIR)
+#
+#  - script: data upload "$BUILDDIR" "$RBUILDDIR"
+#    displayName: Upload build artifacts
 
 - job: Stitch
   dependsOn: Import
   steps:
-  - template: system.yml
-
-  - script: 250 stitch "$(BUILDDIR)"
-    displayName: Stitch
-
-  - script: |
-      data upload "$BUILDDIR" "$RBUILDDIR" &&
-      data delete "$RBUILDDIR" -p '\.p\d\d?$' &&
-      data move "$RBUILDDIR" &&
-      data delete $MARKER
-    displayName: Upload build artifacts and clean up
-
-  - script: |
-      [[ '$(Build.Reason)' = Schedule ]] &&
-        TRAVIS_TOKEN='$(TRAVIS_CRON_API_KEY)' ||
-        TRAVIS_TOKEN='$(TRAVIS_API_KEY)'
-
-      curl -sf\
-        -H 'Travis-API-Version: 3'\
-        -H "Authorization: token $TRAVIS_TOKEN"\
-        -H 'Content-Type: application/json'\
-        -d '{"request": {"branch": "master"}}'\
-        https://api.travis-ci.org/repo/250%2FSteam-250/requests
-    displayName: Trigger Steam 250 repository build
+    - script: env
+#  - template: system.yml
+#
+#  - script: 250 stitch "$(BUILDDIR)"
+#    displayName: Stitch
+#
+#  - script: |
+#      data upload "$BUILDDIR" "$RBUILDDIR" &&
+#      data delete "$RBUILDDIR" -p '\.p\d\d?$' &&
+#      data move "$RBUILDDIR" &&
+#      data delete $MARKER
+#    displayName: Upload build artifacts and clean up
+#
+#  - script: |
+#      [[ '$(Build.Reason)' = Schedule ]] &&
+#        TRAVIS_TOKEN='$(TRAVIS_CRON_API_KEY)' ||
+#        TRAVIS_TOKEN='$(TRAVIS_API_KEY)'
+#
+#      curl -sf\
+#        -H 'Travis-API-Version: 3'\
+#        -H "Authorization: token $TRAVIS_TOKEN"\
+#        -H 'Content-Type: application/json'\
+#        -d '{"request": {"branch": "master"}}'\
+#        https://api.travis-ci.org/repo/250%2FSteam-250/requests
+#    displayName: Trigger Steam 250 repository build
