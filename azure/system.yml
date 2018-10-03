@@ -58,7 +58,7 @@ steps:
     echo Remote build directory: "$rbuilddir"
   displayName: Create build directory
 
-- script: data download -w "$RBUILDDIR" || true
+- script: data download -w "$RBUILDDIR"
   displayName: Restore build directory state
   workingDirectory: $(BUILDDIR)
   condition: not(eq(variables['System.PhaseName'], 'Initialize'))
