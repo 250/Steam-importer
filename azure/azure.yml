@@ -6,6 +6,7 @@ trigger:
 
 variables:
   phpVersion: 7.1
+  chunks: 6
 
 jobs:
 - job: Initialize
@@ -30,7 +31,7 @@ jobs:
 - job: Import
   dependsOn: Initialize
   strategy:
-    parallel: 5
+    parallel: $[variables['chunks']]
   steps:
   - template: system.yml
 
