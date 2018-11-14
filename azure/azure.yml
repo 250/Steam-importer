@@ -73,3 +73,16 @@ jobs:
         -d '{"request": {"branch": "master"}}'\
         https://api.travis-ci.org/repo/250%2FSteam-250/requests
     displayName: Trigger Steam 250 repository build
+
+  - script: |
+      set -v
+      retry data download-last2
+      wget --progress=dot:mega\
+        https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2
+      tar xvf *.tar.* --xform 's#.*/##'
+      rm -v *.tar.*
+      tar cJvf tar *.*
+      ./github-release upload --user 250 --repo Steam-250 --tag snapshots --name snapshots.tar.xz --file tar --replace\
+        --security-token '$(GITHUB_AZURE_TOKEN)'
+    displayName: Upload snapshots
+    workingDirectory: $(Build.ArtifactStagingDirectory)
