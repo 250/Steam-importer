@@ -20,12 +20,14 @@ final class DatabaseFactory
                 total_reviews INTEGER,
                 positive_reviews INTEGER,
                 negative_reviews INTEGER,
+                steam_reviews INTEGER,
                 release_date INTEGER,
                 platforms INTEGER,
                 price INTEGER,
                 discount_price INTEGER,
                 discount INTEGER,
                 vrx INTEGER,
+                free INTEGER,
                 ea INTEGER,
                 owners INTEGER
             );

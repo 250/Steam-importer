@@ -29,6 +29,7 @@ final class AppDetailsMapping extends Mapping
             'discount_price' => new Copy('discount_price'),
             'discount' => new Copy('discount'),
             'vrx' => new Type(DataType::INTEGER(), new Copy('vrx')),
+            'free' => new Type(DataType::INTEGER(), new Copy('free')),
             'ea' => new Callback(
                 static function (array $data): int {
                     return (int)from($data['tags'])->any(static function (array $data): bool {
@@ -43,6 +44,7 @@ final class AppDetailsMapping extends Mapping
                     return $data['positive_reviews'] + $data['negative_reviews'];
                 }
             ),
+            'steam_reviews' => new copy('steam_reviews'),
             'platforms' => new Callback(
                 static function (array $data): int {
                     $platforms = 0;
