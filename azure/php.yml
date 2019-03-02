@@ -8,21 +8,8 @@ steps:
     php -v
   displayName: Use PHP version $(phpVersion)
 
-- script: |
-    file=$(mktemp)
-    expected_signature="$(wget -q -O - https://composer.github.io/installer.sig)"
-    php -r "copy('https://getcomposer.org/installer', '$file');"
-    actual_signature="$(php -r "echo hash_file('SHA384', '$file');")"
-
-    [[ $expected_signature = $actual_signature ]] || {
-        >&2 echo ERROR: Invalid installer signature
-        exit 1
-    }
-
-    php "$file"
-    sudo mv composer.phar /usr/local/bin/composer
-    composer -V
-  displayName: Install Composer
+- script: composer selfupdate
+  displayName: Update Composer
 
 - script: composer validate
   displayName: Validate Composer file

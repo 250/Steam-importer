@@ -29,6 +29,7 @@ final class DatabaseFactory
                 vrx INTEGER,
                 free INTEGER,
                 ea INTEGER,
+                videos TEXT,
                 owners INTEGER
             );
             CREATE TABLE IF NOT EXISTS app_tag (

@@ -7,6 +7,7 @@ use ScriptFUSION\Mapper\DataType;
 use ScriptFUSION\Mapper\Mapping;
 use ScriptFUSION\Mapper\Strategy\Callback;
 use ScriptFUSION\Mapper\Strategy\Copy;
+use ScriptFUSION\Mapper\Strategy\Join;
 use ScriptFUSION\Mapper\Strategy\Type;
 use ScriptFUSION\Steam250\Shared\Platform;
 
@@ -30,6 +31,7 @@ final class AppDetailsMapping extends Mapping
             'discount' => new Copy('discount'),
             'vrx' => new Type(DataType::INTEGER(), new Copy('vrx')),
             'free' => new Type(DataType::INTEGER(), new Copy('free')),
+            'videos' => new Join(',', new Copy('videos')),
             'ea' => new Callback(
                 static function (array $data): int {
                     return (int)from($data['tags'])->any(static function (array $data): bool {
