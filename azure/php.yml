@@ -8,7 +8,7 @@ steps:
     php -v
   displayName: Use PHP version $(phpVersion)
 
-- script: composer selfupdate
+- script: sudo composer selfupdate
   displayName: Update Composer
 
 - script: composer validate
