@@ -43,7 +43,7 @@ jobs:
     displayName: Import apps ($(System.JobPositionInPhase)/$(System.TotalJobsInPhase))
     workingDirectory: $(BUILDDIR)
 
-  - script: data upload "$BUILDDIR" "$RBUILDDIR"
+  - script: retry data upload "$BUILDDIR" "$RBUILDDIR"
     displayName: Upload build artifacts
 
 - job: Stitch
