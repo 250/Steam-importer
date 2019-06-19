@@ -56,6 +56,7 @@ final class AppDetailsMapping extends Mapping
                     $data['vive'] && $platforms |= Platform::VIVE;
                     $data['occulus'] && $platforms |= Platform::OCULUS;
                     $data['wmr'] && $platforms |= Platform::WMR;
+                    $data['valve_index'] && $platforms |= Platform::INDEX;
 
                     return $platforms;
                 }

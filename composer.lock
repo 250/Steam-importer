@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Shared.git",
-                "reference": "e1505fa4be0af4ae0f9020a66228838330577115"
+                "reference": "f441c909223d68e6434f22b1e36f1aa4407f1ff2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/e1505fa4be0af4ae0f9020a66228838330577115",
-                "reference": "e1505fa4be0af4ae0f9020a66228838330577115",
+                "url": "https://api.github.com/repos/250/Shared/zipball/f441c909223d68e6434f22b1e36f1aa4407f1ff2",
+                "reference": "f441c909223d68e6434f22b1e36f1aa4407f1ff2",
                 "shasum": ""
             },
             "require": {
@@ -47,7 +47,7 @@
                 }
             ],
             "description": "Top 250 shared code library.",
-            "time": "2019-02-17T10:25:23+00:00"
+            "time": "2019-06-19T20:26:08+00:00"
         },
         {
             "name": "amphp/amp",
