@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250\Import;
 
+use ScriptFUSION\Porter\Connector\Recoverable\ExponentialAsyncDelayRecoverableExceptionHandler;
 use ScriptFUSION\Porter\Provider\Steam\Resource\ScrapeAppDetails;
 use ScriptFUSION\Porter\Specification\AsyncImportSpecification;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
@@ -15,6 +16,11 @@ class AsyncAppDetailsSpecification extends AsyncImportSpecification
         parent::__construct(new ScrapeAppDetails($appId));
 
         $this->addTransformer(new MappingTransformer(new AppDetailsMapping));
-        $this->setRecoverableExceptionHandler(new AppDetailsImportExceptionHandler);
+        $this->setRecoverableExceptionHandler(
+            new ExceptionHandlerQueue(
+                new AppDetailsImportExceptionHandler,
+                new ExponentialAsyncDelayRecoverableExceptionHandler
+            )
+        );
     }
 }

@@ -20,7 +20,7 @@ final class PorterFactory
         $container->set(SteamProvider::class, new SteamProvider);
         $container->set(SteamChartsProvider::class, new SteamChartsProvider);
         $container->set(SteamSpyProvider::class, new SteamSpyProvider);
-        $container->set(PatreonProvider::class, function () {
+        $container->set(PatreonProvider::class, static function (): PatreonProvider {
             return new PatreonProvider(new PatreonConnector($_SERVER['PATREON_API_KEY']));
         });
 
