@@ -19,8 +19,10 @@ class AsyncAppDetailsSpecification extends AsyncImportSpecification
         $this->setRecoverableExceptionHandler(
             new ExceptionHandlerQueue(
                 new AppDetailsImportExceptionHandler,
-                new ExponentialAsyncDelayRecoverableExceptionHandler
+                new ExponentialAsyncDelayRecoverableExceptionHandler(500)
             )
         );
+
+        $this->setMaxFetchAttempts(10);
     }
 }
