@@ -5,7 +5,7 @@ trigger:
     include: [master]
 
 variables:
-  phpVersion: 7.1
+  phpVersion: 7.3
   chunks: 6
 
 jobs:
