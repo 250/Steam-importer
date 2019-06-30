@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3a71a5e7ed6464d7f63807738531b09",
+    "content-hash": "b54a48657e726d0b3cf77d73e9997569",
     "packages": [
         {
             "name": "250/shared",
@@ -51,25 +51,24 @@
         },
         {
             "name": "amphp/amp",
-            "version": "v2.1.2",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "f824f0df1da2cc042934fa267d7a227fff9276c9"
+                "reference": "7075ef7d74dbd32626bfd31c976b23055c3ade6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/f824f0df1da2cc042934fa267d7a227fff9276c9",
-                "reference": "f824f0df1da2cc042934fa267d7a227fff9276c9",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/7075ef7d74dbd32626bfd31c976b23055c3ade6a",
+                "reference": "7075ef7d74dbd32626bfd31c976b23055c3ade6a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
-                "ext-json": "*",
+                "friendsofphp/php-cs-fixer": "^2.3",
                 "phpstan/phpstan": "^0.8.5",
                 "phpunit/phpunit": "^6.0.9",
                 "react/promise": "^2"
@@ -124,7 +123,7 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2019-05-31T18:42:02+00:00"
+            "time": "2018-12-11T10:31:37+00:00"
         },
         {
             "name": "amphp/artax",
@@ -1412,16 +1411,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.103",
+            "version": "v0.104",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "01f9ada6e0f37515419cbf457144ccefee70e522"
+                "reference": "d41fea99f90d7935bd57cf654bf271072fe584f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/01f9ada6e0f37515419cbf457144ccefee70e522",
-                "reference": "01f9ada6e0f37515419cbf457144ccefee70e522",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/d41fea99f90d7935bd57cf654bf271072fe584f1",
+                "reference": "d41fea99f90d7935bd57cf654bf271072fe584f1",
                 "shasum": ""
             },
             "require": {
@@ -1445,7 +1444,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2019-06-16T00:23:11+00:00"
+            "time": "2019-06-23T00:23:39+00:00"
         },
         {
             "name": "google/auth",
@@ -2083,16 +2082,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.19",
+            "version": "2.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "d2085db7b7394baa071a69c8f9159723c250f2ba"
+                "reference": "d6819a55b05e123db1e881d8b230d57f912126be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/d2085db7b7394baa071a69c8f9159723c250f2ba",
-                "reference": "d2085db7b7394baa071a69c8f9159723c250f2ba",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/d6819a55b05e123db1e881d8b230d57f912126be",
+                "reference": "d6819a55b05e123db1e881d8b230d57f912126be",
                 "shasum": ""
             },
             "require": {
@@ -2171,7 +2170,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2019-06-20T03:34:11+00:00"
+            "time": "2019-06-23T16:33:11+00:00"
         },
         {
             "name": "phptype/string",
@@ -2661,16 +2660,16 @@
         },
         {
             "name": "scriptfusion/retry",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ScriptFUSION/Retry.git",
-                "reference": "68633ae18421f1706040aa479959bcef7290fd87"
+                "reference": "1ade9bf46a008df20616b619ecf624b78e93df77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ScriptFUSION/Retry/zipball/68633ae18421f1706040aa479959bcef7290fd87",
-                "reference": "68633ae18421f1706040aa479959bcef7290fd87",
+                "url": "https://api.github.com/repos/ScriptFUSION/Retry/zipball/1ade9bf46a008df20616b619ecf624b78e93df77",
+                "reference": "1ade9bf46a008df20616b619ecf624b78e93df77",
                 "shasum": ""
             },
             "require": {
@@ -2704,7 +2703,7 @@
                 }
             ],
             "description": "Retries failing operations.",
-            "time": "2019-02-10T15:45:52+00:00"
+            "time": "2019-06-25T20:34:28+00:00"
         },
         {
             "name": "scriptfusion/retry-exception-handlers",
@@ -2957,16 +2956,16 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "4.4.x-dev",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "2d379ba4a7be0f157e63e0c1934fcaf76640b0e3"
+                "reference": "291397232a2eefb3347eaab9170409981eaad0e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/2d379ba4a7be0f157e63e0c1934fcaf76640b0e3",
-                "reference": "2d379ba4a7be0f157e63e0c1934fcaf76640b0e3",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/291397232a2eefb3347eaab9170409981eaad0e2",
+                "reference": "291397232a2eefb3347eaab9170409981eaad0e2",
                 "shasum": ""
             },
             "require": {
@@ -2979,7 +2978,7 @@
             },
             "require-dev": {
                 "masterminds/html5": "^2.6",
-                "symfony/css-selector": "^3.4|^4.0|^5.0"
+                "symfony/css-selector": "~3.4|~4.0"
             },
             "suggest": {
                 "symfony/css-selector": ""
@@ -2987,7 +2986,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.4-dev"
+                    "dev-master": "4.3-dev"
                 }
             },
             "autoload": {
@@ -3014,7 +3013,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-17T01:42:58+00:00"
+            "time": "2019-06-13T11:03:18+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3180,13 +3179,12 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "250/shared": 20,
-        "provider/steam": 20,
-        "provider/patreon": 20,
-        "transformers/mapping-transformer": 20,
-        "scriptfusion/porter": 20,
         "connectors/http": 20,
         "connectors/ssl": 20,
-        "symfony/dom-crawler": 20
+        "provider/patreon": 20,
+        "provider/steam": 20,
+        "scriptfusion/porter": 20,
+        "transformers/mapping-transformer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

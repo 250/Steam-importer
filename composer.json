@@ -11,22 +11,25 @@
     "php": "^7.1",
     "ext-json": "*",
     "250/shared": "dev-master",
-    "provider/steam": "dev-async",
-    "provider/patreon": "5.0.x-dev",
-    "transformers/mapping-transformer": "5.0.x-dev",
-    "scriptfusion/porter": "@dev",
+    "amphp/amp": "2.1.1",
+    "async/throttle": "^1",
     "connectors/http": "@dev",
     "connectors/ssl": "@dev",
-    "async/throttle": "^1",
-    "joomla/di": "^1.5",
     "doctrine/dbal": "^2",
+    "joomla/di": "^1.5",
     "monolog/monolog": "^1",
-    "symfony/dom-crawler": "^4.2@dev",
-    "symfony/console": "^3"
+    "provider/patreon": "5.0.x-dev",
+    "provider/steam": "dev-async",
+    "scriptfusion/porter": "@dev",
+    "symfony/console": "^3",
+    "transformers/mapping-transformer": "5.0.x-dev"
   },
   "autoload": {
     "psr-4": {
       "ScriptFUSION\\Steam250\\": "src"
     }
+  },
+  "config": {
+    "sort-packages": true
   }
 }
