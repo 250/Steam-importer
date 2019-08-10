@@ -28,10 +28,12 @@ steps:
     #!/bin/sh
     sudo tee ${out=/usr/local/bin/retry} <<-'.'
       for i in {1..10}; do
-        "$@" && break
+        ((i > 1)) && {
+          echo Retry \#$((i - 1))...
+          sleep $i
+        }
 
-        echo Retry \#$i...
-        sleep $i
+        "$@" && exit
       done
     .
     sudo chmod -v +x "$out"
