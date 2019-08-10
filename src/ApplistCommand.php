@@ -20,7 +20,13 @@ final class ApplistCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
-        echo file_get_contents(GetAppList::getUrl());
+        $content = file_get_contents(GetAppList::getUrl());
+
+        if ($content === false) {
+            throw new \RuntimeException('Failed to download app list.');
+        }
+
+        echo $content;
 
         return 0;
     }
