@@ -101,7 +101,7 @@ class Importer
                 ));
             }
 
-            yield $this->throttle->finish();
+            yield $this->throttle->getAwaiting();
         });
 
         Loop::run(function () use ($appDetails, $total) {

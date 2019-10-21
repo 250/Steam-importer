@@ -102,7 +102,7 @@ class PlayersImporter
                 );
             }
 
-            yield $throttle->finish();
+            yield $throttle->getAwaiting();
         });
     }
 

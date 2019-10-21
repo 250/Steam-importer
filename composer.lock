@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b54a48657e726d0b3cf77d73e9997569",
+    "content-hash": "ef286c27cac16851057aeb25669388ef",
     "packages": [
         {
             "name": "250/shared",
@@ -12,15 +12,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Shared.git",
-                "reference": "63518012a9217887b25f50151c0eb884e4d6628c"
+                "reference": "3f396424cb505cd8cfca5f46010d7facee07a611"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/63518012a9217887b25f50151c0eb884e4d6628c",
-                "reference": "63518012a9217887b25f50151c0eb884e4d6628c",
+                "url": "https://api.github.com/repos/250/Shared/zipball/3f396424cb505cd8cfca5f46010d7facee07a611",
+                "reference": "3f396424cb505cd8cfca5f46010d7facee07a611",
                 "shasum": ""
             },
             "require": {
+                "async/throttle": "^2",
                 "athari/yalinqo": "^2",
                 "eloquent/enumeration": "^5",
                 "monolog/monolog": "^1",
@@ -47,30 +48,31 @@
                 }
             ],
             "description": "Top 250 shared code library.",
-            "time": "2019-09-14T10:36:22+00:00"
+            "time": "2019-10-19T16:40:42+00:00"
         },
         {
             "name": "amphp/amp",
-            "version": "v2.1.1",
+            "version": "v2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "7075ef7d74dbd32626bfd31c976b23055c3ade6a"
+                "reference": "5a294f13810844e3bdda28c0f352821d735ca9b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/7075ef7d74dbd32626bfd31c976b23055c3ade6a",
-                "reference": "7075ef7d74dbd32626bfd31c976b23055c3ade6a",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/5a294f13810844e3bdda28c0f352821d735ca9b3",
+                "reference": "5a294f13810844e3bdda28c0f352821d735ca9b3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7"
             },
             "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
-                "friendsofphp/php-cs-fixer": "^2.3",
+                "ext-json": "*",
                 "phpstan/phpstan": "^0.8.5",
-                "phpunit/phpunit": "^6.0.9",
+                "phpunit/phpunit": "^6.0.9 | ^7",
                 "react/promise": "^2"
             },
             "type": "library",
@@ -94,20 +96,20 @@
             ],
             "authors": [
                 {
-                    "name": "Bob Weinand",
-                    "email": "bobwei9@hotmail.com"
-                },
-                {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
                     "name": "Daniel Lowrey",
                     "email": "rdlowrey@php.net"
                 },
                 {
                     "name": "Aaron Piotrowski",
                     "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 }
             ],
             "description": "A non-blocking concurrency framework for PHP applications.",
@@ -123,7 +125,7 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2018-12-11T10:31:37+00:00"
+            "time": "2019-10-01T19:39:23+00:00"
         },
         {
             "name": "amphp/artax",
@@ -187,16 +189,16 @@
         },
         {
             "name": "amphp/byte-stream",
-            "version": "v1.6.1",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/byte-stream.git",
-                "reference": "47908f8e8bb2da8af4e59028200758477bc927ea"
+                "reference": "3d457738751295b9bf6b15036578e7823919f724"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/47908f8e8bb2da8af4e59028200758477bc927ea",
-                "reference": "47908f8e8bb2da8af4e59028200758477bc927ea",
+                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/3d457738751295b9bf6b15036578e7823919f724",
+                "reference": "3d457738751295b9bf6b15036578e7823919f724",
                 "shasum": ""
             },
             "require": {
@@ -242,29 +244,29 @@
                 "non-blocking",
                 "stream"
             ],
-            "time": "2019-07-26T21:22:49+00:00"
+            "time": "2019-08-24T17:01:13+00:00"
         },
         {
             "name": "amphp/cache",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/cache.git",
-                "reference": "ab2339e465d9d383dc748f288d530fd7cd7aadea"
+                "reference": "884c102a84fdda3eac71746878d55312319550f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/cache/zipball/ab2339e465d9d383dc748f288d530fd7cd7aadea",
-                "reference": "ab2339e465d9d383dc748f288d530fd7cd7aadea",
+                "url": "https://api.github.com/repos/amphp/cache/zipball/884c102a84fdda3eac71746878d55312319550f6",
+                "reference": "884c102a84fdda3eac71746878d55312319550f6",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2"
             },
             "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
-                "friendsofphp/php-cs-fixer": "^2.3",
-                "phpunit/phpunit": "^6"
+                "phpunit/phpunit": "^6 | ^7 | ^8"
             },
             "type": "library",
             "autoload": {
@@ -288,7 +290,7 @@
             ],
             "description": "A promise-aware caching API for Amp.",
             "homepage": "https://github.com/amphp/cache",
-            "time": "2017-10-04T19:22:12+00:00"
+            "time": "2019-09-21T08:52:12+00:00"
         },
         {
             "name": "amphp/dns",
@@ -670,33 +672,34 @@
         },
         {
             "name": "amphp/sync",
-            "version": "v1.0.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sync.git",
-                "reference": "a1d8f244eb19e3e2a96abc4686cebc80995bbc90"
+                "reference": "dae12b6bd1aef8f720edf8ceb4595c57a1a1b7db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sync/zipball/a1d8f244eb19e3e2a96abc4686cebc80995bbc90",
-                "reference": "a1d8f244eb19e3e2a96abc4686cebc80995bbc90",
+                "url": "https://api.github.com/repos/amphp/sync/zipball/dae12b6bd1aef8f720edf8ceb4595c57a1a1b7db",
+                "reference": "dae12b6bd1aef8f720edf8ceb4595c57a1a1b7db",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^2"
+                "amphp/amp": "^2.2",
+                "php": ">=7.1"
             },
             "require-dev": {
-                "amphp/phpunit-util": "^1",
-                "friendsofphp/php-cs-fixer": "^2.3",
-                "phpunit/phpunit": "^6"
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1.1",
+                "phpunit/phpunit": "^8 || ^7"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Amp\\Sync\\": "lib"
+                    "Amp\\Sync\\": "src"
                 },
                 "files": [
-                    "lib/functions.php"
+                    "src/functions.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -705,12 +708,12 @@
             ],
             "authors": [
                 {
-                    "name": "Stephen Coakley",
-                    "email": "me@stephencoakley.com"
-                },
-                {
                     "name": "Aaron Piotrowski",
                     "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Stephen Coakley",
+                    "email": "me@stephencoakley.com"
                 }
             ],
             "description": "Mutex, Semaphore, and other synchronization tools for Amp.",
@@ -722,7 +725,7 @@
                 "semaphore",
                 "synchronization"
             ],
-            "time": "2017-11-29T21:48:53+00:00"
+            "time": "2019-09-26T20:57:15+00:00"
         },
         {
             "name": "amphp/uri",
@@ -810,21 +813,26 @@
         },
         {
             "name": "async/throttle",
-            "version": "1.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ScriptFUSION/Async-Throttle.git",
-                "reference": "871bf16b40d323d9812ae729f360e9bf7a4ade43"
+                "reference": "a40e9fef20f8b27c9799bfceccb4667b4720424d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ScriptFUSION/Async-Throttle/zipball/871bf16b40d323d9812ae729f360e9bf7a4ade43",
-                "reference": "871bf16b40d323d9812ae729f360e9bf7a4ade43",
+                "url": "https://api.github.com/repos/ScriptFUSION/Async-Throttle/zipball/a40e9fef20f8b27c9799bfceccb4667b4720424d",
+                "reference": "a40e9fef20f8b27c9799bfceccb4667b4720424d",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^2",
+                "amphp/amp": "^2.2",
                 "php": "^7.1"
+            },
+            "require-dev": {
+                "amphp/phpunit-util": "^1.1",
+                "infection/infection": "^0.13",
+                "phpunit/phpunit": "^7.5"
             },
             "type": "library",
             "autoload": {
@@ -840,7 +848,7 @@
                 }
             ],
             "description": "Throttles async object throughput.",
-            "time": "2018-06-21T10:54:26+00:00"
+            "time": "2019-10-17T23:46:00+00:00"
         },
         {
             "name": "athari/yalinqo",
@@ -1413,16 +1421,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.113",
+            "version": "v0.119",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "93f926106f53ebb56e68f0219189dbf55fae0a11"
+                "reference": "580beda87338639b18fc2135b8945d4f898fefae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/93f926106f53ebb56e68f0219189dbf55fae0a11",
-                "reference": "93f926106f53ebb56e68f0219189dbf55fae0a11",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/580beda87338639b18fc2135b8945d4f898fefae",
+                "reference": "580beda87338639b18fc2135b8945d4f898fefae",
                 "shasum": ""
             },
             "require": {
@@ -1446,20 +1454,20 @@
             "keywords": [
                 "google"
             ],
-            "time": "2019-09-08T00:23:09+00:00"
+            "time": "2019-10-18T00:23:50+00:00"
         },
         {
             "name": "google/auth",
-            "version": "v1.5.2",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "2ee962e5df3e9427fda859f1b0515d6d62c4afa5"
+                "reference": "6d5455b4c0f4a58b1f1b4bdf2ba49221123698b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/2ee962e5df3e9427fda859f1b0515d6d62c4afa5",
-                "reference": "2ee962e5df3e9427fda859f1b0515d6d62c4afa5",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/6d5455b4c0f4a58b1f1b4bdf2ba49221123698b3",
+                "reference": "6d5455b4c0f4a58b1f1b4bdf2ba49221123698b3",
                 "shasum": ""
             },
             "require": {
@@ -1478,7 +1486,7 @@
                 "sebastian/comparator": ">=1.2.3"
             },
             "suggest": {
-                "phpseclib/phpseclib": "May be used in place of OpenSSL for signing strings. Please require version ^2."
+                "phpseclib/phpseclib": "May be used in place of OpenSSL for signing strings or for token management. Please require version ^2."
             },
             "type": "library",
             "autoload": {
@@ -1497,7 +1505,7 @@
                 "google",
                 "oauth2"
             ],
-            "time": "2019-07-22T21:01:31+00:00"
+            "time": "2019-10-01T18:35:05+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2088,16 +2096,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.21",
+            "version": "2.0.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "9f1287e68b3f283339a9f98f67515dd619e5bf9d"
+                "reference": "c78eb5058d5bb1a183133c36d4ba5b6675dfa099"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/9f1287e68b3f283339a9f98f67515dd619e5bf9d",
-                "reference": "9f1287e68b3f283339a9f98f67515dd619e5bf9d",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/c78eb5058d5bb1a183133c36d4ba5b6675dfa099",
+                "reference": "c78eb5058d5bb1a183133c36d4ba5b6675dfa099",
                 "shasum": ""
             },
             "require": {
@@ -2176,7 +2184,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2019-07-12T12:53:49+00:00"
+            "time": "2019-09-17T03:41:22+00:00"
         },
         {
             "name": "phptype/string",
@@ -2781,16 +2789,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.4.31",
+            "version": "v3.4.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "4510f04e70344d70952566e4262a0b11df39cb10"
+                "reference": "4727d7f3c99b9dea0ae70ed4f34645728aa90453"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/4510f04e70344d70952566e4262a0b11df39cb10",
-                "reference": "4510f04e70344d70952566e4262a0b11df39cb10",
+                "url": "https://api.github.com/repos/symfony/console/zipball/4727d7f3c99b9dea0ae70ed4f34645728aa90453",
+                "reference": "4727d7f3c99b9dea0ae70ed4f34645728aa90453",
                 "shasum": ""
             },
             "require": {
@@ -2849,20 +2857,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-08-26T07:52:58+00:00"
+            "time": "2019-10-06T19:52:09+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "c6e5e2a00db768c92c3ae131532af4e1acc7bd03"
+                "reference": "f4b3ff6a549d9ed28b2b0ecd1781bf67cf220ee9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/c6e5e2a00db768c92c3ae131532af4e1acc7bd03",
-                "reference": "c6e5e2a00db768c92c3ae131532af4e1acc7bd03",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/f4b3ff6a549d9ed28b2b0ecd1781bf67cf220ee9",
+                "reference": "f4b3ff6a549d9ed28b2b0ecd1781bf67cf220ee9",
                 "shasum": ""
             },
             "require": {
@@ -2902,20 +2910,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2019-08-20T14:07:54+00:00"
+            "time": "2019-10-02T08:36:26+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "afcdea44a2e399c1e4b52246ec8d54c715393ced"
+                "reference": "cc5c1efd0edfcfd10b354750594a46b3dd2afbbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/afcdea44a2e399c1e4b52246ec8d54c715393ced",
-                "reference": "afcdea44a2e399c1e4b52246ec8d54c715393ced",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/cc5c1efd0edfcfd10b354750594a46b3dd2afbbe",
+                "reference": "cc5c1efd0edfcfd10b354750594a46b3dd2afbbe",
                 "shasum": ""
             },
             "require": {
@@ -2958,20 +2966,20 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2019-08-20T14:27:59+00:00"
+            "time": "2019-09-19T15:51:53+00:00"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "cc686552948d627528c0e2e759186dff67c2610e"
+                "reference": "e9f7b4d19d69b133bd638eeddcdc757723b4211f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/cc686552948d627528c0e2e759186dff67c2610e",
-                "reference": "cc686552948d627528c0e2e759186dff67c2610e",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/e9f7b4d19d69b133bd638eeddcdc757723b4211f",
+                "reference": "e9f7b4d19d69b133bd638eeddcdc757723b4211f",
                 "shasum": ""
             },
             "require": {
@@ -3019,7 +3027,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2019-08-26T08:26:39+00:00"
+            "time": "2019-09-28T21:25:05+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
