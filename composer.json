@@ -11,18 +11,14 @@
     "php": "^7.1",
     "ext-json": "*",
     "250/shared": "dev-master",
-    "amphp/amp": "^2",
     "async/throttle": "^2",
-    "connectors/http": "@dev",
-    "connectors/ssl": "@dev",
     "doctrine/dbal": "^2",
     "joomla/di": "^1.5",
     "monolog/monolog": "^1",
-    "provider/patreon": "5.0.x-dev",
-    "provider/steam": "dev-async",
-    "scriptfusion/porter": "@dev",
+    "provider/patreon": "dev-master",
+    "provider/steam": "^2",
     "symfony/console": "^3",
-    "transformers/mapping-transformer": "5.0.x-dev"
+    "transformers/mapping-transformer": "^2"
   },
   "autoload": {
     "psr-4": {
