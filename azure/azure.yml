@@ -5,7 +5,7 @@ trigger:
     include: [master]
 
 variables:
-  phpVersion: 7.3
+  phpVersion: 7.4
   chunks: 6
 
 jobs:
@@ -73,6 +73,7 @@ jobs:
         -d '{"request": {"branch": "master"}}'\
         https://api.travis-ci.org/repo/250%2FSteam-250/requests
     displayName: Trigger Steam 250 repository build
+    condition: not(variables.test)
 
   - script: |
       set -v
@@ -86,3 +87,4 @@ jobs:
         --security-token '$(GITHUB_AZURE_TOKEN)'
     displayName: Upload snapshots
     workingDirectory: $(Build.ArtifactStagingDirectory)
+    condition: not(variables.test)

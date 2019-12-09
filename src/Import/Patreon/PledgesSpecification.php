@@ -44,7 +44,7 @@ class PledgesSpecification extends ImportSpecification
                     return parent::transform($records, $records->getLinkedResources());
                 }
             },
-            new FilterTransformer(function (array $data) {
+            new FilterTransformer(static function (array $data): bool {
                 return $data['reward'] >= 500;
             }),
         ]);
