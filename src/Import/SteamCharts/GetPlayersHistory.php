@@ -6,6 +6,7 @@ namespace ScriptFUSION\Steam250\Import\SteamCharts;
 use Amp\Iterator;
 use Amp\Producer;
 use ScriptFUSION\Porter\Connector\ImportConnector;
+use ScriptFUSION\Porter\Net\Http\AsyncHttpDataSource;
 use ScriptFUSION\Porter\Provider\Resource\AsyncResource;
 
 /**
@@ -30,7 +31,7 @@ class GetPlayersHistory implements AsyncResource
     public function fetchAsync(ImportConnector $connector): Iterator
     {
         return new Producer(function (\Closure $emit) use ($connector): \Generator {
-            $response = yield $connector->fetchAsync(sprintf(self::URL, $this->appId));
+            $response = yield $connector->fetchAsync(new AsyncHttpDataSource(sprintf(self::URL, $this->appId)));
 
             $json = \json_decode((string)$response, true);
 

@@ -9,6 +9,7 @@ use Amp\Producer;
 use Amp\Promise;
 use Psr\Log\LoggerInterface;
 use ScriptFUSION\Porter\Connector\ImportConnector;
+use ScriptFUSION\Porter\Net\Http\AsyncHttpDataSource;
 use ScriptFUSION\Porter\Net\Http\HttpResponse;
 use ScriptFUSION\Porter\Provider\Resource\AsyncResource;
 
@@ -39,7 +40,9 @@ class GetCurrentPlayers implements AsyncResource
             do {
                 $this->logger && $this->logger->debug("Downloading page $currentPage...");
 
-                $responses[] = self::emitParsedBody($emit, $connector->fetchAsync(self::BASE_URL . $currentPage));
+                $responses[] = self::emitParsedBody($emit, $connector->fetchAsync(
+                    new AsyncHttpDataSource(self::BASE_URL . $currentPage)
+                ));
             } while (++$currentPage <= self::PAGES);
 
             yield $responses;
