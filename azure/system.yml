@@ -19,7 +19,7 @@ steps:
     sudo tee ${out=/usr/local/bin/data} <<-'.'
       #!/bin/sh
       GOOGLE_CLIENT_SECRET="$(GOOGLE_CLIENT_SECRET)" GOOGLE_REFRESH_TOKEN="$(GOOGLE_REFRESH_TOKEN)"\
-        "$(Build.SourcesDirectory)/vendor/bin/250 data" -v "$@"
+        php -d memory_limit=-1 "$(Build.SourcesDirectory)/vendor/bin/250 data" -v "$@"
     .
     sudo chmod -v +x "$out"
   displayName: Install "data" command

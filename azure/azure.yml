@@ -2,16 +2,32 @@
 
 trigger:
   branches:
-    include: [master]
+    include:
+      - master
+      - throttle-2 # TODO: Remove
+
+pool:
+  vmImage: ubuntu-18.04
 
 variables:
   phpVersion: 7.4
   chunks: 6
+  test: 1 # TODO: Remove
 
 jobs:
 - job: Initialize
   steps:
   - template: system.yml
+
+#  - script: |
+#      sudo sh -c 'echo xdebug.max_nesting_level=-1 > $(php -r "echo php_ini_loaded_file();")'
+#      git clone https://github.com/hannob/php-crashers.git
+#      cd php-crashers
+#      ulimit -c unlimited
+#      cat /proc/sys/kernel/core_pattern
+#      php class-clone-recursion.php
+#      ls -lah
+#      false
 
   - script: 250 applist > applist.json
     displayName: Download app list
@@ -38,13 +54,22 @@ jobs:
   - script: dig +short myip.opendns.com @resolver1.opendns.com
     displayName: WAN IP
 
-  - script: 250 import-async --lite --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase)
-      --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json || exit
+  - script: |
+      sudo sysctl -w kernel.core_pattern="${core=$(Build.BuildId).$(System.JobPositionInPhase).core}"
+    displayName: Configure core dumps
+
+  - script: |
+      # Enable core dumps.
+      ulimit -c unlimited
+
+      250 import-async --lite --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase) \
+        --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json || exit
     displayName: Import apps ($(System.JobPositionInPhase)/$(System.TotalJobsInPhase))
     workingDirectory: $(BUILDDIR)
 
   - script: retry data upload "$BUILDDIR" "$RBUILDDIR"
     displayName: Upload build artifacts
+    condition: succeededOrFailed() # Upload core dump when task failed but not if job cancelled.
 
 - job: Stitch
   dependsOn: Import
@@ -60,6 +85,7 @@ jobs:
       data move "$RBUILDDIR" &&
       data delete $MARKER
     displayName: Upload build artifacts and clean up
+    condition: not(variables.test)
 
   - script: |
       [[ '$(Build.Reason)' = Schedule ]] &&

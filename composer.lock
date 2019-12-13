@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ffb16a4ff8124466839d0e7ec428f2f",
+    "content-hash": "aa418ca31281d3dfc80454b07c96c877",
     "packages": [
         {
             "name": "250/shared",
@@ -52,16 +52,16 @@
         },
         {
             "name": "amphp/amp",
-            "version": "v2.4.0",
+            "version": "dev-bilge-test",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "13930a582947831bb66ff1aeac28672fd91c38ea"
+                "reference": "ffa08f37dbfca0c5f3a70be282172b30cf42398e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/13930a582947831bb66ff1aeac28672fd91c38ea",
-                "reference": "13930a582947831bb66ff1aeac28672fd91c38ea",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/ffa08f37dbfca0c5f3a70be282172b30cf42398e",
+                "reference": "ffa08f37dbfca0c5f3a70be282172b30cf42398e",
                 "shasum": ""
             },
             "require": {
@@ -125,7 +125,7 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2019-11-11T19:32:05+00:00"
+            "time": "2019-12-13T22:36:42+00:00"
         },
         {
             "name": "amphp/byte-stream",
@@ -3217,10 +3217,18 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.4",
+            "alias_normalized": "2.4.0.0",
+            "version": "dev-bilge-test",
+            "package": "amphp/amp"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "250/shared": 20,
+        "amphp/amp": 20,
         "provider/patreon": 20
     },
     "prefer-stable": false,
