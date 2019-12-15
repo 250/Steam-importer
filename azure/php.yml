@@ -19,3 +19,14 @@ steps:
     composer global require hirak/prestissimo
     composer install -n --no-progress --no-suggest
   displayName: Install dependencies
+
+- script: |
+    sudo DEBIAN_FRONTEND=noninteractive apt --assume-yes install php-pear libuv1-dev
+    sudo pear config-set php_ini "$(php -r 'echo php_ini_loaded_file();')"
+    sudo pecl install channel://pecl.php.net/uv-0.2.4
+    php -m
+    php -m | grep --fixed-strings --line-regexp uv
+  displayName: Install PHP uv extension
+
+- script: php -r 'require "vendor/autoload.php"; echo get_class(Amp\Loop::get()), "\n";'
+  displayName: Async loop driver
