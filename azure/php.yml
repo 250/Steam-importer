@@ -8,6 +8,9 @@ steps:
     php -v
   displayName: Use PHP version $(phpVersion)
 
+- script: sudo phpdismod xdebug && php -m
+  displayName: Disable Xdebug
+
 - script: composer validate
   displayName: Validate Composer file
   condition: eq(variables['System.PhaseName'], 'Initialize')

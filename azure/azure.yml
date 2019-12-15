@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-18.04
 
 variables:
-  phpVersion: 7.4
+  phpVersion: 7.3
   chunks: 6
   test: 1 # TODO: Remove
 
@@ -55,7 +55,7 @@ jobs:
     displayName: WAN IP
 
   - script: |
-      sudo sysctl -w kernel.core_pattern="${core=$(Build.BuildId).$(System.JobPositionInPhase).core}"
+      sudo sysctl -w kernel.core_pattern="$AZURE_BUILD_NUMBER.$(System.JobPositionInPhase).core"
     displayName: Configure core dumps
 
   - script: |
