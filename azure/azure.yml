@@ -19,27 +19,17 @@ jobs:
   steps:
   - template: system.yml
 
-#  - script: |
-#      sudo sh -c 'echo xdebug.max_nesting_level=-1 > $(php -r "echo php_ini_loaded_file();")'
-#      git clone https://github.com/hannob/php-crashers.git
-#      cd php-crashers
-#      ulimit -c unlimited
-#      cat /proc/sys/kernel/core_pattern
-#      php class-clone-recursion.php
-#      ls -lah
-#      false
-
   - script: 250 applist > applist.json
     displayName: Download app list
     workingDirectory: $(BUILDDIR)
 
-  - script: PATREON_API_KEY=$(PATREON_API_KEY) 250 patron-import
-    displayName: Import patron reviews
-    workingDirectory: $(BUILDDIR)
+#  - script: PATREON_API_KEY=$(PATREON_API_KEY) 250 patron-import
+#    displayName: Import patron reviews
+#    workingDirectory: $(BUILDDIR)
 
-  - script: 250 players-import
-    displayName: Import player stats
-    workingDirectory: $(BUILDDIR)
+#  - script: 250 players-import
+#    displayName: Import player stats
+#    workingDirectory: $(BUILDDIR)
 
   - script: data upload "$BUILDDIR" "$RBUILDDIR"
     displayName: Upload build artifacts
@@ -54,16 +44,23 @@ jobs:
   - script: dig +short myip.opendns.com @resolver1.opendns.com
     displayName: WAN IP
 
-  - script: |
-      sudo sysctl -w kernel.core_pattern="$AZURE_BUILD_NUMBER.$(System.JobPositionInPhase).core"
-    displayName: Configure core dumps
+  - script: sudo apt install --assume-yes gdb
+    displayName: Install GDB
 
   - script: |
-      # Enable core dumps.
-      ulimit -c unlimited
+      echo "
+        set pagination off
+        set logging file gdb.$AZURE_BUILD_NUMBER.$(System.JobPositionInPhase).txt
+        set logging on
+        run
+        bt
+        quit
+      " > gdb.script
 
-      250 import-async --lite --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase) \
-        --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json || exit
+      gdb --batch --command=gdb.script -return-child-result --args \
+        php "$(Build.SourcesDirectory)/bin/250" -v import-async --lite \
+          --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase) \
+          --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json
     displayName: Import apps ($(System.JobPositionInPhase)/$(System.TotalJobsInPhase))
     workingDirectory: $(BUILDDIR)
 
