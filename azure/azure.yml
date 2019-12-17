@@ -52,12 +52,25 @@ jobs:
         set pagination off
         set logging file gdb.$AZURE_BUILD_NUMBER.$(System.JobPositionInPhase).txt
         set logging on
+        set \$_exitcode = -999
+        handle SIGTERM nostop print pass
+        handle SIGPIPE nostop noprint pass
+        define hook-stop
+            if \$_exitcode != -999
+                echo normal exit\n
+                quit
+            else
+                echo abnormal exit\n
+                bt
+                quit
+            end
+        end
         run
-        bt
-        quit
       " > gdb.script
 
-      gdb --batch --command=gdb.script -return-child-result --args \
+      cat gdb.script
+
+      USE_ZEND_ALLOC=0 gdb --batch --command=gdb.script -return-child-result --args \
         php "$(Build.SourcesDirectory)/bin/250" -v import-async --lite \
           --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase) \
           --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json
