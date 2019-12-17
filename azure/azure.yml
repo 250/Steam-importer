@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-18.04
 
 variables:
-  phpVersion: 7.4
+  phpVersion: 7.3
   chunks: 6
   test: 1 # TODO: Remove
 
@@ -19,27 +19,17 @@ jobs:
   steps:
   - template: system.yml
 
-#  - script: |
-#      sudo sh -c 'echo xdebug.max_nesting_level=-1 > $(php -r "echo php_ini_loaded_file();")'
-#      git clone https://github.com/hannob/php-crashers.git
-#      cd php-crashers
-#      ulimit -c unlimited
-#      cat /proc/sys/kernel/core_pattern
-#      php class-clone-recursion.php
-#      ls -lah
-#      false
-
   - script: 250 applist > applist.json
     displayName: Download app list
     workingDirectory: $(BUILDDIR)
 
-  - script: PATREON_API_KEY=$(PATREON_API_KEY) 250 patron-import
-    displayName: Import patron reviews
-    workingDirectory: $(BUILDDIR)
+#  - script: PATREON_API_KEY=$(PATREON_API_KEY) 250 patron-import
+#    displayName: Import patron reviews
+#    workingDirectory: $(BUILDDIR)
 
-  - script: 250 players-import
-    displayName: Import player stats
-    workingDirectory: $(BUILDDIR)
+#  - script: 250 players-import
+#    displayName: Import player stats
+#    workingDirectory: $(BUILDDIR)
 
   - script: data upload "$BUILDDIR" "$RBUILDDIR"
     displayName: Upload build artifacts
@@ -54,16 +44,8 @@ jobs:
   - script: dig +short myip.opendns.com @resolver1.opendns.com
     displayName: WAN IP
 
-  - script: |
-      sudo sysctl -w kernel.core_pattern="${core=$(Build.BuildId).$(System.JobPositionInPhase).core}"
-    displayName: Configure core dumps
-
-  - script: |
-      # Enable core dumps.
-      ulimit -c unlimited
-
-      250 import-async --lite --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase) \
-        --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json || exit
+  - script: 250 import-async --lite --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase)
+      --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json
     displayName: Import apps ($(System.JobPositionInPhase)/$(System.TotalJobsInPhase))
     workingDirectory: $(BUILDDIR)
 

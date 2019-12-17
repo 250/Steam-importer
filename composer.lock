@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa418ca31281d3dfc80454b07c96c877",
+    "content-hash": "c123e5a23242843fa46edb98f24e2385",
     "packages": [
         {
             "name": "250/shared",
@@ -52,27 +52,26 @@
         },
         {
             "name": "amphp/amp",
-            "version": "dev-bilge-test",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "ffa08f37dbfca0c5f3a70be282172b30cf42398e"
+                "reference": "7075ef7d74dbd32626bfd31c976b23055c3ade6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/ffa08f37dbfca0c5f3a70be282172b30cf42398e",
-                "reference": "ffa08f37dbfca0c5f3a70be282172b30cf42398e",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/7075ef7d74dbd32626bfd31c976b23055c3ade6a",
+                "reference": "7075ef7d74dbd32626bfd31c976b23055c3ade6a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
-                "ext-json": "*",
+                "friendsofphp/php-cs-fixer": "^2.3",
                 "phpstan/phpstan": "^0.8.5",
-                "phpunit/phpunit": "^6.0.9 | ^7",
+                "phpunit/phpunit": "^6.0.9",
                 "react/promise": "^2"
             },
             "type": "library",
@@ -96,20 +95,20 @@
             ],
             "authors": [
                 {
-                    "name": "Daniel Lowrey",
-                    "email": "rdlowrey@php.net"
-                },
-                {
-                    "name": "Aaron Piotrowski",
-                    "email": "aaron@trowski.com"
-                },
-                {
                     "name": "Bob Weinand",
                     "email": "bobwei9@hotmail.com"
                 },
                 {
                     "name": "Niklas Keller",
                     "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@php.net"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
                 }
             ],
             "description": "A non-blocking concurrency framework for PHP applications.",
@@ -125,7 +124,7 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2019-12-13T22:36:42+00:00"
+            "time": "2018-12-11T10:31:37+00:00"
         },
         {
             "name": "amphp/byte-stream",
@@ -3219,16 +3218,15 @@
     "packages-dev": [],
     "aliases": [
         {
-            "alias": "2.4",
-            "alias_normalized": "2.4.0.0",
-            "version": "dev-bilge-test",
+            "alias": "2.2",
+            "alias_normalized": "2.2.0.0",
+            "version": "2.1.1.0",
             "package": "amphp/amp"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "250/shared": 20,
-        "amphp/amp": 20,
         "provider/patreon": 20
     },
     "prefer-stable": false,
