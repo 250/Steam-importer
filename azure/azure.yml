@@ -51,7 +51,6 @@ jobs:
 
   - script: retry data upload "$BUILDDIR" "$RBUILDDIR"
     displayName: Upload build artifacts
-    condition: succeededOrFailed() # Upload core dump when task failed but not if job cancelled.
 
 - job: Stitch
   dependsOn: Import
