@@ -56,12 +56,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "ffa08f37dbfca0c5f3a70be282172b30cf42398e"
+                "reference": "9deb947000c4f606c68ce0f83b34b39a1d1515af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/ffa08f37dbfca0c5f3a70be282172b30cf42398e",
-                "reference": "ffa08f37dbfca0c5f3a70be282172b30cf42398e",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/9deb947000c4f606c68ce0f83b34b39a1d1515af",
+                "reference": "9deb947000c4f606c68ce0f83b34b39a1d1515af",
                 "shasum": ""
             },
             "require": {
@@ -125,7 +125,7 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2019-12-13T22:36:42+00:00"
+            "time": "2019-12-19T18:55:40+00:00"
         },
         {
             "name": "amphp/byte-stream",
@@ -2889,7 +2889,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -2942,16 +2942,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "b8600a1d7d20b0e80906398bb1f50612fa074a8e"
+                "reference": "5c4c1db977dc70bb3250e1308d3e8c6341aa38f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/b8600a1d7d20b0e80906398bb1f50612fa074a8e",
-                "reference": "b8600a1d7d20b0e80906398bb1f50612fa074a8e",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/5c4c1db977dc70bb3250e1308d3e8c6341aa38f5",
+                "reference": "5c4c1db977dc70bb3250e1308d3e8c6341aa38f5",
                 "shasum": ""
             },
             "require": {
@@ -2994,11 +2994,11 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-28T13:33:56+00:00"
+            "time": "2019-12-16T14:46:54+00:00"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
