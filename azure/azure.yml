@@ -4,7 +4,6 @@ trigger:
   branches:
     include:
       - master
-      - throttle-2 # TODO: Remove
 
 pool:
   vmImage: ubuntu-18.04
@@ -12,7 +11,6 @@ pool:
 variables:
   phpVersion: 7.3
   chunks: 6
-  test: 1 # TODO: Remove
 
 jobs:
 - job: Initialize
@@ -23,13 +21,13 @@ jobs:
     displayName: Download app list
     workingDirectory: $(BUILDDIR)
 
-#  - script: PATREON_API_KEY=$(PATREON_API_KEY) 250 patron-import
-#    displayName: Import patron reviews
-#    workingDirectory: $(BUILDDIR)
+  - script: PATREON_API_KEY=$(PATREON_API_KEY) 250 patron-import
+    displayName: Import patron reviews
+    workingDirectory: $(BUILDDIR)
 
-#  - script: 250 players-import
-#    displayName: Import player stats
-#    workingDirectory: $(BUILDDIR)
+  - script: 250 players-import
+    displayName: Import player stats
+    workingDirectory: $(BUILDDIR)
 
   - script: data upload "$BUILDDIR" "$RBUILDDIR"
     displayName: Upload build artifacts
