@@ -10,7 +10,9 @@
   "require": {
     "php": "^7.1",
     "ext-json": "*",
+    "250/log": "dev-master",
     "250/shared": "dev-master",
+    "250/storage": "dev-master",
     "amphp/amp": "2.1.1 as 2.2",
     "async/throttle": "^2",
     "doctrine/dbal": "^2",

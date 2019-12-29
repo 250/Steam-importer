@@ -7,7 +7,7 @@ use ScriptFUSION\Porter\Connector\Recoverable\ExponentialAsyncDelayRecoverableEx
 use ScriptFUSION\Porter\Provider\Steam\Resource\ScrapeAppDetails;
 use ScriptFUSION\Porter\Specification\AsyncImportSpecification;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
-use ScriptFUSION\Steam250\Import\Mapping\AppDetailsMapping;
+use ScriptFUSION\Steam250\Shared\Mapping\AppDetailsMapping;
 
 class AsyncAppDetailsSpecification extends AsyncImportSpecification
 {

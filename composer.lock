@@ -4,36 +4,62 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c123e5a23242843fa46edb98f24e2385",
+    "content-hash": "077ce0ababa6a45caedbb2d84d454f21",
     "packages": [
+        {
+            "name": "250/log",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/250/Log.git",
+                "reference": "5e4a05c7791e04035d82523530457b725e8f3429"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/250/Log/zipball/5e4a05c7791e04035d82523530457b725e8f3429",
+                "reference": "5e4a05c7791e04035d82523530457b725e8f3429",
+                "shasum": ""
+            },
+            "require": {
+                "async/throttle": "^2",
+                "monolog/monolog": "^1",
+                "php": "^7.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ScriptFUSION\\Steam250\\Log\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Bilge",
+                    "email": "bilge@scriptfusion.com"
+                }
+            ],
+            "description": "Club 250 shared logging library.",
+            "time": "2019-12-29T09:46:55+00:00"
+        },
         {
             "name": "250/shared",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Shared.git",
-                "reference": "3f396424cb505cd8cfca5f46010d7facee07a611"
+                "reference": "3f732139b5b0374d4296f42041b5e7a90ec7ae5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/3f396424cb505cd8cfca5f46010d7facee07a611",
-                "reference": "3f396424cb505cd8cfca5f46010d7facee07a611",
+                "url": "https://api.github.com/repos/250/Shared/zipball/3f732139b5b0374d4296f42041b5e7a90ec7ae5c",
+                "reference": "3f732139b5b0374d4296f42041b5e7a90ec7ae5c",
                 "shasum": ""
             },
             "require": {
-                "async/throttle": "^2",
-                "athari/yalinqo": "^2",
-                "eloquent/enumeration": "^5",
-                "monolog/monolog": "^1",
-                "nao-pon/flysystem-google-drive": "^1.1.9",
                 "php": "^7.1",
-                "phptype/string": "^1",
-                "scriptfusion/static-class": "^1",
-                "symfony/console": "^3"
+                "scriptfusion/mapper": "^2",
+                "scriptfusion/static-class": "^1"
             },
-            "bin": [
-                "bin/250 data"
-            ],
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -47,8 +73,50 @@
                     "email": "bilge@scriptfusion.com"
                 }
             ],
-            "description": "Top 250 shared code library.",
-            "time": "2019-10-19T16:40:42+00:00"
+            "description": "Club 250 shared code library.",
+            "time": "2019-12-29T16:34:54+00:00"
+        },
+        {
+            "name": "250/storage",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/250/Storage.git",
+                "reference": "b797be7f9a1311663975df63d8c0ee5d9cd3099d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/250/Storage/zipball/b797be7f9a1311663975df63d8c0ee5d9cd3099d",
+                "reference": "b797be7f9a1311663975df63d8c0ee5d9cd3099d",
+                "shasum": ""
+            },
+            "require": {
+                "250/log": "dev-master",
+                "athari/yalinqo": "^2",
+                "eloquent/enumeration": "^6",
+                "nao-pon/flysystem-google-drive": "^1.1.9",
+                "php": "^7.1",
+                "phptype/string": "^1",
+                "symfony/console": "^3|^4|^5"
+            },
+            "bin": [
+                "bin/250 data"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ScriptFUSION\\Steam250\\Storage\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Bilge",
+                    "email": "bilge@scriptfusion.com"
+                }
+            ],
+            "description": "Club 250 shared storage library.",
+            "time": "2019-12-29T10:13:39+00:00"
         },
         {
             "name": "amphp/amp",
@@ -1286,25 +1354,23 @@
         },
         {
             "name": "eloquent/enumeration",
-            "version": "5.1.1",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eloquent/enumeration.git",
-                "reference": "0242859435d9b135939816858348556d3cde9e3c"
+                "reference": "15a1959683ae4fea75e19ff09d72a344ece3c6a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eloquent/enumeration/zipball/0242859435d9b135939816858348556d3cde9e3c",
-                "reference": "0242859435d9b135939816858348556d3cde9e3c",
+                "url": "https://api.github.com/repos/eloquent/enumeration/zipball/15a1959683ae4fea75e19ff09d72a344ece3c6a4",
+                "reference": "15a1959683ae4fea75e19ff09d72a344ece3c6a4",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "php": ">=7.1"
             },
             "require-dev": {
-                "icecave/archer": "dev-develop",
-                "phpunit/phpunit": "^4",
-                "sami/sami": "^3"
+                "phpunit/phpunit": "^7"
             },
             "type": "library",
             "autoload": {
@@ -1333,7 +1399,7 @@
                 "set",
                 "type"
             ],
-            "time": "2015-11-03T22:21:38+00:00"
+            "time": "2018-11-22T02:45:56+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -1532,16 +1598,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.5.0",
+            "version": "6.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "dbc2bc3a293ed6b1ae08a3651e2bfd213d19b6a5"
+                "reference": "43ece0e75098b7ecd8d13918293029e555a50f82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/dbc2bc3a293ed6b1ae08a3651e2bfd213d19b6a5",
-                "reference": "dbc2bc3a293ed6b1ae08a3651e2bfd213d19b6a5",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/43ece0e75098b7ecd8d13918293029e555a50f82",
+                "reference": "43ece0e75098b7ecd8d13918293029e555a50f82",
                 "shasum": ""
             },
             "require": {
@@ -1595,7 +1661,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2019-12-07T18:20:45+00:00"
+            "time": "2019-12-23T11:57:10+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1822,16 +1888,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.61",
+            "version": "1.0.62",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "4fb13c01784a6c9f165a351e996871488ca2d8c9"
+                "reference": "14dd5d7dff5fbc29ca9a2a53ff109760e40d91a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/4fb13c01784a6c9f165a351e996871488ca2d8c9",
-                "reference": "4fb13c01784a6c9f165a351e996871488ca2d8c9",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/14dd5d7dff5fbc29ca9a2a53ff109760e40d91a0",
+                "reference": "14dd5d7dff5fbc29ca9a2a53ff109760e40d91a0",
                 "shasum": ""
             },
             "require": {
@@ -1902,7 +1968,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2019-12-08T21:46:50+00:00"
+            "time": "2019-12-29T14:46:55+00:00"
         },
         {
             "name": "league/flysystem-cached-adapter",
@@ -1953,16 +2019,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.25.2",
+            "version": "1.25.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "d5e2fb341cb44f7e2ab639d12a1e5901091ec287"
+                "reference": "fa82921994db851a8becaf3787a9e73c5976b6f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/d5e2fb341cb44f7e2ab639d12a1e5901091ec287",
-                "reference": "d5e2fb341cb44f7e2ab639d12a1e5901091ec287",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fa82921994db851a8becaf3787a9e73c5976b6f1",
+                "reference": "fa82921994db851a8becaf3787a9e73c5976b6f1",
                 "shasum": ""
             },
             "require": {
@@ -2027,7 +2093,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2019-11-13T10:00:05+00:00"
+            "time": "2019-12-20T14:15:16+00:00"
         },
         {
             "name": "nao-pon/flysystem-cached-extra",
@@ -2290,33 +2356,33 @@
         },
         {
             "name": "provider/steam",
-            "version": "2.0.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "920bf2b87035499aafdea92a1fcb82894de17145"
+                "reference": "21dae134fc5f9a3138732fd53b5dad384835d714"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/920bf2b87035499aafdea92a1fcb82894de17145",
-                "reference": "920bf2b87035499aafdea92a1fcb82894de17145",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/21dae134fc5f9a3138732fd53b5dad384835d714",
+                "reference": "21dae134fc5f9a3138732fd53b5dad384835d714",
                 "shasum": ""
             },
             "require": {
                 "amphp/parallel": "^1.1",
                 "connectors/http": "^3",
-                "eloquent/enumeration": "^5",
+                "eloquent/enumeration": "^5|^6",
                 "ext-json": "*",
                 "php": "^7.1",
                 "phpseclib/phpseclib": "^2",
                 "scriptfusion/porter": "^5",
-                "symfony/css-selector": "^3|^4",
-                "symfony/dom-crawler": "^3|^4"
+                "symfony/css-selector": "^3|^4|^5",
+                "symfony/dom-crawler": "^3|^4|^5"
             },
             "require-dev": {
                 "athari/yalinqo": "^2.4.2",
                 "mockery/mockery": "^1.3",
-                "phpunit/phpunit": "^7"
+                "phpunit/phpunit": "^7.5"
             },
             "type": "library",
             "autoload": {
@@ -2332,7 +2398,7 @@
                 }
             ],
             "description": "Steam data provider for Porter.",
-            "time": "2019-12-08T16:30:03+00:00"
+            "time": "2019-12-29T16:43:40+00:00"
         },
         {
             "name": "psr/cache",
@@ -2605,25 +2671,25 @@
         },
         {
             "name": "scriptfusion/mapper",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ScriptFUSION/Mapper.git",
-                "reference": "1b8326e238876db9e5f86533ef924f003316a433"
+                "reference": "370029a0dd956c01bc3c9f46808fe044df372c66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ScriptFUSION/Mapper/zipball/1b8326e238876db9e5f86533ef924f003316a433",
-                "reference": "1b8326e238876db9e5f86533ef924f003316a433",
+                "url": "https://api.github.com/repos/ScriptFUSION/Mapper/zipball/370029a0dd956c01bc3c9f46808fe044df372c66",
+                "reference": "370029a0dd956c01bc3c9f46808fe044df372c66",
                 "shasum": ""
             },
             "require": {
-                "eloquent/enumeration": "^5",
-                "php": "^5.6|^7",
+                "eloquent/enumeration": "^5|^6",
+                "php": "^7.1",
                 "scriptfusion/array-walker": "^1"
             },
             "require-dev": {
-                "mockery/mockery": "^0.9.4",
+                "mockery/mockery": "^1.3",
                 "phpunit/phpunit": "^4.8",
                 "scriptfusion/static-class": "^1"
             },
@@ -2644,7 +2710,7 @@
                 }
             ],
             "description": "Transforms arrays using an object composition DSL.",
-            "time": "2019-03-02T12:05:43+00:00"
+            "time": "2019-12-29T16:57:01+00:00"
         },
         {
             "name": "scriptfusion/porter",
@@ -2888,25 +2954,25 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v4.4.1",
+            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "64acec7e0d67125e9f4656c68d4a38a42ab5a0b7"
+                "reference": "19d29e7098b7b2c3313cb03902ca30f100dcb837"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/64acec7e0d67125e9f4656c68d4a38a42ab5a0b7",
-                "reference": "64acec7e0d67125e9f4656c68d4a38a42ab5a0b7",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/19d29e7098b7b2c3313cb03902ca30f100dcb837",
+                "reference": "19d29e7098b7b2c3313cb03902ca30f100dcb837",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3"
+                "php": "^7.2.5"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.4-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -2937,20 +3003,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-12T00:35:04+00:00"
+            "time": "2019-11-18T17:27:11+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "b8600a1d7d20b0e80906398bb1f50612fa074a8e"
+                "reference": "5c4c1db977dc70bb3250e1308d3e8c6341aa38f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/b8600a1d7d20b0e80906398bb1f50612fa074a8e",
-                "reference": "b8600a1d7d20b0e80906398bb1f50612fa074a8e",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/5c4c1db977dc70bb3250e1308d3e8c6341aa38f5",
+                "reference": "5c4c1db977dc70bb3250e1308d3e8c6341aa38f5",
                 "shasum": ""
             },
             "require": {
@@ -2993,24 +3059,24 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-28T13:33:56+00:00"
+            "time": "2019-12-16T14:46:54+00:00"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v4.4.1",
+            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "36bbcab9369fc2f583220890efd43bf262d563fd"
+                "reference": "0a0a73a0836926898b6fcd6817fe697487a73d97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/36bbcab9369fc2f583220890efd43bf262d563fd",
-                "reference": "36bbcab9369fc2f583220890efd43bf262d563fd",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/0a0a73a0836926898b6fcd6817fe697487a73d97",
+                "reference": "0a0a73a0836926898b6fcd6817fe697487a73d97",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3",
+                "php": "^7.2.5",
                 "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-mbstring": "~1.0"
             },
@@ -3019,7 +3085,7 @@
             },
             "require-dev": {
                 "masterminds/html5": "^2.6",
-                "symfony/css-selector": "^3.4|^4.0|^5.0"
+                "symfony/css-selector": "^4.4|^5.0"
             },
             "suggest": {
                 "symfony/css-selector": ""
@@ -3027,7 +3093,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.4-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -3054,7 +3120,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-29T11:38:30+00:00"
+            "time": "2019-11-18T17:27:11+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3226,7 +3292,9 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "250/log": 20,
         "250/shared": 20,
+        "250/storage": 20,
         "provider/patreon": 20
     },
     "prefer-stable": false,
