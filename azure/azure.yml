@@ -68,8 +68,6 @@ jobs:
         run
       " > gdb.script
 
-      cat gdb.script
-
       USE_ZEND_ALLOC=0 gdb --batch --command=gdb.script -return-child-result --args \
         php -dzend.assertions=1 "$(Build.SourcesDirectory)/bin/250" -v import-async --lite \
           --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase) \
