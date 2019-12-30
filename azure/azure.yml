@@ -24,10 +24,12 @@ jobs:
   - script: PATREON_API_KEY=$(PATREON_API_KEY) 250 patron-import
     displayName: Import patron reviews
     workingDirectory: $(BUILDDIR)
+    condition: not(variables['skip-patreon'])
 
   - script: 250 players-import
     displayName: Import player stats
     workingDirectory: $(BUILDDIR)
+    condition: not(variables['skip-players'])
 
   - script: data upload "$BUILDDIR" "$RBUILDDIR"
     displayName: Upload build artifacts
