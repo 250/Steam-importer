@@ -56,12 +56,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "9deb947000c4f606c68ce0f83b34b39a1d1515af"
+                "reference": "0ec4c6f7991a1927c22fae0ea002b761ae419638"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/9deb947000c4f606c68ce0f83b34b39a1d1515af",
-                "reference": "9deb947000c4f606c68ce0f83b34b39a1d1515af",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/0ec4c6f7991a1927c22fae0ea002b761ae419638",
+                "reference": "0ec4c6f7991a1927c22fae0ea002b761ae419638",
                 "shasum": ""
             },
             "require": {
@@ -125,7 +125,7 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2019-12-19T18:55:40+00:00"
+            "time": "2020-01-21T18:58:48+00:00"
         },
         {
             "name": "amphp/byte-stream",

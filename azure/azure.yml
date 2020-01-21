@@ -74,6 +74,8 @@ jobs:
           --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json
     displayName: Import apps ($(System.JobPositionInPhase)/$(System.TotalJobsInPhase))
     workingDirectory: $(BUILDDIR)
+    env:
+      AMP_LOG_TIMER_QUEUE_PATH: $(BUILDDIR)/tq-$(System.JobPositionInPhase).log
 
   - script: retry data upload "$BUILDDIR" "$RBUILDDIR"
     displayName: Upload build artifacts
