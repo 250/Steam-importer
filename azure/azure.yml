@@ -69,7 +69,7 @@ jobs:
       " > gdb.script
 
       USE_ZEND_ALLOC=0 gdb --batch --command=gdb.script -return-child-result --args \
-        php -dzend.assertions=1 "$(Build.SourcesDirectory)/bin/250" -v import-async --lite \
+        php -dzend.assertions=1 -dopcache.enable=0 -dopcache.enable_cli=0 "$(Build.SourcesDirectory)/bin/250" -v import-async --lite \
           --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase) \
           --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json
     displayName: Import apps ($(System.JobPositionInPhase)/$(System.TotalJobsInPhase))

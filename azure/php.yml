@@ -8,8 +8,8 @@ steps:
     php -v
   displayName: Use PHP version $(phpVersion)
 
-- script: php -i | grep assert
-  displayName: Assertion settings
+- script: php -i
+  displayName: PHP settings
 
 - script: sudo phpdismod xdebug && php -m
   displayName: Disable Xdebug
