@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "077ce0ababa6a45caedbb2d84d454f21",
+    "content-hash": "09284304b6d3b565d2cd57993fa612d7",
     "packages": [
         {
             "name": "250/log",
@@ -47,12 +47,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Shared.git",
-                "reference": "3f732139b5b0374d4296f42041b5e7a90ec7ae5c"
+                "reference": "79e09255c6a6e53c2737e05f4071435d3088d498"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/3f732139b5b0374d4296f42041b5e7a90ec7ae5c",
-                "reference": "3f732139b5b0374d4296f42041b5e7a90ec7ae5c",
+                "url": "https://api.github.com/repos/250/Shared/zipball/79e09255c6a6e53c2737e05f4071435d3088d498",
+                "reference": "79e09255c6a6e53c2737e05f4071435d3088d498",
                 "shasum": ""
             },
             "require": {
@@ -74,7 +74,7 @@
                 }
             ],
             "description": "Club 250 shared code library.",
-            "time": "2019-12-29T16:34:54+00:00"
+            "time": "2019-12-30T01:34:43+00:00"
         },
         {
             "name": "250/storage",
@@ -82,12 +82,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Storage.git",
-                "reference": "b797be7f9a1311663975df63d8c0ee5d9cd3099d"
+                "reference": "f50b13e41179958a718a8fc45c4816c974fa0e40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Storage/zipball/b797be7f9a1311663975df63d8c0ee5d9cd3099d",
-                "reference": "b797be7f9a1311663975df63d8c0ee5d9cd3099d",
+                "url": "https://api.github.com/repos/250/Storage/zipball/f50b13e41179958a718a8fc45c4816c974fa0e40",
+                "reference": "f50b13e41179958a718a8fc45c4816c974fa0e40",
                 "shasum": ""
             },
             "require": {
@@ -116,30 +116,31 @@
                 }
             ],
             "description": "Club 250 shared storage library.",
-            "time": "2019-12-29T10:13:39+00:00"
+            "time": "2020-02-01T01:40:14+00:00"
         },
         {
             "name": "amphp/amp",
-            "version": "v2.1.1",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "7075ef7d74dbd32626bfd31c976b23055c3ade6a"
+                "reference": "13930a582947831bb66ff1aeac28672fd91c38ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/7075ef7d74dbd32626bfd31c976b23055c3ade6a",
-                "reference": "7075ef7d74dbd32626bfd31c976b23055c3ade6a",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/13930a582947831bb66ff1aeac28672fd91c38ea",
+                "reference": "13930a582947831bb66ff1aeac28672fd91c38ea",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7"
             },
             "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
-                "friendsofphp/php-cs-fixer": "^2.3",
+                "ext-json": "*",
                 "phpstan/phpstan": "^0.8.5",
-                "phpunit/phpunit": "^6.0.9",
+                "phpunit/phpunit": "^6.0.9 | ^7",
                 "react/promise": "^2"
             },
             "type": "library",
@@ -163,20 +164,20 @@
             ],
             "authors": [
                 {
-                    "name": "Bob Weinand",
-                    "email": "bobwei9@hotmail.com"
-                },
-                {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
                     "name": "Daniel Lowrey",
                     "email": "rdlowrey@php.net"
                 },
                 {
                     "name": "Aaron Piotrowski",
                     "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 }
             ],
             "description": "A non-blocking concurrency framework for PHP applications.",
@@ -192,20 +193,20 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2018-12-11T10:31:37+00:00"
+            "time": "2019-11-11T19:32:05+00:00"
         },
         {
             "name": "amphp/byte-stream",
-            "version": "v1.7.1",
+            "version": "v1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/byte-stream.git",
-                "reference": "9d8205686a004948475dc43f8a88d2fa5e75a113"
+                "reference": "1e52f1752b2e20e2a7e464476ef887a2388e3832"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/9d8205686a004948475dc43f8a88d2fa5e75a113",
-                "reference": "9d8205686a004948475dc43f8a88d2fa5e75a113",
+                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/1e52f1752b2e20e2a7e464476ef887a2388e3832",
+                "reference": "1e52f1752b2e20e2a7e464476ef887a2388e3832",
                 "shasum": ""
             },
             "require": {
@@ -251,7 +252,7 @@
                 "non-blocking",
                 "stream"
             ],
-            "time": "2019-10-27T14:33:41+00:00"
+            "time": "2020-01-29T18:22:23+00:00"
         },
         {
             "name": "amphp/cache",
@@ -1186,16 +1187,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.10.0",
+            "version": "v2.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "0c9a646775ef549eb0a213a4f9bd4381d9b4d934"
+                "reference": "c2b8e6e82732a64ecde1cddf9e1e06cb8556e3d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/0c9a646775ef549eb0a213a4f9bd4381d9b4d934",
-                "reference": "0c9a646775ef549eb0a213a4f9bd4381d9b4d934",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/c2b8e6e82732a64ecde1cddf9e1e06cb8556e3d8",
+                "reference": "c2b8e6e82732a64ecde1cddf9e1e06cb8556e3d8",
                 "shasum": ""
             },
             "require": {
@@ -1274,7 +1275,7 @@
                 "sqlserver",
                 "sqlsrv"
             ],
-            "time": "2019-11-03T16:50:43+00:00"
+            "time": "2020-01-04T12:56:21+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -1510,23 +1511,23 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.121",
+            "version": "v0.124",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "a33fd9ed19fe4e27f2ccebbf45646f38e7cb95af"
+                "reference": "7bdd526abda4d802e973816cd7b4f3f3bc75fa03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/a33fd9ed19fe4e27f2ccebbf45646f38e7cb95af",
-                "reference": "a33fd9ed19fe4e27f2ccebbf45646f38e7cb95af",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/7bdd526abda4d802e973816cd7b4f3f3bc75fa03",
+                "reference": "7bdd526abda4d802e973816cd7b4f3f3bc75fa03",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.8"
+                "phpunit/phpunit": "^4.8|^5"
             },
             "type": "library",
             "autoload": {
@@ -1543,7 +1544,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2019-11-03T00:23:34+00:00"
+            "time": "2020-01-25T00:24:16+00:00"
         },
         {
             "name": "google/auth",
@@ -1888,16 +1889,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.62",
+            "version": "1.0.63",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "14dd5d7dff5fbc29ca9a2a53ff109760e40d91a0"
+                "reference": "8132daec326565036bc8e8d1876f77ec183a7bd6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/14dd5d7dff5fbc29ca9a2a53ff109760e40d91a0",
-                "reference": "14dd5d7dff5fbc29ca9a2a53ff109760e40d91a0",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/8132daec326565036bc8e8d1876f77ec183a7bd6",
+                "reference": "8132daec326565036bc8e8d1876f77ec183a7bd6",
                 "shasum": ""
             },
             "require": {
@@ -1968,7 +1969,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2019-12-29T14:46:55+00:00"
+            "time": "2020-01-04T16:30:31+00:00"
         },
         {
             "name": "league/flysystem-cached-adapter",
@@ -2356,16 +2357,16 @@
         },
         {
             "name": "provider/steam",
-            "version": "2.1.1",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "21dae134fc5f9a3138732fd53b5dad384835d714"
+                "reference": "afaeaa7d2522c279697d7f83d3183052825e9729"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/21dae134fc5f9a3138732fd53b5dad384835d714",
-                "reference": "21dae134fc5f9a3138732fd53b5dad384835d714",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/afaeaa7d2522c279697d7f83d3183052825e9729",
+                "reference": "afaeaa7d2522c279697d7f83d3183052825e9729",
                 "shasum": ""
             },
             "require": {
@@ -2380,6 +2381,7 @@
                 "symfony/dom-crawler": "^3|^4|^5"
             },
             "require-dev": {
+                "amphp/phpunit-util": "^1.2",
                 "athari/yalinqo": "^2.4.2",
                 "mockery/mockery": "^1.3",
                 "phpunit/phpunit": "^7.5"
@@ -2398,7 +2400,7 @@
                 }
             ],
             "description": "Steam data provider for Porter.",
-            "time": "2019-12-29T16:43:40+00:00"
+            "time": "2020-01-30T20:57:53+00:00"
         },
         {
             "name": "psr/cache",
@@ -2882,16 +2884,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.4.36",
+            "version": "v3.4.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "1ee23b3b659b06c622f2bd2492a229e416eb4586"
+                "reference": "7c5bdd346f9d90a2d22d4e1fe61e02dc19b98f12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/1ee23b3b659b06c622f2bd2492a229e416eb4586",
-                "reference": "1ee23b3b659b06c622f2bd2492a229e416eb4586",
+                "url": "https://api.github.com/repos/symfony/console/zipball/7c5bdd346f9d90a2d22d4e1fe61e02dc19b98f12",
+                "reference": "7c5bdd346f9d90a2d22d4e1fe61e02dc19b98f12",
                 "shasum": ""
             },
             "require": {
@@ -2950,20 +2952,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-12-01T10:04:45+00:00"
+            "time": "2020-01-10T07:52:48+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v5.0.2",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "19d29e7098b7b2c3313cb03902ca30f100dcb837"
+                "reference": "ff60c90cb7950b592ebc84ad1289d0345bf24f9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/19d29e7098b7b2c3313cb03902ca30f100dcb837",
-                "reference": "19d29e7098b7b2c3313cb03902ca30f100dcb837",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/ff60c90cb7950b592ebc84ad1289d0345bf24f9f",
+                "reference": "ff60c90cb7950b592ebc84ad1289d0345bf24f9f",
                 "shasum": ""
             },
             "require": {
@@ -3003,20 +3005,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-18T17:27:11+00:00"
+            "time": "2020-01-04T14:08:26+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v4.4.2",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "5c4c1db977dc70bb3250e1308d3e8c6341aa38f5"
+                "reference": "20236471058bbaa9907382500fc14005c84601f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/5c4c1db977dc70bb3250e1308d3e8c6341aa38f5",
-                "reference": "5c4c1db977dc70bb3250e1308d3e8c6341aa38f5",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/20236471058bbaa9907382500fc14005c84601f0",
+                "reference": "20236471058bbaa9907382500fc14005c84601f0",
                 "shasum": ""
             },
             "require": {
@@ -3059,20 +3061,20 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2019-12-16T14:46:54+00:00"
+            "time": "2020-01-25T12:44:29+00:00"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v5.0.2",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "0a0a73a0836926898b6fcd6817fe697487a73d97"
+                "reference": "439c3c7be4daa569deef0dd1e30cf3562108d062"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/0a0a73a0836926898b6fcd6817fe697487a73d97",
-                "reference": "0a0a73a0836926898b6fcd6817fe697487a73d97",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/439c3c7be4daa569deef0dd1e30cf3562108d062",
+                "reference": "439c3c7be4daa569deef0dd1e30cf3562108d062",
                 "shasum": ""
             },
             "require": {
@@ -3120,7 +3122,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-18T17:27:11+00:00"
+            "time": "2020-01-04T14:08:26+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3282,14 +3284,7 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [
-        {
-            "alias": "2.2",
-            "alias_normalized": "2.2.0.0",
-            "version": "2.1.1.0",
-            "package": "amphp/amp"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "250/log": 20,
@@ -3300,7 +3295,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1",
+        "php": "^7.4",
         "ext-json": "*"
     },
     "platform-dev": []

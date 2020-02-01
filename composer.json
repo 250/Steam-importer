@@ -8,12 +8,12 @@
     }
   ],
   "require": {
-    "php": "^7.1",
+    "php": "^7.4",
     "ext-json": "*",
     "250/log": "dev-master",
     "250/shared": "dev-master",
     "250/storage": "dev-master",
-    "amphp/amp": "2.1.1 as 2.2",
+    "amphp/amp": "^2.1.1",
     "async/throttle": "^2",
     "doctrine/dbal": "^2",
     "joomla/di": "^1.5",
