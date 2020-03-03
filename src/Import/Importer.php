@@ -11,8 +11,10 @@ use ScriptFUSION\Async\Throttle\Throttle;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
 use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;
+use ScriptFUSION\Retry\FailingTooHardException;
 use ScriptFUSION\Steam250\Database\Queries;
 use ScriptFUSION\Steam250\Import\SteamSpy\SteamSpySpecification;
+use function Amp\call;
 
 /**
  * Imports Steam app data into a database with chunking support.
@@ -83,7 +85,7 @@ class Importer
                 }
 
                 yield $this->throttle->await($emit(
-                    \Amp\call(function () use ($app, $count, $total) {
+                    call(function () use ($app, $count, $total) {
                         try {
                             // Decorate app with full data set.
                             $app += yield ($this->appDetailsImporter)($this->porter, $app['id']);
@@ -92,6 +94,12 @@ class Importer
                         } catch (ServerFatalException $exception) {
                             $this->logger->error(
                                 "Error %app%: {$exception->getMessage()}",
+                                compact('app', 'total', 'count')
+                            );
+                        } catch (FailingTooHardException $exception) {
+                            $prev = $exception->getPrevious();
+                            $this->logger->critical(
+                                'Critical error %app%: [' . get_class($prev) . "] {$prev->getMessage()}",
                                 compact('app', 'total', 'count')
                             );
                         }

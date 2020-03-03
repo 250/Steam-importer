@@ -8,8 +8,11 @@ use Doctrine\DBAL\DriverManager;
 
 final class DatabaseFactory
 {
-    public function create(string $path = 'steam.sqlite'): Connection
+    public function create(string $path = 'steam.sqlite', bool $overwrite = false): Connection
     {
+        // Truncate existing file. unlink() always fails.
+        $overwrite && is_writable($path) && file_put_contents($path, '');
+
         $connection = DriverManager::getConnection(['url' => "sqlite:///$path"]);
 
         $connection->exec(

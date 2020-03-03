@@ -32,6 +32,7 @@ class ImportCommand extends Command
                 Importer::DEFAULT_CHUNK_INDEX
             )
             ->addOption('lite', null, null, 'Do not insert invalid apps or apps with no reviews.')
+            ->addOption('overwrite', null, InputOption::VALUE_NONE, 'Overwrite any existing database.')
             ->addOption('steam-spy', null, InputOption::VALUE_REQUIRED, 'Path to Steam Spy data in JSON format.')
         ;
     }
@@ -42,6 +43,7 @@ class ImportCommand extends Command
             $input->getArgument('applist'),
             (int)$input->getOption('chunks'),
             (int)$input->getOption('chunk-index'),
+            $input->getOption('overwrite'),
             $output->isVeryVerbose()
         );
         $importer->setLite($input->getOption('lite'));

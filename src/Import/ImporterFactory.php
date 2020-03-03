@@ -9,7 +9,7 @@ use ScriptFUSION\Steam250\PorterFactory;
 
 final class ImporterFactory
 {
-    public function create(string $appListPath, int $chunks, int $chunkIndex, bool $verbose): Importer
+    public function create(string $appListPath, int $chunks, int $chunkIndex, bool $overwrite, bool $verbose): Importer
     {
         $extension = 'sqlite';
         $chunks && $extension .= ".p$chunkIndex";
@@ -17,7 +17,7 @@ final class ImporterFactory
         $importer = new Importer(
             (new PorterFactory)->create(),
             new AppDetailsImporterSync,
-            (new DatabaseFactory)->create("steam.$extension"),
+            (new DatabaseFactory)->create("steam.$extension", $overwrite),
             (new LoggerFactory)->create('Import', $verbose),
             $appListPath
         );
