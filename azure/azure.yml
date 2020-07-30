@@ -73,7 +73,7 @@ jobs:
         TRAVIS_TOKEN='$(TRAVIS_CRON_API_KEY)' ||
         TRAVIS_TOKEN='$(TRAVIS_API_KEY)'
 
-      curl -sSf\
+      curl -sS\
         -H 'Travis-API-Version: 3'\
         -H "Authorization: token $TRAVIS_TOKEN"\
         -H 'Content-Type: application/json'\
