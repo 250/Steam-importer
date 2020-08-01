@@ -18,7 +18,8 @@ final class Application
         $this->app = $app = new \Symfony\Component\Console\Application;
 
         $app->addCommands([
-            new ApplistCommand,
+            new SteamApplistCommand,
+            new Club250AppListCommand,
             new PlayersImportCommand,
             new SteamSpyCommand,
             new ImportCommand,

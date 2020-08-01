@@ -9,6 +9,7 @@
   ],
   "require": {
     "php": "^7.4",
+    "ext-fileinfo": "*",
     "ext-json": "*",
     "250/log": "dev-master",
     "250/shared": "dev-master",

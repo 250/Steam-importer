@@ -17,6 +17,10 @@ jobs:
   steps:
   - template: system.yml
 
+  - script: 250 c250-applist >c250-applist.txt
+    displayName: Download Club 250 app list
+    workingDirectory: $(BUILDDIR)
+
   - script: retry bash -c '250 applist > applist.json && ls -l applist.json && (($(stat -c%s applist.json) > 4000000))'
     displayName: Download app list
     workingDirectory: $(BUILDDIR)
@@ -45,7 +49,7 @@ jobs:
     displayName: WAN IP
 
   - script: 250 import-async --lite --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase)
-      --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" applist.json
+      --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" c250-applist.txt
     displayName: Import apps ($(System.JobPositionInPhase)/$(System.TotalJobsInPhase))
     workingDirectory: $(BUILDDIR)
 

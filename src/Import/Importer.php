@@ -11,8 +11,10 @@ use ScriptFUSION\Async\Throttle\Throttle;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
 use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;
+use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Retry\FailingTooHardException;
 use ScriptFUSION\Steam250\Database\Queries;
+use ScriptFUSION\Steam250\Import\Patreon\ApplistFormat;
 use ScriptFUSION\Steam250\Import\SteamSpy\SteamSpySpecification;
 use function Amp\call;
 
@@ -60,14 +62,16 @@ class Importer
 
     public function import(): void
     {
-        $this->logger->info('Starting Steam games import...');
-        $this->chunks && $this->logger->info("Processing chunk $this->chunkIndex of $this->chunks.");
+        $this->logger->debug('Detecting applist format...');
+        $format = $this->detectApplistFormat();
+        $specification = $this->fetchApps($format);
 
-        $apps = $this->porter->import(
-            new AppListSpecification($this->appListPath, $this->chunks, $this->chunkIndex)
-        );
-
+        $this->logger->info("Reading applist format: \"$format\"...");
+        $apps = $this->porter->import($specification);
         $total = \count($apps);
+
+        $this->logger->info('Starting Steam app details import...');
+        $this->chunks && $this->logger->info("Processing chunk $this->chunkIndex of $this->chunks.");
 
         $appDetails = new Producer(function (\Closure $emit) use ($apps, $total) {
             $count = 0;
@@ -88,7 +92,9 @@ class Importer
                     call(function () use ($app, $count, $total) {
                         try {
                             // Decorate app with full data set.
-                            $app += yield ($this->appDetailsImporter)($this->porter, $app['id']);
+                            $app = (yield ($this->appDetailsImporter)($this->porter, $app['id']))
+                                // Overwrite name with imported name, preserving only the original ID.
+                                + ['id' => $app['id']];
                         } catch (InvalidAppIdException | ParserException $exception) {
                             // This is fine 🔥.
                         } catch (ServerFatalException $exception) {
@@ -235,5 +241,26 @@ class Importer
     public function setAppDetailsImporter(AppDetailsImporter $appDetailsImporter): void
     {
         $this->appDetailsImporter = $appDetailsImporter;
+    }
+
+    private function detectApplistFormat(): ApplistFormat
+    {
+        $info = new \finfo(FILEINFO_MIME_ENCODING);
+
+        if ($info->file($this->appListPath) === 'us-ascii') {
+            return ApplistFormat::CLUB250();
+        }
+
+        return ApplistFormat::STEAM();
+    }
+
+    private function fetchApps(ApplistFormat $format): ImportSpecification
+    {
+        switch ($format) {
+            case ApplistFormat::STEAM:
+                return new SteamAppListSpecification($this->appListPath, $this->chunks, $this->chunkIndex);
+            case ApplistFormat::CLUB250:
+                return new Club250AppListSpecification($this->appListPath, $this->chunks, $this->chunkIndex);
+        }
     }
 }

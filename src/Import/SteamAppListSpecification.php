@@ -10,7 +10,7 @@ use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
 use ScriptFUSION\Steam250\Resource\StaticSteamAppList;
 use ScriptFUSION\Steam250\Transformer\ChunkingTransformer;
 
-class AppListSpecification extends ImportSpecification
+class SteamAppListSpecification extends ImportSpecification
 {
     public function __construct(string $appListPath, int $chunks, int $chunkIndex)
     {
