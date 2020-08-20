@@ -50,7 +50,7 @@ steps:
 
     if [[ $SYSTEM_PHASENAME = Initialize ]]; then
       date=$(date -u +%Y%m/%d | tee $marker)
-      data upload $marker
+      data upload $marker || exit
     else
       retry data download -w $marker
       date=$(cat $marker)
