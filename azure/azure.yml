@@ -28,12 +28,12 @@ jobs:
   - script: PATREON_API_KEY=$(PATREON_API_KEY) 250 patron-import
     displayName: Import patron reviews
     workingDirectory: $(BUILDDIR)
-    condition: not(variables['skip-patreon'])
+    condition: and(succeeded(), not(variables['skip-patreon']))
 
   - script: 250 players-import
     displayName: Import player stats
     workingDirectory: $(BUILDDIR)
-    condition: not(variables['skip-players'])
+    condition: and(succeeded(), not(variables['skip-players']))
 
   - script: data upload "$BUILDDIR" "$RBUILDDIR"
     displayName: Upload build artifacts
@@ -70,7 +70,7 @@ jobs:
       data move "$RBUILDDIR" &&
       data delete $MARKER
     displayName: Upload build artifacts and clean up
-    condition: not(variables.test)
+    condition: and(succeeded(), not(variables.test))
 
   - script: |
       [[ '$(Build.Reason)' = Schedule ]] &&
@@ -84,7 +84,7 @@ jobs:
         -d '{"request": {"branch": "master"}}'\
         https://api.travis-ci.org/repo/250%2FSteam-250/requests
     displayName: Trigger Steam 250 repository build
-    condition: not(variables.test)
+    condition: and(succeeded(), not(variables.test))
 
   - script: |
       set -v
@@ -98,4 +98,4 @@ jobs:
         --file tar --replace --security-token '$(GITHUB_AZURE_TOKEN)'
     displayName: Upload snapshots
     workingDirectory: $(Build.ArtifactStagingDirectory)
-    condition: not(variables.test)
+    condition: and(succeeded(), not(variables.test))
