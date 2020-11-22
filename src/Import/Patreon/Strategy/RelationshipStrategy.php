@@ -11,7 +11,7 @@ class RelationshipStrategy extends ContextSwap
 {
     /**
      * @param string $name Relationship name.
-     * @param string $type Relationship type.
+     * @param string|null $type Relationship type.
      */
     public function __construct(string $name, string $type = null)
     {

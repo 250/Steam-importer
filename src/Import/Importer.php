@@ -7,16 +7,15 @@ use Amp\Loop;
 use Amp\Producer;
 use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
-use ScriptFUSION\Async\Throttle\Throttle;
+use ScriptFUSION\Async\Throttle\DualThrottle;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
-use ScriptFUSION\Porter\Provider\Steam\Scrape\ParserException;
+use ScriptFUSION\Porter\Provider\Steam\Scrape\SteamStoreException;
 use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Retry\FailingTooHardException;
 use ScriptFUSION\Steam250\Database\Queries;
 use ScriptFUSION\Steam250\Import\Patreon\ApplistFormat;
 use ScriptFUSION\Steam250\Import\SteamSpy\SteamSpySpecification;
-use function Amp\call;
 
 /**
  * Imports Steam app data into a database with chunking support.
@@ -32,18 +31,18 @@ class Importer
     public const DEFAULT_CHUNKS = 0;
     public const DEFAULT_CHUNK_INDEX = 1;
 
-    private $porter;
-    private $appDetailsImporter;
-    private $database;
-    private $logger;
-    private $appListPath;
-    private $throttle;
-    private $chunks = self::DEFAULT_CHUNKS;
-    private $chunkIndex = self::DEFAULT_CHUNK_INDEX;
-    private $lite = false;
-    private $steamSpyPath;
+    private Porter $porter;
+    private AppDetailsImporter $appDetailsImporter;
+    private Connection $database;
+    private LoggerInterface $logger;
+    private string $appListPath;
+    private DualThrottle $throttle;
+    private int $chunks = self::DEFAULT_CHUNKS;
+    private int $chunkIndex = self::DEFAULT_CHUNK_INDEX;
+    private bool $lite = false;
+    private string $steamSpyPath;
 
-    private static $steamSpyData;
+    private static array $steamSpyData;
 
     public function __construct(
         Porter $porter,
@@ -57,7 +56,7 @@ class Importer
         $this->database = $database;
         $this->logger = $logger;
         $this->appListPath = $appListPath;
-        $this->throttle = new Throttle(70);
+        $this->throttle = new DualThrottle(70);
     }
 
     public function import(): void
@@ -88,31 +87,45 @@ class Importer
                     continue;
                 }
 
-                yield $this->throttle->await($emit(
-                    call(function () use ($app, $count, $total) {
-                        try {
-                            // Decorate app with full data set.
-                            $app = (yield ($this->appDetailsImporter)($this->porter, $app['id']))
-                                // Overwrite name with imported name, preserving only the original ID.
-                                + ['id' => $app['id']];
-                        } catch (InvalidAppIdException | ParserException $exception) {
-                            // This is fine 🔥.
-                        } catch (ServerFatalException $exception) {
-                            $this->logger->error(
-                                "Error %app%: {$exception->getMessage()}",
-                                compact('app', 'total', 'count')
-                            );
-                        } catch (FailingTooHardException $exception) {
-                            $prev = $exception->getPrevious();
-                            $this->logger->critical(
-                                'Critical error %app%: [' . get_class($prev) . "] {$prev->getMessage()}",
-                                compact('app', 'total', 'count')
-                            );
+                // Wait for throttle before adding new job. Might need to be in loop.
+                yield $this->throttle->join();
+
+                // Import app details.
+                $appImport = ($this->appDetailsImporter)($this->porter, $app['id'], $this->throttle);
+
+                $appImport->onResolve(
+                    function (?\Throwable $throwable, ?array $appDetails) use ($emit, $app, $count, $total): void {
+                        if (!$throwable) {
+                            // Overwrite name with imported name, preserving only the original ID.
+                            $emit([$appDetails + ['id' => $app['id']], $count]);
+
+                            return;
                         }
 
-                        return [$app, $count];
-                    })
-                ));
+                        $context = compact('app', 'total', 'count');
+
+                        if ($throwable instanceof SteamStoreException) {
+                            // Usually due to region block.
+                            $this->logger->warning("Steam error %app%: {$throwable->getMessage()}", $context);
+                        } elseif ($throwable instanceof InvalidAppIdException) {
+                            // Store page is redirecting.
+                            $this->logger->warning("Invalid: %app%", $context);
+                        } elseif ($throwable instanceof ServerFatalException) {
+                            $this->logger->error(
+                                "Error %app%: {$throwable->getMessage()}",
+                                $context
+                            );
+                        } elseif ($throwable instanceof FailingTooHardException) {
+                            $prev = $throwable->getPrevious();
+                            $this->logger->critical(
+                                'Critical error %app%: [' . get_class($prev) . "] {$prev->getMessage()}",
+                                $context
+                            );
+                        } else {
+                            throw $throwable;
+                        }
+                    }
+                );
             }
 
             yield $this->throttle->getAwaiting();
@@ -206,7 +219,7 @@ class Importer
 
     private function decorateWithSteamSpyData(array &$app): void
     {
-        self::$steamSpyData || self::$steamSpyData =
+        self::$steamSpyData ??=
             iterator_to_array($this->porter->import(new SteamSpySpecification($this->steamSpyPath)));
 
         if (!isset(self::$steamSpyData[$app['id']])) {

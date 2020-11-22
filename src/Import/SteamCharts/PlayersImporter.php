@@ -9,7 +9,7 @@ use Amp\Producer;
 use Amp\Promise;
 use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
-use ScriptFUSION\Async\Throttle\Throttle;
+use ScriptFUSION\Async\Throttle\DualThrottle;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Specification\AsyncImportSpecification;
 
@@ -68,7 +68,7 @@ class PlayersImporter
     private function fetchAveragePlayers(): Iterator
     {
         return new Producer(function (\Closure $emit): \Generator {
-            $throttle = new Throttle(150, 60);
+            $throttle = new DualThrottle(150, 60);
 
             $resource = new GetCurrentPlayers;
             $resource->setLogger($this->logger);

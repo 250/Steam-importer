@@ -15,7 +15,7 @@
     "250/shared": "dev-master",
     "250/storage": "dev-master",
     "amphp/amp": "^2.1.1",
-    "async/throttle": "^2",
+    "async/throttle": "^3",
     "doctrine/dbal": "^2",
     "joomla/di": "^1.5",
     "monolog/monolog": "^1",
