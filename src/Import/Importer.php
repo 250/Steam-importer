@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250\Import;
 
+use Amp\Delayed;
 use Amp\Loop;
 use Amp\Producer;
 use Doctrine\DBAL\Connection;
@@ -94,12 +95,10 @@ class Importer
                 $appImport = ($this->appDetailsImporter)($this->porter, $app['id'], $this->throttle);
 
                 $appImport->onResolve(
-                    function (?\Throwable $throwable, ?array $appDetails) use ($emit, $app, $count, $total): void {
+                    function (?\Throwable $throwable, ?array $appDetails) use ($emit, $app, $count, $total) {
                         if (!$throwable) {
                             // Overwrite name with imported name, preserving only the original ID.
-                            $emit([$appDetails + ['id' => $app['id']], $count]);
-
-                            return;
+                            return yield $emit([$appDetails + ['id' => $app['id']], $count]);
                         }
 
                         $context = compact('app', 'total', 'count');
@@ -109,7 +108,7 @@ class Importer
                             $this->logger->warning("Steam error %app%: {$throwable->getMessage()}", $context);
                         } elseif ($throwable instanceof InvalidAppIdException) {
                             // Store page is redirecting.
-                            $this->logger->warning("Invalid: %app%", $context);
+                            $this->logger->warning("Invalid %app%", $context);
                         } elseif ($throwable instanceof ServerFatalException) {
                             $this->logger->error(
                                 "Error %app%: {$throwable->getMessage()}",
@@ -128,6 +127,8 @@ class Importer
                 );
             }
 
+            // Allow other fibers to enter the throttle. Avoids "Iterators cannot emit values after calling complete".
+            yield new Delayed(0);
             yield $this->throttle->getAwaiting();
         });
 
