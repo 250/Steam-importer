@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250\Import;
 
-use Amp\Delayed;
 use Amp\Loop;
 use Amp\Producer;
 use Doctrine\DBAL\Connection;
@@ -17,6 +16,7 @@ use ScriptFUSION\Retry\FailingTooHardException;
 use ScriptFUSION\Steam250\Database\Queries;
 use ScriptFUSION\Steam250\Import\Patreon\ApplistFormat;
 use ScriptFUSION\Steam250\Import\SteamSpy\SteamSpySpecification;
+use function Amp\Promise\any;
 
 /**
  * Imports Steam app data into a database with chunking support.
@@ -129,7 +129,7 @@ class Importer
             }
 
             // Wait for all jobs to finish enqueuing.
-            yield $importQ->getAwaiting();
+            yield any($importQ->getAwaiting());
 
             // Wait for all imports to complete.
             yield $this->throttle->getAwaiting();
