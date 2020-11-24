@@ -74,6 +74,7 @@ class Importer
         $this->chunks && $this->logger->info("Processing chunk $this->chunkIndex of $this->chunks.");
 
         $appDetails = new Producer(function (\Closure $emit) use ($apps, $total) {
+            $importQ = new DualThrottle(PHP_INT_MAX, PHP_INT_MAX);
             $count = 0;
 
             foreach ($apps as $app) {
@@ -92,7 +93,7 @@ class Importer
                 yield $this->throttle->join();
 
                 // Import app details.
-                $appImport = ($this->appDetailsImporter)($this->porter, $app['id'], $this->throttle);
+                $importQ->await($appImport = ($this->appDetailsImporter)($this->porter, $app['id'], $this->throttle));
 
                 $appImport->onResolve(
                     function (?\Throwable $throwable, ?array $appDetails) use ($emit, $app, $count, $total) {
@@ -127,8 +128,10 @@ class Importer
                 );
             }
 
-            // Allow other fibers to enter the throttle. Avoids "Iterators cannot emit values after calling complete".
-            yield new Delayed(0);
+            // Wait for all jobs to finish enqueuing.
+            yield $importQ->getAwaiting();
+
+            // Wait for all imports to complete.
             yield $this->throttle->getAwaiting();
         });
 
