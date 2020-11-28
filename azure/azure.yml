@@ -82,7 +82,7 @@ jobs:
         -H "Authorization: token $TRAVIS_TOKEN"\
         -H 'Content-Type: application/json'\
         -d '{"request": {"branch": "master"}}'\
-        https://api.travis-ci.org/repo/250%2FSteam-250/requests
+        https://api.travis-ci.com/repo/250%2FSteam-250/requests
     displayName: Trigger Steam 250 repository build
     condition: and(succeeded(), not(variables.test))
 
