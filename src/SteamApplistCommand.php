@@ -20,7 +20,7 @@ final class SteamApplistCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
-        $content = file_get_contents(GetAppList::getUrl());
+        $content = file_get_contents((new GetAppList)->getUrl());
 
         if ($content === false) {
             throw new \RuntimeException('Failed to download app list.');
