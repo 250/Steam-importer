@@ -1,10 +1,10 @@
-Steam Top 250
-=============
+Steam Importer
+==============
 
 [![Build status][Build image]][Build]
 [![Code style][Style image]][Style]
 
-Steam top 250 games as rated by players.
+Steam app importer.
 
 
   [Build]: https://travis-ci.org/250/Steam-importer

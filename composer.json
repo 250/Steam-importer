@@ -20,7 +20,7 @@
     "joomla/di": "^1.5",
     "monolog/monolog": "^1",
     "provider/patreon": "dev-master",
-    "provider/steam": "^2",
+    "provider/steam": "^4.2.2",
     "symfony/console": "^3",
     "transformers/mapping-transformer": "^2"
   },
