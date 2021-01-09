@@ -53,7 +53,7 @@ class PlayersImporter
 
                 $this->logger->debug("Inserting app ID #$appId...", compact('count', 'total'));
 
-                $this->database->executeUpdate(
+                $this->database->executeStatement(
                     'INSERT OR IGNORE INTO app_players VALUES (?, ?)',
                     [$appId, round($average)]
                 );
@@ -81,7 +81,7 @@ class PlayersImporter
                 $app = $apps->getCurrent();
 
                 yield $throttle->await(
-                    \Amp\call(function () use ($emit, $throttle, $app, $cutoffDate, &$count): \Generator {
+                    $promise = \Amp\call(function () use ($emit, $throttle, $app, $cutoffDate, &$count): \Generator {
                         $appId = +$app['app_id'];
 
                         $this->logger->info(
@@ -100,6 +100,7 @@ class PlayersImporter
                         yield $emit($app + ['average_players_7d' => array_sum($players) / \count($players)]);
                     })
                 );
+                Promise\rethrow($promise);
             }
 
             yield $throttle->getAwaiting();
