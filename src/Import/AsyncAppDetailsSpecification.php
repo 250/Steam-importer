@@ -15,7 +15,7 @@ class AsyncAppDetailsSpecification extends AsyncImportSpecification
     {
         parent::__construct(new ScrapeAppDetails($appId));
 
-        $this->addTransformer(new MappingTransformer(new AppDetailsMapping));
+        $this->addTransformer(new MappingTransformer(new AppDetailsMapping($appId)));
         $this->setRecoverableExceptionHandler(
             new ExceptionHandlerQueue(
                 new AppDetailsImportExceptionHandler,

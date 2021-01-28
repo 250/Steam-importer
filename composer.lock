@@ -52,16 +52,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Shared.git",
-                "reference": "96d9355983a4622e76e874a5fde2ca3d992220f8"
+                "reference": "ea8efb2d07967824a5e9d1cd670b165b9691dc1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/96d9355983a4622e76e874a5fde2ca3d992220f8",
-                "reference": "96d9355983a4622e76e874a5fde2ca3d992220f8",
+                "url": "https://api.github.com/repos/250/Shared/zipball/ea8efb2d07967824a5e9d1cd670b165b9691dc1d",
+                "reference": "ea8efb2d07967824a5e9d1cd670b165b9691dc1d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1",
+                "php": ">=7.4",
                 "scriptfusion/mapper": "^2",
                 "scriptfusion/static-class": "^1"
             },
@@ -84,7 +84,7 @@
                 "issues": "https://github.com/250/Shared/issues",
                 "source": "https://github.com/250/Shared/tree/master"
             },
-            "time": "2020-12-15T18:25:11+00:00"
+            "time": "2021-01-28T11:23:58+00:00"
         },
         {
             "name": "250/storage",

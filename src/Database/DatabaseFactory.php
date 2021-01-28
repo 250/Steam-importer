@@ -33,7 +33,9 @@ final class DatabaseFactory
                 free INTEGER,
                 ea INTEGER,
                 videos TEXT,
-                owners INTEGER
+                owners INTEGER,
+                parent_id INTEGER,
+                alias INTEGER
             );
             CREATE TABLE IF NOT EXISTS app_tag (
                 app_id INTEGER NOT NULL,
