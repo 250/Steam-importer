@@ -74,15 +74,13 @@ jobs:
 
   - script: |
       [[ '$(Build.Reason)' = Schedule ]] &&
-        TRAVIS_TOKEN='$(TRAVIS_CRON_API_KEY)' ||
-        TRAVIS_TOKEN='$(TRAVIS_API_KEY)'
+        GITHUB_TOKEN='$(GITHUB_AZURE_TOKEN)' ||
+        GITHUB_TOKEN='$(GITHUB_BILGE_TOKEN)'
 
-      curl -sS\
-        -H 'Travis-API-Version: 3'\
-        -H "Authorization: token $TRAVIS_TOKEN"\
-        -H 'Content-Type: application/json'\
-        -d '{"request": {"branch": "master"}}'\
-        https://api.travis-ci.com/repo/250%2FSteam-250/requests
+      curl -sS \
+        -u :"$GITHUB_TOKEN" \
+        -d '{"ref":"master"}' \
+        https://api.github.com/repos/250/Steam-250/actions/workflows/Build.yml/dispatches
     displayName: Trigger Steam 250 repository build
     condition: and(succeeded(), not(variables.test))
 
