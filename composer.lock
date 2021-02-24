@@ -1895,16 +1895,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.160.0",
+            "version": "v0.161.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "b8a448056ced89d1bc2d68ca10c22e7b2ed06512"
+                "reference": "776dcac9250497024c778c71c70bb39de5427223"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/b8a448056ced89d1bc2d68ca10c22e7b2ed06512",
-                "reference": "b8a448056ced89d1bc2d68ca10c22e7b2ed06512",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/776dcac9250497024c778c71c70bb39de5427223",
+                "reference": "776dcac9250497024c778c71c70bb39de5427223",
                 "shasum": ""
             },
             "require": {
@@ -1930,9 +1930,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.160.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.161.0"
             },
-            "time": "2021-02-13T12:20:02+00:00"
+            "time": "2021-02-20T12:20:06+00:00"
         },
         {
             "name": "google/auth",
@@ -3146,16 +3146,16 @@
         },
         {
             "name": "provider/steam",
-            "version": "4.3.3",
+            "version": "4.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "b5c05bc5e578e3977598d53bdc40d84bbb813459"
+                "reference": "88244d10921f6252fe20710e003b07af2f31c636"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/b5c05bc5e578e3977598d53bdc40d84bbb813459",
-                "reference": "b5c05bc5e578e3977598d53bdc40d84bbb813459",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/88244d10921f6252fe20710e003b07af2f31c636",
+                "reference": "88244d10921f6252fe20710e003b07af2f31c636",
                 "shasum": ""
             },
             "require": {
@@ -3191,9 +3191,9 @@
             "description": "Steam data provider for Porter.",
             "support": {
                 "issues": "https://github.com/Provider/Steam/issues",
-                "source": "https://github.com/Provider/Steam/tree/4.3.3"
+                "source": "https://github.com/Provider/Steam/tree/4.3.4"
             },
-            "time": "2021-02-14T12:35:17+00:00"
+            "time": "2021-02-24T00:54:44+00:00"
         },
         {
             "name": "psr/cache",
