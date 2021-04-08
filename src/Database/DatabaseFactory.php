@@ -32,6 +32,7 @@ final class DatabaseFactory
                 vrx INTEGER,
                 free INTEGER,
                 ea INTEGER,
+                adult INTEGER,
                 videos TEXT,
                 owners INTEGER,
                 parent_id INTEGER,
