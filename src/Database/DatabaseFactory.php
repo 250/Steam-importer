@@ -15,7 +15,7 @@ final class DatabaseFactory
 
         $connection = DriverManager::getConnection(['url' => "sqlite:///$path"]);
 
-        $connection->exec(
+        $connection->executeStatement(
             'CREATE TABLE IF NOT EXISTS app (
                 id INTEGER PRIMARY KEY NOT NULL,
                 name TEXT NOT NULL,
@@ -38,11 +38,15 @@ final class DatabaseFactory
                 parent_id INTEGER,
                 alias INTEGER
             );
+            CREATE TABLE IF NOT EXISTS tag (
+                id INTEGER PRIMARY KEY NOT NULL,
+                name TEXT NOT NULL
+            );
             CREATE TABLE IF NOT EXISTS app_tag (
                 app_id INTEGER NOT NULL,
-                tag TEXT NOT NULL,
+                tag_id INTEGER NOT NULL,
                 votes INTEGER NOT NULL,
-                PRIMARY KEY(app_id, tag)
+                PRIMARY KEY(app_id, tag_id)
             );
             CREATE TABLE IF NOT EXISTS app_developer (
                 app_id INTEGER NOT NULL,
