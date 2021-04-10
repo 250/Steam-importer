@@ -15,6 +15,7 @@ final class DatabaseFactory
 
         $connection = DriverManager::getConnection(['url' => "sqlite:///$path"]);
 
+        // NB: Any tables added or removed should probably also be reflected in the Stitcher.
         $connection->executeStatement(
             'CREATE TABLE IF NOT EXISTS app (
                 id INTEGER PRIMARY KEY NOT NULL,
@@ -50,11 +51,13 @@ final class DatabaseFactory
             );
             CREATE TABLE IF NOT EXISTS app_developer (
                 app_id INTEGER NOT NULL,
+                id INTEGER,
                 name TEXT NOT NULL,
                 PRIMARY KEY(app_id, name)
             );
             CREATE TABLE IF NOT EXISTS app_publisher (
                 app_id INTEGER NOT NULL,
+                id INTEGER,
                 name TEXT NOT NULL,
                 PRIMARY KEY(app_id, name)
             );

@@ -34,7 +34,7 @@ final class Queries
     public static function insertDeveloper(Connection $database, array $developers): bool
     {
         return $database->executeStatement(
-            'INSERT OR IGNORE INTO app_developer VALUES (:id, :name)',
+            'INSERT OR IGNORE INTO app_developer VALUES (?, ?, ?)',
             $developers
         ) > 0;
     }
@@ -42,7 +42,7 @@ final class Queries
     public static function insertPublisher(Connection $database, array $publishers): bool
     {
         return $database->executeStatement(
-            'INSERT OR IGNORE INTO app_publisher VALUES (:id, :name)',
+            'INSERT OR IGNORE INTO app_publisher VALUES (?, ?, ?)',
             $publishers
         ) > 0;
     }
