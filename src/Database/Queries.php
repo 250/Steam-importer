@@ -12,14 +12,15 @@ final class Queries
 
     public static function doesAppExist(Connection $database, int $appId): bool
     {
-        return $database->fetchColumn("SELECT id FROM app WHERE id = $appId") !== false;
+        return $database->fetchOne("SELECT id FROM app WHERE id = $appId") !== false;
     }
 
     public static function stitchReviewChunks(Connection $database, $chunkPath): bool
     {
-        return $database->exec(
+        return $database->executeStatement(
             "ATTACH '$chunkPath' AS chunk;
             INSERT OR IGNORE INTO app SELECT * FROM chunk.app;
+            INSERT OR IGNORE INTO tag SELECT * FROM chunk.tag;
             INSERT OR IGNORE INTO app_tag SELECT * FROM chunk.app_tag;
             INSERT OR IGNORE INTO app_developer SELECT * FROM chunk.app_developer;
             INSERT OR IGNORE INTO app_publisher SELECT * FROM chunk.app_publisher;
@@ -32,7 +33,7 @@ final class Queries
      */
     public static function insertDeveloper(Connection $database, array $developers): bool
     {
-        return $database->executeUpdate(
+        return $database->executeStatement(
             'INSERT OR IGNORE INTO app_developer VALUES (:id, :name)',
             $developers
         ) > 0;
@@ -40,7 +41,7 @@ final class Queries
 
     public static function insertPublisher(Connection $database, array $publishers): bool
     {
-        return $database->executeUpdate(
+        return $database->executeStatement(
             'INSERT OR IGNORE INTO app_publisher VALUES (:id, :name)',
             $publishers
         ) > 0;
