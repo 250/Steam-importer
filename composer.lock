@@ -3231,16 +3231,16 @@
         },
         {
             "name": "provider/steam",
-            "version": "5.2.2",
+            "version": "5.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "f42fe3e2ed3f3126f32beb1b4b27c7a58f0f3185"
+                "reference": "991fbd42b9376f67d2aa55abbbf74caaddc476a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/f42fe3e2ed3f3126f32beb1b4b27c7a58f0f3185",
-                "reference": "f42fe3e2ed3f3126f32beb1b4b27c7a58f0f3185",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/991fbd42b9376f67d2aa55abbbf74caaddc476a8",
+                "reference": "991fbd42b9376f67d2aa55abbbf74caaddc476a8",
                 "shasum": ""
             },
             "require": {
@@ -3278,9 +3278,9 @@
             "description": "Steam data provider for Porter.",
             "support": {
                 "issues": "https://github.com/Provider/Steam/issues",
-                "source": "https://github.com/Provider/Steam/tree/5.2.2"
+                "source": "https://github.com/Provider/Steam/tree/5.2.5"
             },
-            "time": "2021-07-27T12:55:13+00:00"
+            "time": "2021-11-09T22:28:13+00:00"
         },
         {
             "name": "psr/cache",
