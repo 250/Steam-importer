@@ -18,7 +18,6 @@ class AsyncAppDetailsSpecification extends AsyncImportSpecification
         $this->addTransformer(new MappingTransformer(new AppDetailsMapping($appId)));
         $this->setRecoverableExceptionHandler(
             new ExceptionHandlerQueue(
-                new AppDetailsImportExceptionHandler,
                 new ExponentialAsyncDelayRecoverableExceptionHandler(500)
             )
         );

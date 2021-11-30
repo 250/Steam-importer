@@ -15,6 +15,5 @@ class AppDetailsSpecification extends ImportSpecification
         parent::__construct(new ScrapeAppDetails($appId));
 
         $this->addTransformer(new MappingTransformer(new AppDetailsMapping($appId)));
-        $this->setRecoverableExceptionHandler(new AppDetailsImportExceptionHandler);
     }
 }

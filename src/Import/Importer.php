@@ -110,11 +110,6 @@ class Importer
                         } elseif ($throwable instanceof InvalidAppIdException) {
                             // Store page is redirecting.
                             $this->logger->warning("Invalid %app%", $context);
-                        } elseif ($throwable instanceof ServerFatalException) {
-                            $this->logger->error(
-                                "Error %app%: {$throwable->getMessage()}",
-                                $context
-                            );
                         } elseif ($throwable instanceof FailingTooHardException) {
                             $prev = $throwable->getPrevious();
                             $this->logger->critical(
