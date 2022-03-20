@@ -9,7 +9,7 @@ pool:
   vmImage: ubuntu-18.04
 
 variables:
-  phpVersion: 7.4
+  phpVersion: 8.1
   chunks: 6
 
 jobs:

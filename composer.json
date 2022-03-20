@@ -8,7 +8,7 @@
     }
   ],
   "require": {
-    "php": "^7.4",
+    "php": "^8",
     "ext-fileinfo": "*",
     "ext-json": "*",
     "250/log": "dev-master",
@@ -17,11 +17,11 @@
     "amphp/amp": "^2.1.1",
     "async/throttle": "^3",
     "doctrine/dbal": "^2",
-    "joomla/di": "^1.5",
+    "joomla/di": "^2",
     "monolog/monolog": "^1",
     "provider/patreon": "dev-master",
-    "provider/steam": "^5",
-    "symfony/console": "^3",
+    "provider/steam": "^5.3",
+    "symfony/console": "^5",
     "transformers/mapping-transformer": "^2"
   },
   "autoload": {

@@ -35,6 +35,7 @@ final class DatabaseFactory
                 ea INTEGER,
                 adult INTEGER,
                 videos TEXT,
+                steam_deck INTEGER,
                 owners INTEGER,
                 parent_id INTEGER,
                 alias INTEGER
