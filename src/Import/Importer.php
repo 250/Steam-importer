@@ -113,10 +113,12 @@ class Importer
                         } elseif ($throwable instanceof FailingTooHardException) {
                             $prev = $throwable->getPrevious();
                             $this->logger->critical(
-                                'Critical error %app%: [' . get_class($prev) . "] {$prev->getMessage()}",
+                                'Critical error %app%: [' . get_debug_type($prev) . "] {$prev->getMessage()}",
                                 $context
                             );
                         } else {
+                            $this->logger->critical('Fatal error in %app%.', $context);
+
                             throw $throwable;
                         }
                     }
