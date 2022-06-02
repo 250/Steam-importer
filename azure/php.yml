@@ -15,7 +15,7 @@ steps:
   displayName: Validate Composer file
   condition: eq(variables['System.PhaseName'], 'Initialize')
 
-- script: composer install --no-interaction --no-progress --prefer-source
+- script: composer install --no-interaction --no-progress
   displayName: Install dependencies
 
 - script: php -r 'require "vendor/autoload.php"; echo get_class(Amp\Loop::get()), "\n";'
