@@ -1,0 +1,33 @@
+<?php
+declare(strict_types=1);
+
+namespace ScriptFUSION\Steam250\Import\Club250;
+
+use ScriptFUSION\Porter\Connector\ImportConnector;
+use ScriptFUSION\Porter\Net\Http\HttpDataSource;
+use ScriptFUSION\Porter\Provider\Resource\ProviderResource;
+use ScriptFUSION\Porter\Provider\Resource\SingleRecordResource;
+
+class GetClub250AppList implements ProviderResource, SingleRecordResource
+{
+    const URL = 'https://club.steam250.com/api/applist';
+
+    public function __construct(private readonly string $apiToken)
+    {
+    }
+
+    public function getProviderClassName(): string
+    {
+        return Club250Provider::class;
+    }
+
+    public function fetch(ImportConnector $connector): \Iterator
+    {
+        $response = $connector->fetch(
+            (new HttpDataSource(self::URL))
+                ->addHeader("authorization: Bearer $this->apiToken")
+        );
+
+        yield [$response];
+    }
+}

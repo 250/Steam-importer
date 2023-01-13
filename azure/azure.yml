@@ -17,7 +17,7 @@ jobs:
   steps:
   - template: system.yml
 
-  - script: 250 c250-applist >c250-applist.txt
+  - script: 250 c250-applist '$(CLUB_250_API_TOKEN)' >c250-applist.txt
     displayName: Download Club 250 app list
     workingDirectory: $(BUILDDIR)
 
