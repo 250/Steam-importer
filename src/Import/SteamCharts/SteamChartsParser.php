@@ -22,7 +22,7 @@ final class SteamChartsParser
 
         return $dataRows->each(static function (Crawler $tr): array {
             return [
-                'app_id' => substr(strrchr($tr->filter('a[href^="/app/"]')->attr('href'), '/'), 1),
+                'app_id' => +substr(strrchr($tr->filter('a[href^="/app/"]')->attr('href'), '/'), 1),
                 'peak_concurrent_players_30d' => $tr->children('.peak-concurrent')->text(),
             ];
         });

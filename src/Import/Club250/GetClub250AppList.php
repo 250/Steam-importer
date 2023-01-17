@@ -25,7 +25,7 @@ class GetClub250AppList implements ProviderResource, SingleRecordResource
     {
         $response = $connector->fetch(
             (new HttpDataSource(self::URL))
-                ->addHeader("authorization: Bearer $this->apiToken")
+                ->addHeader('authorization', "Bearer $this->apiToken")
         );
 
         yield [$response];

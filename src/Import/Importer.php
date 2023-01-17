@@ -3,20 +3,18 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250\Import;
 
-use Amp\Loop;
-use Amp\Producer;
+use Amp\Future;
 use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
 use ScriptFUSION\Async\Throttle\DualThrottle;
+use ScriptFUSION\Porter\Import\Import;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
 use ScriptFUSION\Porter\Provider\Steam\Scrape\SteamStoreException;
-use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Retry\FailingTooHardException;
 use ScriptFUSION\Steam250\Database\Queries;
 use ScriptFUSION\Steam250\Import\Patreon\ApplistFormat;
 use ScriptFUSION\Steam250\Import\SteamSpy\SteamSpySpecification;
-use function Amp\Promise\any;
 
 /**
  * Imports Steam app data into a database with chunking support.
@@ -33,7 +31,6 @@ class Importer
     public const DEFAULT_CHUNK_INDEX = 1;
 
     private Porter $porter;
-    private AppDetailsImporter $appDetailsImporter;
     private Connection $database;
     private LoggerInterface $logger;
     private string $appListPath;
@@ -47,13 +44,11 @@ class Importer
 
     public function __construct(
         Porter $porter,
-        AppDetailsImporter $appDetailsImporter,
         Connection $database,
         LoggerInterface $logger,
         string $appListPath
     ) {
         $this->porter = $porter;
-        $this->appDetailsImporter = $appDetailsImporter;
         $this->database = $database;
         $this->logger = $logger;
         $this->appListPath = $appListPath;
@@ -73,81 +68,75 @@ class Importer
         $this->logger->info('Starting Steam app details import...');
         $this->chunks && $this->logger->info("Processing chunk $this->chunkIndex of $this->chunks.");
 
-        $appDetails = new Producer(function (\Closure $emit) use ($apps, $total) {
-            $importQ = new DualThrottle(PHP_INT_MAX, PHP_INT_MAX);
+        $appDetails = function () use ($apps, $total) {
+            $importQ = new DualThrottle(PHP_INT_MAX, $this->throttle->getMaxConcurrency());
             $count = 0;
 
             foreach ($apps as $app) {
                 ++$count;
 
+                $context = compact('app', 'total', 'count');
+
                 if (Queries::doesAppExist($this->database, $app['id'])) {
                     $this->logger->warning(
                         'Skipped %app%: already exists.',
-                        compact('app', 'total', 'count')
+                        $context,
                     );
 
                     continue;
                 }
 
-                // Wait for throttle before adding new job. Might need to be in loop.
-                yield $this->throttle->join();
-
                 // Import app details.
-                $importQ->await($appImport = ($this->appDetailsImporter)($this->porter, $app['id'], $this->throttle));
+                yield $importQ->async(function () use ($app, $count, $context): ?array {
+                    try {
+                        $appDetails = $this->porter->importOne(
+                            (new AppDetailsSpecification($app['id']))->setThrottle($this->throttle)
+                        );
 
-                $appImport->onResolve(
-                    function (?\Throwable $throwable, ?array $appDetails) use ($emit, $app, $count, $total) {
-                        if (!$throwable) {
-                            // Overwrite name with imported name, preserving only the original ID.
-                            return yield $emit([$appDetails + ['id' => $app['id']], $count]);
-                        }
+                        // Overwrite name with imported name, preserving only the original ID.
+                        return [$appDetails + ['id' => $app['id']], $count];
+                    } catch (SteamStoreException $storeException) {
+                        // Usually due to region block.
+                        $this->logger->warning("Steam error %app%: {$storeException->getMessage()}", $context);
+                    } catch (InvalidAppIdException) {
+                        // Store page is redirecting.
+                        $this->logger->warning("Invalid %app%", $context);
+                    } catch (FailingTooHardException $failingTooHardException) {
+                        $prev = $failingTooHardException->getPrevious();
 
-                        $context = compact('app', 'total', 'count');
+                        $this->logger->critical(
+                            'Critical error %app%: [' . get_debug_type($prev) . "] {$prev?->getMessage()}",
+                            $context
+                        );
+                    } catch (\Throwable $throwable) {
+                        $this->logger->critical('Fatal error in %app%.', $context);
 
-                        if ($throwable instanceof SteamStoreException) {
-                            // Usually due to region block.
-                            $this->logger->warning("Steam error %app%: {$throwable->getMessage()}", $context);
-                        } elseif ($throwable instanceof InvalidAppIdException) {
-                            // Store page is redirecting.
-                            $this->logger->warning("Invalid %app%", $context);
-                        } elseif ($throwable instanceof FailingTooHardException) {
-                            $prev = $throwable->getPrevious();
-                            $this->logger->critical(
-                                'Critical error %app%: [' . get_debug_type($prev) . "] {$prev->getMessage()}",
-                                $context
-                            );
-                        } else {
-                            $this->logger->critical('Fatal error in %app%.', $context);
-
-                            throw $throwable;
-                        }
+                        throw $throwable;
                     }
-                );
+
+                    return null;
+                });
+            }
+        };
+
+        $payloadCount = 0;
+
+        foreach (Future::iterate($appDetails()) as $appPayload) {
+            if (!$payload = $appPayload->await()) {
+                continue;
             }
 
-            // Wait for all jobs to finish enqueuing.
-            yield any($importQ->getAwaiting());
+            $this->processAppPayload($payload, $total);
 
-            // Wait for all imports to complete.
-            yield $this->throttle->getAwaiting();
-        });
-
-        Loop::run(function () use ($appDetails, $total) {
-            $payloadCount = 0;
-
-            while (yield $appDetails->advance()) {
-                $this->processAppPayload($appDetails->getCurrent(), $total);
-
-                if (!(++$payloadCount % $this->throttle->getMaxConcurrency())
-                    && $this->database->isTransactionActive()
-                ) {
-                    $this->database->commit();
-                    $this->logger->debug("Committed batch of {$this->throttle->getMaxConcurrency()}.");
-                }
+            if (!(++$payloadCount % $this->throttle->getMaxConcurrency())
+                && $this->database->isTransactionActive()
+            ) {
+                $this->database->commit();
+                $this->logger->debug("Committed batch of {$this->throttle->getMaxConcurrency()}.");
             }
+        }
 
-            $this->database->isTransactionActive() && $this->database->commit();
-        });
+        $this->database->isTransactionActive() && $this->database->commit();
 
         $this->logger->info('Finished :^)');
     }
@@ -258,11 +247,6 @@ class Importer
         $this->steamSpyPath = $steamSpyPath;
     }
 
-    public function setAppDetailsImporter(AppDetailsImporter $appDetailsImporter): void
-    {
-        $this->appDetailsImporter = $appDetailsImporter;
-    }
-
     private function detectApplistFormat(): ApplistFormat
     {
         $info = new \finfo(FILEINFO_MIME_ENCODING);
@@ -274,13 +258,13 @@ class Importer
         return ApplistFormat::STEAM();
     }
 
-    private function fetchApps(ApplistFormat $format): ImportSpecification
+    private function fetchApps(ApplistFormat $format): Import
     {
-        switch ($format) {
-            case ApplistFormat::STEAM:
-                return new SteamAppListSpecification($this->appListPath, $this->chunks, $this->chunkIndex);
-            case ApplistFormat::CLUB250:
-                return new Club250AppListSpecification($this->appListPath, $this->chunks, $this->chunkIndex);
-        }
+        return match ($format) {
+            ApplistFormat::STEAM() =>
+                new SteamAppListSpecification($this->appListPath, $this->chunks, $this->chunkIndex),
+            ApplistFormat::CLUB250() =>
+                new Club250AppListSpecification($this->appListPath, $this->chunks, $this->chunkIndex),
+        };
     }
 }

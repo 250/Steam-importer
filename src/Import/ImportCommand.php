@@ -15,7 +15,7 @@ class ImportCommand extends Command
     {
         $this
             ->setName('import')
-            ->setDescription('Import app data synchronously, for each Steam app, into a database.')
+            ->setDescription('Import app data asynchronously, for each Steam app, into a database.')
             ->addArgument('applist', InputArgument::REQUIRED, 'Path to Steam app list in JSON format.')
             ->addOption(
                 'chunks',
@@ -39,7 +39,7 @@ class ImportCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
-        $importer = $this->createFactory()->create(
+        $importer = (new ImporterFactory())->create(
             $input->getArgument('applist'),
             (int)$input->getOption('chunks'),
             (int)$input->getOption('chunk-index'),
@@ -52,10 +52,5 @@ class ImportCommand extends Command
         $importer->import();
 
         return 0;
-    }
-
-    protected function createFactory()
-    {
-        return new ImporterFactory;
     }
 }

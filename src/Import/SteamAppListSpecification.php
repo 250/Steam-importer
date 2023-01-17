@@ -5,12 +5,12 @@ namespace ScriptFUSION\Steam250\Import;
 
 use ScriptFUSION\Mapper\AnonymousMapping;
 use ScriptFUSION\Mapper\Strategy\Copy;
-use ScriptFUSION\Porter\Specification\ImportSpecification;
+use ScriptFUSION\Porter\Import\Import;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
 use ScriptFUSION\Steam250\Resource\StaticSteamAppList;
 use ScriptFUSION\Steam250\Transformer\ChunkingTransformer;
 
-class SteamAppListSpecification extends ImportSpecification
+final class SteamAppListSpecification extends Import
 {
     public function __construct(string $appListPath, int $chunks, int $chunkIndex)
     {

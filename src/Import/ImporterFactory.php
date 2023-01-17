@@ -16,7 +16,6 @@ final class ImporterFactory
 
         $importer = new Importer(
             (new PorterFactory)->create(),
-            new AppDetailsImporterSync,
             (new DatabaseFactory)->create("steam.$extension", $overwrite),
             (new LoggerFactory)->create('Import', $verbose),
             $appListPath

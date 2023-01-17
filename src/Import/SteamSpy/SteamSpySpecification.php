@@ -5,11 +5,11 @@ namespace ScriptFUSION\Steam250\Import\SteamSpy;
 
 use ScriptFUSION\Mapper\AnonymousMapping;
 use ScriptFUSION\Mapper\Strategy\Copy;
+use ScriptFUSION\Porter\Import\Import;
 use ScriptFUSION\Porter\Provider\Resource\StaticResource;
-use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
 
-class SteamSpySpecification extends ImportSpecification
+final class SteamSpySpecification extends Import
 {
     public function __construct(string $steamSpyDataPath)
     {

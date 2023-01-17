@@ -4,18 +4,16 @@ declare(strict_types=1);
 namespace ScriptFUSION\Steam250\Import\SteamCharts;
 
 use ScriptFUSION\Porter\Connector\Recoverable\StatelessRecoverableExceptionHandler;
+use ScriptFUSION\Porter\Import\Import;
 use ScriptFUSION\Porter\Net\Http\HttpServerException;
-use ScriptFUSION\Porter\Specification\AsyncImportSpecification;
 
-class GetPlayersHistorySpecification extends AsyncImportSpecification
+final class GetPlayersHistoryImport extends Import
 {
     public function __construct(GetPlayersHistory $resource)
     {
         parent::__construct($resource);
 
-        $this->setRecoverableExceptionHandler(new StatelessRecoverableExceptionHandler(
-            \Closure::fromCallable([$this, 'handle'])
-        ));
+        $this->setRecoverableExceptionHandler(new StatelessRecoverableExceptionHandler(self::handle(...)));
     }
 
     private static function handle(\Exception $exception): void

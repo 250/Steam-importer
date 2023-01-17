@@ -3,20 +3,20 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250\Import\SteamCharts;
 
-use ScriptFUSION\Porter\Connector\AsyncConnector;
-use ScriptFUSION\Porter\Net\Http\AsyncHttpConnector;
-use ScriptFUSION\Porter\Provider\AsyncProvider;
+use ScriptFUSION\Porter\Connector\Connector;
+use ScriptFUSION\Porter\Net\Http\HttpConnector;
+use ScriptFUSION\Porter\Provider\Provider;
 
-final class SteamChartsProvider implements AsyncProvider
+final class SteamChartsProvider implements Provider
 {
-    private AsyncHttpConnector $connector;
+    private HttpConnector $connector;
 
     public function __construct()
     {
-        $this->connector = new AsyncHttpConnector;
+        $this->connector = new HttpConnector();
     }
 
-    public function getAsyncConnector(): AsyncConnector
+    public function getConnector(): Connector
     {
         return $this->connector;
     }

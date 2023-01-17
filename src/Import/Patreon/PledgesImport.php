@@ -6,14 +6,14 @@ namespace ScriptFUSION\Steam250\Import\Patreon;
 use ScriptFUSION\Mapper\AnonymousMapping;
 use ScriptFUSION\Mapper\Strategy\Copy;
 use ScriptFUSION\Porter\Collection\RecordCollection;
+use ScriptFUSION\Porter\Import\Import;
 use ScriptFUSION\Porter\Provider\Patreon\Collection\PledgeRecords;
 use ScriptFUSION\Porter\Provider\Patreon\Resource\GetPledges;
-use ScriptFUSION\Porter\Specification\ImportSpecification;
 use ScriptFUSION\Porter\Transform\FilterTransformer;
 use ScriptFUSION\Porter\Transform\Mapping\MappingTransformer;
 use ScriptFUSION\Steam250\Import\Patreon\Strategy\RelationshipStrategy;
 
-class PledgesSpecification extends ImportSpecification
+final class PledgesImport extends Import
 {
     public function __construct()
     {

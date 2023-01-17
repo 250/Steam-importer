@@ -21,6 +21,6 @@ final class PlayersImportCommand extends Command
     {
         $importer = (new PlayersImporterFactory)->create($output->isVeryVerbose());
 
-        return $importer->import() ? 0 : 1;
+        return $importer->import() ? self::SUCCESS : self::FAILURE;
     }
 }

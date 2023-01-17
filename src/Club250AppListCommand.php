@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ScriptFUSION\Steam250;
 
-use ScriptFUSION\Porter\Specification\ImportSpecification;
+use ScriptFUSION\Porter\Import\Import;
 use ScriptFUSION\Steam250\Import\Club250\GetClub250AppList;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -23,7 +23,7 @@ final class Club250AppListCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
-        echo (new PorterFactory())->create()->importOne(new ImportSpecification(
+        echo (new PorterFactory())->create()->importOne(new Import(
             new GetClub250AppList($input->getArgument('api-token'))
         ))[0];
 

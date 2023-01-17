@@ -17,7 +17,7 @@ final class StaticClub250AppList extends StaticResource
             new CountableProviderRecords(
                 (static function () use ($file): \Generator {
                     foreach ($file as $line) {
-                        yield ['id' => (int)$line, 'name' => ''];
+                        $line && yield ['id' => (int)$line, 'name' => ''];
                     }
                 })(),
                 iterator_count($file),

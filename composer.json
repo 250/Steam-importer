@@ -7,22 +7,23 @@
       "email": "bilge@scriptfusion.com"
     }
   ],
+  "minimum-stability": "beta",
+  "prefer-stable": true,
   "require": {
-    "php": "^8",
+    "php": "^8.1",
     "ext-fileinfo": "*",
     "ext-json": "*",
     "250/log": "dev-master",
     "250/shared": "dev-master",
     "250/storage": "dev-master",
-    "amphp/amp": "^2.1.1",
-    "async/throttle": "^3",
+    "async/throttle": "^4",
     "doctrine/dbal": "^2",
     "joomla/di": "^2",
     "monolog/monolog": "^1",
-    "provider/patreon": "dev-master",
-    "provider/steam": "^5.3",
-    "symfony/console": "^5",
-    "transformers/mapping-transformer": "^2"
+    "provider/patreon": "^2",
+    "provider/steam": "^7",
+    "symfony/console": "^6",
+    "transformers/mapping-transformer": "^3"
   },
   "autoload": {
     "psr-4": {
