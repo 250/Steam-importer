@@ -57,25 +57,27 @@ final class PlayersImporter
         $resource->setLogger($this->logger);
         $apps = $this->porter->import((new Import($resource))->setThrottle($this->throttle));
 
-        $cutoffDate = new \DateTimeImmutable('-7 days');
-        $count = 0;
+        foreach (Future::iterate(
+            (function () use ($apps) {
+                $cutoffDate = new \DateTimeImmutable('-7 days');
+                $count = 0;
 
-        foreach ($apps as $app) {
-            $appId = $app['app_id'];
+                foreach ($apps as $app) {
+                    $appId = $app['app_id'];
 
-            $appsPlayers[] = async(function () use (&$count, $appId, $cutoffDate, $app) {
-                $this->logger->info(
-                    "Fetching app #$appId player history...",
-                    ['count' => ++$count, 'total' => 2000, 'throttle' => $this->throttle]
-                );
+                    yield async(function () use ($appId, &$count, $cutoffDate, $app): array {
+                        $this->logger->info(
+                            "Fetching app #$appId player history...",
+                            ['count' => ++$count, 'total' => 2000, 'throttle' => $this->throttle]
+                        );
 
-                $players = $this->fetchPlayersHistory($appId, $cutoffDate);
+                        $players = $this->fetchPlayersHistory($appId, $cutoffDate);
 
-                return $app + ['average_players_7d' => $players ? array_sum($players) / \count($players) : 0];
-            });
-        }
-
-        foreach (Future::iterate($appsPlayers ?? []) as $appPlayers) {
+                        return $app + ['average_players_7d' => $players ? array_sum($players) / \count($players) : 0];
+                    });
+                }
+            })()
+        ) as $appPlayers) {
             yield $appPlayers->await();
         }
     }
