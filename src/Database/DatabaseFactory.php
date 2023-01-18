@@ -38,7 +38,8 @@ final class DatabaseFactory
                 steam_deck INTEGER,
                 owners INTEGER,
                 parent_id INTEGER,
-                alias INTEGER
+                alias INTEGER,
+                demo_id INTEGER
             );
             CREATE TABLE IF NOT EXISTS tag (
                 id INTEGER PRIMARY KEY NOT NULL,
