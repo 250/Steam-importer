@@ -13,6 +13,7 @@ use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
 use ScriptFUSION\Porter\Provider\Steam\Scrape\SteamStoreException;
 use ScriptFUSION\Retry\FailingTooHardException;
 use ScriptFUSION\Steam250\Database\Queries;
+use ScriptFUSION\Steam250\Import\Club250\Club250AppListSpecification;
 use ScriptFUSION\Steam250\Import\Patreon\ApplistFormat;
 use ScriptFUSION\Steam250\Import\SteamSpy\SteamSpySpecification;
 

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace ScriptFUSION\Steam250;
+namespace ScriptFUSION\Steam250\Import\Club250;
 
 use ScriptFUSION\Porter\Import\Import;
-use ScriptFUSION\Steam250\Import\Club250\GetClub250AppList;
+use ScriptFUSION\Steam250\PorterFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

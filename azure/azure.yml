@@ -21,6 +21,10 @@ jobs:
     displayName: Download Club 250 app list
     workingDirectory: $(BUILDDIR)
 
+  - script: 250 c250-tags
+    displayName: Download Club 250 tags list
+    workingDirectory: $(BUILDDIR)
+
   - script: retry bash -c '250 applist > applist.json && ls -l applist.json && (($(stat -c%s applist.json) > 4000000))'
     displayName: Download app list
     workingDirectory: $(BUILDDIR)

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ScriptFUSION\Steam250\Import;
+namespace ScriptFUSION\Steam250\Import\Club250;
 
 use ScriptFUSION\Porter\Import\Import;
 use ScriptFUSION\Steam250\Resource\StaticClub250AppList;
