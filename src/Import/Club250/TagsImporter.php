@@ -23,7 +23,11 @@ final class TagsImporter
 
         foreach ($this->porter->import(new Import(new GetClub250Tags())) as $tag) {
             $this->database->executeStatement(
-                'INSERT OR REPLACE INTO tag (id, name, category) VALUES (:id, :name, :cat);',
+                'INSERT OR REPLACE INTO tag (id, name, category) VALUES (:id, :name, :catShortName)',
+                $tag
+            );
+            $this->database->executeStatement(
+                'INSERT OR IGNORE INTO tag_cat (id, name) VALUES (:catShortName, :catName)',
                 $tag
             );
 

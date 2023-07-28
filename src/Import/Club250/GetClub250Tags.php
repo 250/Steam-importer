@@ -22,13 +22,16 @@ final class GetClub250Tags implements ProviderResource
         $response = $connector->fetch(new HttpDataSource(self::URL));
 
         $crawler = new Crawler((string)$response);
+        $tags = $crawler->filter('ol.tags');
+        $cats = json_decode($tags->attr('data-cat'), true, 512, JSON_THROW_ON_ERROR);
 
-        yield from $crawler->filter('ol.tags')->children()->each(static function (Crawler $tag) {
+        yield from $tags->children()->each(static function (Crawler $tag) use ($cats) {
             $id = preg_replace('[^/tag/(\d+)$]', '$1', $tag->children('a')->attr('href'));
-            $cat = $tag->attr('data-cat');
             $name = $tag->innerText();
+            $catShortName = $tag->attr('data-cat');
+            $catName = \iter\search(fn ($cat) => $cat[1] === $catShortName, $cats)[2];
 
-            return compact('id', 'name', 'cat');
+            return compact('id', 'name', 'catShortName', 'catName');
         });
     }
 }

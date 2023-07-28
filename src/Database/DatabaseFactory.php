@@ -46,6 +46,10 @@ final class DatabaseFactory
                 name TEXT NOT NULL,
                 category TEXT
             );
+            CREATE TABLE IF NOT EXISTS tag_cat (
+                id TEXT PRIMARY KEY NOT NULL,
+                name TEXT NOT NULL
+            );
             CREATE TABLE IF NOT EXISTS app_tag (
                 app_id INTEGER NOT NULL,
                 tag_id INTEGER NOT NULL,
