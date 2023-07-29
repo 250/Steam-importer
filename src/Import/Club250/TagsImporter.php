@@ -19,15 +19,22 @@ final class TagsImporter
 
     public function import(): void
     {
-        $this->logger->info('Begin importing tags and tag categories from Club 250');
+        $this->logger->info('Begin importing tag categories from Club 250.');
 
-        foreach ($this->porter->import(new Import(new GetClub250Tags())) as $tag) {
+        foreach ($this->porter->import((new Import(new GetClub250TagCategories()))->enableCache()) as $category) {
             $this->database->executeStatement(
-                'INSERT OR REPLACE INTO tag (id, name, category) VALUES (:id, :name, :catShortName)',
-                $tag
+                'INSERT OR IGNORE INTO tag_cat (id, name, short_name) VALUES (:id, :name, :short_name)',
+                $category
             );
+        }
+
+        $this->logger->info('Finished importing tag categories.');
+
+        $this->logger->info('Begin importing tags from Club 250.');
+
+        foreach ($this->porter->import((new Import(new GetClub250Tags()))->enableCache()) as $tag) {
             $this->database->executeStatement(
-                'INSERT OR IGNORE INTO tag_cat (id, name) VALUES (:catShortName, :catName)',
+                'INSERT OR REPLACE INTO tag (id, name, category) VALUES (:id, :name, :category)',
                 $tag
             );
 

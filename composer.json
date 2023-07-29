@@ -20,7 +20,6 @@
     "doctrine/dbal": "^2",
     "joomla/di": "^2",
     "monolog/monolog": "^1",
-    "nikic/iter": "^2",
     "provider/patreon": "^2",
     "provider/steam": "^7",
     "symfony/console": "^6",
