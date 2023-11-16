@@ -1,22 +1,29 @@
 steps:
-- script: |
-    sudo update-alternatives --set php /usr/bin/php$(phpVersion)
-    sudo update-alternatives --set phar /usr/bin/phar$(phpVersion)
-    sudo update-alternatives --set phpdbg /usr/bin/phpdbg$(phpVersion)
-    sudo update-alternatives --set php-cgi /usr/bin/php-cgi$(phpVersion)
-    sudo update-alternatives --set phar.phar /usr/bin/phar.phar$(phpVersion)
-    php -v
-  displayName: Use PHP version $(phpVersion)
+  - script: |
+      sudo add-apt-repository ppa:ondrej/php
+      sudo apt-get update
+      sudo apt-get install \
+        php$(phpVersion)-cli \
+        php$(phpVersion)-curl \
+        php$(phpVersion)-gmp \
+        php$(phpVersion)-mbstring \
+        php$(phpVersion)-sqlite3 \
+        php$(phpVersion)-xml
+      php -v
+    displayName: Install PHP $(phpVersion)
 
-- script: sudo phpdismod xdebug && php -m
-  displayName: Disable Xdebug
+  - script: php -m
+    displayName: Show PHP modules
 
-- script: composer validate
-  displayName: Validate Composer file
-  condition: eq(variables['System.PhaseName'], 'Initialize')
+  - script: sudo phpdismod xdebug && php -m
+    displayName: Disable Xdebug
 
-- script: composer install --no-interaction --no-progress
-  displayName: Install dependencies
+  - script: composer validate
+    displayName: Validate Composer file
+    condition: eq(variables['System.PhaseName'], 'Initialize')
 
-- script: php -r 'require "vendor/autoload.php"; echo get_class(Revolt\EventLoop::getDriver()), "\n";'
-  displayName: Async loop driver
+  - script: composer install --no-interaction --no-progress
+    displayName: Install dependencies
+
+  - script: php -r 'require "vendor/autoload.php"; echo get_class(Revolt\EventLoop::getDriver()), "\n";'
+    displayName: Async loop driver

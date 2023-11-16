@@ -1,76 +1,76 @@
 steps:
-- template: php.yml
+  - template: php.yml
 
-- script: |
-    build=A$(Build.BuildId)
-    echo "##vso[task.setvariable variable=AZURE_BUILD_NUMBER]$build"
-    echo $build
-  displayName: Declare build number (A$(Build.BuildId))
+  - script: |
+      build=A$(Build.BuildId)
+      echo "##vso[task.setvariable variable=AZURE_BUILD_NUMBER]$build"
+      echo $build
+    displayName: Declare build number (A$(Build.BuildId))
 
-- script: |
-    sudo tee ${out=/usr/local/bin/250} <<-'.'
-      "$(Build.SourcesDirectory)/bin/250" -v "$@"
-    .
-    sudo chmod -v +x "$out"
-  displayName: Install "250" command
+  - script: |
+      sudo tee ${out=/usr/local/bin/250} <<-'.'
+        "$(Build.SourcesDirectory)/bin/250" -v "$@"
+      .
+      sudo chmod -v +x "$out"
+    displayName: Install "250" command
 
-- script: |
-    sudo tee ${out=/usr/local/bin/data} <<-'.'
-      GOOGLE_CLIENT_SECRET="$(GOOGLE_CLIENT_SECRET)" GOOGLE_REFRESH_TOKEN="$(GOOGLE_REFRESH_TOKEN)"\
-        retry php -d memory_limit=-1 "$(Build.SourcesDirectory)/vendor/bin/250 data" -v "$@"
-    .
-    sudo chmod -v +x "$out"
-  displayName: Install "data" command
+  - script: |
+      sudo tee ${out=/usr/local/bin/data} <<-'.'
+        GOOGLE_CLIENT_SECRET="$(GOOGLE_CLIENT_SECRET)" GOOGLE_REFRESH_TOKEN="$(GOOGLE_REFRESH_TOKEN)"\
+          retry php -d memory_limit=-1 "$(Build.SourcesDirectory)/vendor/bin/250 data" -v "$@"
+      .
+      sudo chmod -v +x "$out"
+    displayName: Install "data" command
 
-- script: |
-    sudo tee ${out=/usr/local/bin/retry} <<-'.'
-      for i in {1..20}; do
-        ((i > 1)) && {
-          echo Retry \#$((i - 1))...
-          sleep $i
-        }
+  - script: |
+      sudo tee ${out=/usr/local/bin/retry} <<-'.'
+        for i in {1..20}; do
+          ((i > 1)) && {
+            echo Retry \#$((i - 1))...
+            sleep $i
+          }
+      
+          "$@" && exit
+        done
+      .
+      sudo chmod -v +x "$out"
+    displayName: Install "retry" command
 
-        "$@" && exit
-      done
-    .
-    sudo chmod -v +x "$out"
-  displayName: Install "retry" command
+  - script: |
+      mkdir -v ${datadir=~/Steam-data}
+      echo "##vso[task.setvariable variable=DATADIR]$datadir"
+      echo "$datadir"
+    displayName: Create data directory
 
-- script: |
-    mkdir -v ${datadir=~/Steam-data}
-    echo "##vso[task.setvariable variable=DATADIR]$datadir"
-    echo "$datadir"
-  displayName: Create data directory
+  - script: |
+      marker=$AZURE_BUILD_NUMBER.date
+      
+      if [[ $SYSTEM_PHASENAME = Initialize ]]; then
+        date=$(date -u +%Y%m/%d | tee $marker)
+        data upload $marker || exit
+      else
+        data download -w $marker
+        date=$(cat $marker)
+      fi
+      
+      echo $date
+      echo "##vso[task.setvariable variable=DATE]$date"
+      echo "##vso[task.setvariable variable=MARKER]$marker"
+      
+      [[ -r $marker ]]
+    displayName: Upload/download date marker
 
-- script: |
-    marker=$AZURE_BUILD_NUMBER.date
+  - script: |
+      mkdir -pv "${builddir=$DATADIR/$DATE/$AZURE_BUILD_NUMBER}"
+      echo "##vso[task.setvariable variable=BUILDDIR]$builddir"
+      echo Build directory: "$builddir"
+      
+      rbuilddir=${builddir#$DATADIR/}
+      echo "##vso[task.setvariable variable=RBUILDDIR]$rbuilddir"
+      echo Remote build directory: "$rbuilddir"
+    displayName: Create build directory
 
-    if [[ $SYSTEM_PHASENAME = Initialize ]]; then
-      date=$(date -u +%Y%m/%d | tee $marker)
-      data upload $marker || exit
-    else
-      data download -w $marker
-      date=$(cat $marker)
-    fi
-
-    echo $date
-    echo "##vso[task.setvariable variable=DATE]$date"
-    echo "##vso[task.setvariable variable=MARKER]$marker"
-
-    [[ -r $marker ]]
-  displayName: Upload/download date marker
-
-- script: |
-    mkdir -pv "${builddir=$DATADIR/$DATE/$AZURE_BUILD_NUMBER}"
-    echo "##vso[task.setvariable variable=BUILDDIR]$builddir"
-    echo Build directory: "$builddir"
-
-    rbuilddir=${builddir#$DATADIR/}
-    echo "##vso[task.setvariable variable=RBUILDDIR]$rbuilddir"
-    echo Remote build directory: "$rbuilddir"
-  displayName: Create build directory
-
-- script: data download -w "$RBUILDDIR"
-  displayName: Restore build directory state
-  workingDirectory: $(BUILDDIR)
-  condition: not(eq(variables['System.PhaseName'], 'Initialize'))
+  - script: data download -w "$RBUILDDIR"
+    displayName: Restore build directory state
+    workingDirectory: $(BUILDDIR)
+    condition: not(eq(variables['System.PhaseName'], 'Initialize'))
