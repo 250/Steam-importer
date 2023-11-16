@@ -26,7 +26,7 @@ final class GetClub250Tags implements ProviderResource
 
         yield from $tags->children()->each(static function (Crawler $tag) {
             $id = preg_replace('[^/tag/(\d+)$]', '$1', $tag->children('a')->attr('href'));
-            $name = $tag->innerText();
+            $name = $tag->children('a')->innerText();
             $category = $tag->attr('data-cat');
 
             return compact('id', 'name', 'category');
