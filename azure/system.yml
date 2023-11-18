@@ -1,4 +1,29 @@
 steps:
+  - script: |
+      mkdir -v ${datadir=/tmp/data}
+      echo "##vso[task.setvariable variable=DATADIR]$datadir"
+      echo "##vso[task.setvariable variable=DDATADIR]${ddatadir=/${datadir##*/}}"
+      echo "$datadir" "$ddatadir"
+    displayName: Create data directory
+
+  - script: |
+      sudo tee ${out=/usr/local/bin/drun} <<'.'
+        docker run --tty --log-driver=none \
+          --mount type=bind,src=$(Build.SourcesDirectory),dst=/repo \
+          --mount type=bind,src=$DATADIR,dst=$DDATADIR \
+          --workdir "${cwd-$BUILDDIR}" \
+          ghcr.io/250/club-250-base:latest "$@"
+      .
+      sudo chmod -v +x "$out"
+    displayName: Install "drun" command
+
+  - script: |
+      sudo tee ${php=/usr/local/bin/php} ${composer=/usr/local/bin/composer} <<'.'
+        cwd=/repo drun "$(basename "$0")" "$@"
+      .
+      sudo chmod -v +x "$php" "$composer"
+    displayName: Overload "php" and "composer" commands
+
   - template: php.yml
 
   - script: |
@@ -9,15 +34,17 @@ steps:
 
   - script: |
       sudo tee ${out=/usr/local/bin/250} <<-'.'
-        "$(Build.SourcesDirectory)/bin/250" -v "$@"
+        drun /repo/bin/250 -v "$@"
       .
       sudo chmod -v +x "$out"
     displayName: Install "250" command
 
   - script: |
       sudo tee ${out=/usr/local/bin/data} <<-'.'
-        GOOGLE_CLIENT_SECRET="$(GOOGLE_CLIENT_SECRET)" GOOGLE_REFRESH_TOKEN="$(GOOGLE_REFRESH_TOKEN)"\
-          retry php -d memory_limit=-1 "$(Build.SourcesDirectory)/vendor/bin/250 data" -v "$@"
+        retry drun env \
+          GOOGLE_CLIENT_SECRET=$(GOOGLE_CLIENT_SECRET) \
+          GOOGLE_REFRESH_TOKEN=$(GOOGLE_REFRESH_TOKEN) \
+          php -d memory_limit=-1 /repo/vendor/bin/250\ data -v "$@"
       .
       sudo chmod -v +x "$out"
     displayName: Install "data" command
@@ -37,19 +64,13 @@ steps:
     displayName: Install "retry" command
 
   - script: |
-      mkdir -v ${datadir=~/Steam-data}
-      echo "##vso[task.setvariable variable=DATADIR]$datadir"
-      echo "$datadir"
-    displayName: Create data directory
-
-  - script: |
       marker=$AZURE_BUILD_NUMBER.date
       
       if [[ $SYSTEM_PHASENAME = Initialize ]]; then
         date=$(date -u +%Y%m/%d | tee $marker)
-        data upload $marker || exit
+        cwd=$DDATADIR data upload $marker || exit
       else
-        data download -w $marker
+        cwd=$DDATADIR data download -w $marker
         date=$(cat $marker)
       fi
       
@@ -59,18 +80,18 @@ steps:
       
       [[ -r $marker ]]
     displayName: Upload/download date marker
+    workingDirectory: $(DATADIR)
 
   - script: |
-      mkdir -pv "${builddir=$DATADIR/$DATE/$AZURE_BUILD_NUMBER}"
+      drun mkdir -pv "${builddir=$DDATADIR/$DATE/$AZURE_BUILD_NUMBER}"
       echo "##vso[task.setvariable variable=BUILDDIR]$builddir"
       echo Build directory: "$builddir"
       
-      rbuilddir=${builddir#$DATADIR/}
+      rbuilddir=${builddir#$DDATADIR/}
       echo "##vso[task.setvariable variable=RBUILDDIR]$rbuilddir"
       echo Remote build directory: "$rbuilddir"
     displayName: Create build directory
 
   - script: data download -w "$RBUILDDIR"
     displayName: Restore build directory state
-    workingDirectory: $(BUILDDIR)
     condition: not(eq(variables['System.PhaseName'], 'Initialize'))

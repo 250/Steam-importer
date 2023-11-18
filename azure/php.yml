@@ -1,23 +1,4 @@
 steps:
-  - script: |
-      sudo add-apt-repository ppa:ondrej/php
-      sudo apt-get update
-      sudo apt-get install \
-        php$(phpVersion)-cli \
-        php$(phpVersion)-curl \
-        php$(phpVersion)-gmp \
-        php$(phpVersion)-mbstring \
-        php$(phpVersion)-sqlite3 \
-        php$(phpVersion)-xml
-      php -v
-    displayName: Install PHP $(phpVersion)
-
-  - script: php -m
-    displayName: Show PHP modules
-
-  - script: sudo phpdismod xdebug && php -m
-    displayName: Disable Xdebug
-
   - script: composer validate
     displayName: Validate Composer file
     condition: eq(variables['System.PhaseName'], 'Initialize')

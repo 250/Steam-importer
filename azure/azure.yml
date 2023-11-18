@@ -17,21 +17,18 @@ jobs:
     steps:
       - template: system.yml
 
-      - script: 250 c250-applist '$(CLUB_250_API_TOKEN)' >c250-applist.txt
+      - script: drun sh -c '>c250-applist.txt /repo/bin/250 c250-applist "$(CLUB_250_API_TOKEN)"'
         displayName: Download Club 250 app list
-        workingDirectory: $(BUILDDIR)
 
       - script: 250 c250-tags
         displayName: Download Club 250 tags list
-        workingDirectory: $(BUILDDIR)
 
-      - script: retry bash -c '250 applist > applist.json && ls -l applist.json && (($(stat -c%s applist.json) > 4000000))'
+      - script: retry drun sh -c '>applist.json /repo/bin/250 applist && ls -l applist.json &&
+          let "$(stat -c%s applist.json) > 4000000"'
         displayName: Download app list
-        workingDirectory: $(BUILDDIR)
 
       - script: 250 players-import
         displayName: Import player stats
-        workingDirectory: $(BUILDDIR)
         condition: and(succeeded(), not(variables['skip-players']))
 
       - script: data upload "$BUILDDIR" "$RBUILDDIR"
@@ -48,9 +45,8 @@ jobs:
         displayName: WAN IP
 
       - script: 250 import --lite --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase)
-          --steam-spy "$(Build.SourcesDirectory)/data/steamspy 20180411.json" c250-applist.txt
+          --steam-spy '/repo/data/steamspy 20180411.json' c250-applist.txt
         displayName: Import apps ($(System.JobPositionInPhase)/$(System.TotalJobsInPhase))
-        workingDirectory: $(BUILDDIR)
 
       - script: data upload "$BUILDDIR" "$RBUILDDIR"
         displayName: Upload build artifacts
@@ -75,7 +71,7 @@ jobs:
           [[ '$(Build.Reason)' = Schedule ]] &&
             GITHUB_TOKEN='$(GITHUB_AZURE_TOKEN)' ||
             GITHUB_TOKEN='$(GITHUB_BILGE_TOKEN)'
-          
+
           curl -sS \
             -u :"$GITHUB_TOKEN" \
             -d '{"ref":"master"}' \
@@ -91,8 +87,8 @@ jobs:
           bunzip2 -v *.bz2
           chmod -c +x linux-amd64-github-release
           tar cJvf tar *.*
-          retry ./linux-amd64-github-release upload --user 250 --repo Steam-250 --tag snapshots --name snapshots.tar.xz \
-            --file tar --replace --security-token '$(GITHUB_AZURE_TOKEN)'
+          retry ./linux-amd64-github-release upload --user 250 --repo Steam-250 --tag snapshots \
+            --name snapshots.tar.xz --file tar --replace --security-token '$(GITHUB_AZURE_TOKEN)'
         displayName: Upload snapshots
         workingDirectory: $(Build.ArtifactStagingDirectory)
         condition: and(succeeded(), not(variables.test))
