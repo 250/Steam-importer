@@ -95,21 +95,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Storage.git",
-                "reference": "7495b139a253e11142d50da2214b404767129588"
+                "reference": "a77f06c52562c59a2401d0f4c347a06dae3b182b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Storage/zipball/7495b139a253e11142d50da2214b404767129588",
-                "reference": "7495b139a253e11142d50da2214b404767129588",
+                "url": "https://api.github.com/repos/250/Storage/zipball/a77f06c52562c59a2401d0f4c347a06dae3b182b",
+                "reference": "a77f06c52562c59a2401d0f4c347a06dae3b182b",
                 "shasum": ""
             },
             "require": {
                 "250/log": "dev-master",
-                "athari/yalinqo": "^2",
-                "eloquent/enumeration": "^6",
                 "nao-pon/flysystem-google-drive": "^1.1.9",
-                "php": "^8",
-                "phptype/string": "^1",
+                "nikic/iter": "^2.3",
+                "php": "^8.1",
                 "symfony/console": "^3|^4|^5|^6"
             },
             "default-branch": true,
@@ -134,7 +132,7 @@
                 "issues": "https://github.com/250/Storage/issues",
                 "source": "https://github.com/250/Storage/tree/master"
             },
-            "time": "2023-01-17T02:21:34+00:00"
+            "time": "2023-11-20T22:21:47+00:00"
         },
         {
             "name": "amphp/amp",
@@ -219,16 +217,16 @@
         },
         {
             "name": "amphp/byte-stream",
-            "version": "v2.0.2",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/byte-stream.git",
-                "reference": "408a3b4fc4f4c7604575dc8704f18c1bd91c3ceb"
+                "reference": "0a4b0e80dad92c75e6131f8ad253919211540338"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/408a3b4fc4f4c7604575dc8704f18c1bd91c3ceb",
-                "reference": "408a3b4fc4f4c7604575dc8704f18c1bd91c3ceb",
+                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/0a4b0e80dad92c75e6131f8ad253919211540338",
+                "reference": "0a4b0e80dad92c75e6131f8ad253919211540338",
                 "shasum": ""
             },
             "require": {
@@ -282,7 +280,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/byte-stream/issues",
-                "source": "https://github.com/amphp/byte-stream/tree/v2.0.2"
+                "source": "https://github.com/amphp/byte-stream/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -290,7 +288,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-01T04:41:26+00:00"
+            "time": "2023-11-19T14:34:16+00:00"
         },
         {
             "name": "amphp/cache",
@@ -359,16 +357,16 @@
         },
         {
             "name": "amphp/dns",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "e42876aa8306c754abd1b3e71a44e13066909fd1"
+                "reference": "c3b518f321f26e786554480de580f06b9f34d1cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/e42876aa8306c754abd1b3e71a44e13066909fd1",
-                "reference": "e42876aa8306c754abd1b3e71a44e13066909fd1",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/c3b518f321f26e786554480de580f06b9f34d1cd",
+                "reference": "c3b518f321f26e786554480de580f06b9f34d1cd",
                 "shasum": ""
             },
             "require": {
@@ -435,7 +433,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/dns/issues",
-                "source": "https://github.com/amphp/dns/tree/v2.0.1"
+                "source": "https://github.com/amphp/dns/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -443,7 +441,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-21T16:00:09+00:00"
+            "time": "2023-11-18T15:49:57+00:00"
         },
         {
             "name": "amphp/hpack",
@@ -1266,70 +1264,6 @@
             "time": "2023-06-13T13:07:08+00:00"
         },
         {
-            "name": "athari/yalinqo",
-            "version": "v2.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Athari/YaLinqo.git",
-                "reference": "f837af690830fb35904c7b6a5f33052e46b86e57"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Athari/YaLinqo/zipball/f837af690830fb35904c7b6a5f33052e46b86e57",
-                "reference": "f837af690830fb35904c7b6a5f33052e46b86e57",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5"
-            },
-            "conflict": {
-                "phpunit/php-timer": ">=2"
-            },
-            "require-dev": {
-                "php-coveralls/php-coveralls": "^2.5",
-                "phpdocumentor/phpdocumentor": "^2.8",
-                "phpunit/phpunit": "<6"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "YaLinqo/Linq.php"
-                ],
-                "psr-4": {
-                    "YaLinqo\\": "YaLinqo/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Prokhorov",
-                    "homepage": "https://github.com/Athari/"
-                }
-            ],
-            "description": "YaLinqo, a LINQ-to-objects library for PHP",
-            "homepage": "http://athari.github.io/YaLinqo",
-            "keywords": [
-                "linq",
-                "linqo",
-                "query",
-                "statistic"
-            ],
-            "support": {
-                "docs": "http://athari.github.io/YaLinqo",
-                "issues": "https://github.com/Athari/YaLinqo/issues",
-                "source": "https://github.com/Athari/YaLinqo"
-            },
-            "time": "2023-07-11T15:51:42+00:00"
-        },
-        {
             "name": "connectors/http",
             "version": "7.0.0",
             "source": {
@@ -1952,16 +1886,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.324.0",
+            "version": "v0.325.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "585cc823c3d59788e4a0829d5b7e41c76950d801"
+                "reference": "b2d39ef968f0017d6bff3c1da82501a0c575c9ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/585cc823c3d59788e4a0829d5b7e41c76950d801",
-                "reference": "585cc823c3d59788e4a0829d5b7e41c76950d801",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/b2d39ef968f0017d6bff3c1da82501a0c575c9ce",
+                "reference": "b2d39ef968f0017d6bff3c1da82501a0c575c9ce",
                 "shasum": ""
             },
             "require": {
@@ -1990,9 +1924,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.324.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.325.0"
             },
-            "time": "2023-11-13T01:06:14+00:00"
+            "time": "2023-11-18T01:04:14+00:00"
         },
         {
             "name": "google/auth",
@@ -3212,6 +3146,58 @@
             "time": "2020-07-30T01:26:26+00:00"
         },
         {
+            "name": "nikic/iter",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/iter.git",
+                "reference": "d9f88bc04b5b453914373e70c041353d8e67c3f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/iter/zipball/d9f88bc04b5b453914373e70c041353d8e67c3f5",
+                "reference": "d9f88bc04b5b453914373e70c041353d8e67c3f5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.4",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
+                "vimeo/psalm": "^4.18 || ^5.13"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/iter.func.php",
+                    "src/iter.php",
+                    "src/iter.rewindable.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov",
+                    "email": "nikic@php.net"
+                }
+            ],
+            "description": "Iteration primitives using generators",
+            "keywords": [
+                "functional",
+                "generator",
+                "iterator"
+            ],
+            "support": {
+                "issues": "https://github.com/nikic/iter/issues",
+                "source": "https://github.com/nikic/iter/tree/v2.3.0"
+            },
+            "time": "2023-07-25T19:55:40+00:00"
+        },
+        {
             "name": "phpseclib/phpseclib",
             "version": "2.0.45",
             "source": {
@@ -3320,47 +3306,6 @@
                 }
             ],
             "time": "2023-09-15T20:55:47+00:00"
-        },
-        {
-            "name": "phptype/string",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phptype/String.git",
-                "reference": "0c62fb6d142c7c63ff8327054d8275d8124ca94b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phptype/String/zipball/0c62fb6d142c7c63ff8327054d8275d8124ca94b",
-                "reference": "0c62fb6d142c7c63ff8327054d8275d8124ca94b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5",
-                "scriptfusion/static-class": "^1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ScriptFUSION\\Type\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Bilge",
-                    "email": "bilge@scriptfusion.com"
-                }
-            ],
-            "description": "String extension methods.",
-            "support": {
-                "issues": "https://github.com/phptype/String/issues",
-                "source": "https://github.com/phptype/String/tree/1.0.1"
-            },
-            "time": "2020-12-16T01:07:47+00:00"
         },
         {
             "name": "provider/steam",
@@ -3772,16 +3717,16 @@
         },
         {
             "name": "revolt/event-loop",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/revoltphp/event-loop.git",
-                "reference": "40292c18e53d9a1b7e6c807f4fda5908552e1ba5"
+                "reference": "fce6063869513de56f639aa522b2ef2fedbf8d73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/40292c18e53d9a1b7e6c807f4fda5908552e1ba5",
-                "reference": "40292c18e53d9a1b7e6c807f4fda5908552e1ba5",
+                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/fce6063869513de56f639aa522b2ef2fedbf8d73",
+                "reference": "fce6063869513de56f639aa522b2ef2fedbf8d73",
                 "shasum": ""
             },
             "require": {
@@ -3791,7 +3736,7 @@
                 "ext-json": "*",
                 "jetbrains/phpstorm-stubs": "^2019.3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.7"
+                "psalm/phar": "^5.15"
             },
             "type": "library",
             "extra": {
@@ -3838,9 +3783,9 @@
             ],
             "support": {
                 "issues": "https://github.com/revoltphp/event-loop/issues",
-                "source": "https://github.com/revoltphp/event-loop/tree/v1.0.4"
+                "source": "https://github.com/revoltphp/event-loop/tree/v1.0.5"
             },
-            "time": "2023-10-22T03:19:00+00:00"
+            "time": "2023-11-19T14:45:35+00:00"
         },
         {
             "name": "scriptfusion/array-walker",

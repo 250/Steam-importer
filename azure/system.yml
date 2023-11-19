@@ -12,7 +12,7 @@ steps:
           --mount type=bind,src=$(Build.SourcesDirectory),dst=/repo \
           --mount type=bind,src=$DATADIR,dst=$DDATADIR \
           --workdir "${cwd-$BUILDDIR}" \
-          ghcr.io/250/club-250-base:alpine "$@"
+          ghcr.io/250/club-250-base "$@"
       .
       sudo chmod -v +x "$out"
     displayName: Install "drun" command
