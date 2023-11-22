@@ -80,15 +80,15 @@ jobs:
         condition: and(succeeded(), not(variables.test))
 
       - script: |
-          set -v
-          data download-last2
+          set -ev
+          cwd=$DDATADIR data download-last2
           wget --progress=dot:mega\
             https://github.com/meterup/github-release/releases/download/v0.7.4/linux-amd64-github-release.bz2
           bunzip2 -v *.bz2
           chmod -c +x linux-amd64-github-release
-          tar cJvf tar *.*
+          tar cJvf tar *.steam.sqlite
           retry ./linux-amd64-github-release upload --user 250 --repo Steam-250 --tag snapshots \
             --name snapshots.tar.xz --file tar --replace --security-token '$(GITHUB_AZURE_TOKEN)'
         displayName: Upload snapshots
-        workingDirectory: $(Build.ArtifactStagingDirectory)
+        workingDirectory: $(DATADIR)
         condition: and(succeeded(), not(variables.test))
