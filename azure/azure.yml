@@ -80,6 +80,9 @@ jobs:
         condition: and(succeeded(), not(variables.test))
 
       - script: |
+          # Only update on Fridays.
+          [[ $(date +%u) = 5 ]] || exit 0
+
           set -ev
           cwd=$DDATADIR data download-last2
           wget --progress=dot:mega\
