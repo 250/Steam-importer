@@ -10,7 +10,7 @@ use ScriptFUSION\Porter\Provider\Resource\SingleRecordResource;
 
 final class GetClub250AppList implements ProviderResource, SingleRecordResource
 {
-    private const URL = 'https://club.steam250.com/api/applist';
+    private const URL = 'https://api.steam250.com/applist';
 
     public function __construct(private readonly string $apiToken)
     {
