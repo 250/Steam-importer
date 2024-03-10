@@ -817,16 +817,16 @@
         },
         {
             "name": "amphp/pipeline",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/pipeline.git",
-                "reference": "8a0ecc281bb0932d6b4a786453aff18c55756e63"
+                "reference": "f1c2ce35d27ae86ead018adb803eccca7421dd9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/pipeline/zipball/8a0ecc281bb0932d6b4a786453aff18c55756e63",
-                "reference": "8a0ecc281bb0932d6b4a786453aff18c55756e63",
+                "url": "https://api.github.com/repos/amphp/pipeline/zipball/f1c2ce35d27ae86ead018adb803eccca7421dd9b",
+                "reference": "f1c2ce35d27ae86ead018adb803eccca7421dd9b",
                 "shasum": ""
             },
             "require": {
@@ -872,7 +872,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/pipeline/issues",
-                "source": "https://github.com/amphp/pipeline/tree/v1.1.0"
+                "source": "https://github.com/amphp/pipeline/tree/v1.2.0"
             },
             "funding": [
                 {
@@ -880,7 +880,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-23T04:34:28+00:00"
+            "time": "2024-03-10T14:48:16+00:00"
         },
         {
             "name": "amphp/process",
@@ -3426,16 +3426,16 @@
         },
         {
             "name": "provider/steam",
-            "version": "7.3.6",
+            "version": "7.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "db118b5f60ebad5d42d3114a1d81f4b3b80a7cf9"
+                "reference": "d96a8c327165c03afb3f2234caefd48e443c2405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/db118b5f60ebad5d42d3114a1d81f4b3b80a7cf9",
-                "reference": "db118b5f60ebad5d42d3114a1d81f4b3b80a7cf9",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/d96a8c327165c03afb3f2234caefd48e443c2405",
+                "reference": "d96a8c327165c03afb3f2234caefd48e443c2405",
                 "shasum": ""
             },
             "require": {
@@ -3476,9 +3476,9 @@
             "description": "Steam data provider for Porter.",
             "support": {
                 "issues": "https://github.com/Provider/Steam/issues",
-                "source": "https://github.com/Provider/Steam/tree/7.3.6"
+                "source": "https://github.com/Provider/Steam/tree/7.4.0"
             },
-            "time": "2024-02-07T15:39:14+00:00"
+            "time": "2024-03-10T18:34:14+00:00"
         },
         {
             "name": "psr/cache",
