@@ -72,6 +72,11 @@ final class DatabaseFactory
             CREATE TABLE IF NOT EXISTS app_players (
                 app_id INTEGER PRIMARY KEY NOT NULL,
                 average_players_7d INTEGER NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS c250_ranking (
+                id TEXT NOT NULL,
+                app_id INTEGER NOT NULL,
+                PRIMARY KEY(id, app_id)
             );'
         );
 

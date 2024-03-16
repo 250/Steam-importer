@@ -5,6 +5,7 @@ namespace ScriptFUSION\Steam250;
 
 use ScriptFUSION\Steam250\Import\Club250\Club250AppListCommand;
 use ScriptFUSION\Steam250\Import\Club250\Club250TagsCommand;
+use ScriptFUSION\Steam250\Import\Club250\Club250TrendingCommand;
 use ScriptFUSION\Steam250\Import\ImportCommand;
 use ScriptFUSION\Steam250\Import\Patreon\PatronImportCommand;
 use ScriptFUSION\Steam250\Import\SteamCharts\PlayersImportCommand;
@@ -22,6 +23,7 @@ final class Application
             new SteamApplistCommand,
             new Club250AppListCommand,
             new Club250TagsCommand,
+            new Club250TrendingCommand,
             new PlayersImportCommand,
             new SteamSpyCommand,
             new ImportCommand,

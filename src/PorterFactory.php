@@ -5,8 +5,6 @@ namespace ScriptFUSION\Steam250;
 
 use Joomla\DI\Container;
 use ScriptFUSION\Porter\Porter;
-use ScriptFUSION\Porter\Provider\Patreon\Connector\PatreonConnector;
-use ScriptFUSION\Porter\Provider\Patreon\PatreonProvider;
 use ScriptFUSION\Porter\Provider\Steam\SteamProvider;
 use ScriptFUSION\Steam250\Import\Club250\Club250Provider;
 use ScriptFUSION\Steam250\Import\SteamCharts\SteamChartsProvider;
@@ -21,9 +19,6 @@ final class PorterFactory
         $container->set(SteamProvider::class, new SteamProvider);
         $container->set(SteamChartsProvider::class, new SteamChartsProvider);
         $container->set(SteamSpyProvider::class, new SteamSpyProvider);
-        $container->set(PatreonProvider::class, static function (): PatreonProvider {
-            return new PatreonProvider(new PatreonConnector($_SERVER['PATREON_API_KEY']));
-        });
         $container->set(Club250Provider::class, new Club250Provider);
 
         return $porter;
