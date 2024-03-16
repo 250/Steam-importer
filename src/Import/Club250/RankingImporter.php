@@ -21,14 +21,17 @@ final readonly class RankingImporter
     {
         $this->logger->info('Begin importing ranking from Club 250.');
 
+        $rank = 0;
+
         foreach ($this->porter->importOne(
             new Import(new GetClub250Trending($apiToken))
         ) as $appId) {
+            ++$rank;
             $this->logger->info("App #$appId\n");
 
             $this->database->executeStatement(
-                'INSERT OR REPLACE INTO c250_ranking (id, app_id) VALUES ("TREND", :appId)',
-                compact('appId'),
+                'INSERT OR REPLACE INTO c250_ranking (id, rank, app_id) VALUES ("TREND", :rank, :appId)',
+                compact('rank', 'appId'),
             );
         }
 

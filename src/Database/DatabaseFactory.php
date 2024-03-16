@@ -75,8 +75,9 @@ final class DatabaseFactory
             );
             CREATE TABLE IF NOT EXISTS c250_ranking (
                 id TEXT NOT NULL,
+                rank INTEGER NOT NULL,
                 app_id INTEGER NOT NULL,
-                PRIMARY KEY(id, app_id)
+                PRIMARY KEY(id, rank)
             );'
         );
 
