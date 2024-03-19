@@ -30,7 +30,7 @@ final readonly class RankingImporter
             $this->logger->info("App #$appId\n");
 
             $this->database->executeStatement(
-                'INSERT OR REPLACE INTO c250_ranking (id, rank, app_id) VALUES ("TREND", :rank, :appId)',
+                'INSERT OR REPLACE INTO c250_ranking (list_id, rank, app_id) VALUES ("TREND", :rank, :appId)',
                 compact('rank', 'appId'),
             );
         }
