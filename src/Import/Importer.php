@@ -160,8 +160,8 @@ class Importer
 
         // No reviews.
         if (isset($app['total_reviews']) && $app['total_reviews'] < 1) {
-            // Keep games with no reviews, due out in the next 8 days, for the previews page.
-            if ($this->lite && ($app['release_date'] <= time() || $app['release_date'] > strtotime('8day'))) {
+            // Keep games with no reviews, but due out in the next month, for the previews page.
+            if ($this->lite && ($app['release_date'] <= time() || $app['release_date'] > strtotime('30 day'))) {
                 $this->logger->notice('Skipped %app%: no reviews.', $logContext);
 
                 return;
