@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8856b4d6bbccaec25d040b4f513def09",
+    "content-hash": "4bc42bbb5cf347a115f914857bab1571",
     "packages": [
         {
             "name": "250/log",
@@ -55,12 +55,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Shared.git",
-                "reference": "43ec22a9e48616572a04e92e39a5aa236cc4e723"
+                "reference": "114c6ea107698eab54ccdd06466b51a5270bbf5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/43ec22a9e48616572a04e92e39a5aa236cc4e723",
-                "reference": "43ec22a9e48616572a04e92e39a5aa236cc4e723",
+                "url": "https://api.github.com/repos/250/Shared/zipball/114c6ea107698eab54ccdd06466b51a5270bbf5b",
+                "reference": "114c6ea107698eab54ccdd06466b51a5270bbf5b",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                 "issues": "https://github.com/250/Shared/issues",
                 "source": "https://github.com/250/Shared/tree/master"
             },
-            "time": "2024-09-25T22:32:16+00:00"
+            "time": "2024-09-26T19:10:44+00:00"
         },
         {
             "name": "250/storage",
@@ -3427,16 +3427,16 @@
         },
         {
             "name": "provider/steam",
-            "version": "7.5.1",
+            "version": "8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "5996a320526fd79e017e292ccdfcc05b06aab539"
+                "reference": "5afa4d4642768e7caa0012d947cddd12b49e69e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/5996a320526fd79e017e292ccdfcc05b06aab539",
-                "reference": "5996a320526fd79e017e292ccdfcc05b06aab539",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/5afa4d4642768e7caa0012d947cddd12b49e69e7",
+                "reference": "5afa4d4642768e7caa0012d947cddd12b49e69e7",
                 "shasum": ""
             },
             "require": {
@@ -3474,9 +3474,9 @@
             "description": "Steam data provider for Porter.",
             "support": {
                 "issues": "https://github.com/Provider/Steam/issues",
-                "source": "https://github.com/Provider/Steam/tree/7.5.1"
+                "source": "https://github.com/Provider/Steam/tree/8.0.0"
             },
-            "time": "2024-09-25T22:48:38+00:00"
+            "time": "2024-09-26T08:12:00+00:00"
         },
         {
             "name": "psr/cache",
@@ -3944,26 +3944,26 @@
         },
         {
             "name": "scriptfusion/mapper",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ScriptFUSION/Mapper.git",
-                "reference": "4cb4adffdefe4d93f55de6cce83e92afb8a31c40"
+                "reference": "dafee01503742d9d90f684aa93014ff884123cf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ScriptFUSION/Mapper/zipball/4cb4adffdefe4d93f55de6cce83e92afb8a31c40",
-                "reference": "4cb4adffdefe4d93f55de6cce83e92afb8a31c40",
+                "url": "https://api.github.com/repos/ScriptFUSION/Mapper/zipball/dafee01503742d9d90f684aa93014ff884123cf1",
+                "reference": "dafee01503742d9d90f684aa93014ff884123cf1",
                 "shasum": ""
             },
             "require": {
                 "eloquent/enumeration": "^5|^6",
-                "php": "^7.2|^8",
+                "php": "^8.1",
                 "scriptfusion/array-walker": "^1"
             },
             "require-dev": {
                 "mockery/mockery": "^1.3.3",
-                "phpunit/phpunit": "^8.5|^9",
+                "phpunit/phpunit": "^10.5",
                 "scriptfusion/static-class": "^1"
             },
             "type": "library",
@@ -3985,9 +3985,9 @@
             "description": "Transforms arrays using an object composition DSL.",
             "support": {
                 "issues": "https://github.com/ScriptFUSION/Mapper/issues",
-                "source": "https://github.com/ScriptFUSION/Mapper/tree/2.4.0"
+                "source": "https://github.com/ScriptFUSION/Mapper/tree/2.5.0"
             },
-            "time": "2021-03-06T00:38:37+00:00"
+            "time": "2024-09-26T18:58:18+00:00"
         },
         {
             "name": "scriptfusion/porter",

@@ -40,7 +40,8 @@ final class DatabaseFactory
                 parent_id INTEGER,
                 alias INTEGER,
                 demo_id INTEGER,
-                capsule_hash TEXT
+                capsule_hash TEXT,
+                capsule_alt INTEGER
             );
             CREATE TABLE IF NOT EXISTS tag (
                 id INTEGER PRIMARY KEY NOT NULL,
