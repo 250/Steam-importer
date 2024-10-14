@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bc42bbb5cf347a115f914857bab1571",
+    "content-hash": "428ffa4c323b8360ce4d5caa3738b61f",
     "packages": [
         {
             "name": "250/log",
@@ -55,12 +55,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Shared.git",
-                "reference": "114c6ea107698eab54ccdd06466b51a5270bbf5b"
+                "reference": "644c59524e705054709d5d59b2f584c015ca0f00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/114c6ea107698eab54ccdd06466b51a5270bbf5b",
-                "reference": "114c6ea107698eab54ccdd06466b51a5270bbf5b",
+                "url": "https://api.github.com/repos/250/Shared/zipball/644c59524e705054709d5d59b2f584c015ca0f00",
+                "reference": "644c59524e705054709d5d59b2f584c015ca0f00",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                 "issues": "https://github.com/250/Shared/issues",
                 "source": "https://github.com/250/Shared/tree/master"
             },
-            "time": "2024-09-26T19:10:44+00:00"
+            "time": "2024-10-14T20:55:45+00:00"
         },
         {
             "name": "250/storage",
@@ -1885,16 +1885,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.374.0",
+            "version": "v0.377.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "5f6060df419f4f72dcc970197f9a9b1613cecc62"
+                "reference": "912727289dd617a97da7d2700debbe81a59cea19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/5f6060df419f4f72dcc970197f9a9b1613cecc62",
-                "reference": "5f6060df419f4f72dcc970197f9a9b1613cecc62",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/912727289dd617a97da7d2700debbe81a59cea19",
+                "reference": "912727289dd617a97da7d2700debbe81a59cea19",
                 "shasum": ""
             },
             "require": {
@@ -1923,9 +1923,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.374.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.377.0"
             },
-            "time": "2024-09-23T01:02:23+00:00"
+            "time": "2024-10-14T00:56:24+00:00"
         },
         {
             "name": "google/auth",
@@ -3427,16 +3427,16 @@
         },
         {
             "name": "provider/steam",
-            "version": "8.0.0",
+            "version": "9.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "5afa4d4642768e7caa0012d947cddd12b49e69e7"
+                "reference": "71dfd28c219a61d0892afd656c2476c11f45c55f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/5afa4d4642768e7caa0012d947cddd12b49e69e7",
-                "reference": "5afa4d4642768e7caa0012d947cddd12b49e69e7",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/71dfd28c219a61d0892afd656c2476c11f45c55f",
+                "reference": "71dfd28c219a61d0892afd656c2476c11f45c55f",
                 "shasum": ""
             },
             "require": {
@@ -3465,6 +3465,9 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0-only"
+            ],
             "authors": [
                 {
                     "name": "Bilge",
@@ -3474,9 +3477,9 @@
             "description": "Steam data provider for Porter.",
             "support": {
                 "issues": "https://github.com/Provider/Steam/issues",
-                "source": "https://github.com/Provider/Steam/tree/8.0.0"
+                "source": "https://github.com/Provider/Steam/tree/9.0.0"
             },
-            "time": "2024-09-26T08:12:00+00:00"
+            "time": "2024-10-13T16:46:35+00:00"
         },
         {
             "name": "psr/cache",
