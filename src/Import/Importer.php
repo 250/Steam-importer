@@ -22,7 +22,7 @@ use ScriptFUSION\Steam250\Import\SteamSpy\SteamSpySpecification;
  *
  * The specified list of apps is decorated by downloading additional data for each app.
  *
- * By default every app is saved in the database whether or not it was successfully decorated. This is to avoid pausing
+ * By default, every app is saved in the database whether or not successfully decorated. This is to avoid pausing
  * to redecorate the same item if the import is restarted. "Lite" mode avoids saving undecorated records to the
  * database, to save space, creating a "lighter" database.
  */
@@ -62,7 +62,7 @@ class Importer
         $format = $this->detectApplistFormat();
         $specification = $this->fetchApps($format);
 
-        $this->logger->info("Reading applist format: \"$format\"...");
+        $this->logger->info("Reading applist format: \"$format->name\"...");
         $apps = $this->porter->import($specification);
         $total = \count($apps);
 
@@ -253,18 +253,18 @@ class Importer
         $info = new \finfo(FILEINFO_MIME_ENCODING);
 
         if ($info->file($this->appListPath) === 'us-ascii') {
-            return ApplistFormat::CLUB250();
+            return ApplistFormat::CLUB250;
         }
 
-        return ApplistFormat::STEAM();
+        return ApplistFormat::STEAM;
     }
 
     private function fetchApps(ApplistFormat $format): Import
     {
         return match ($format) {
-            ApplistFormat::STEAM() =>
+            ApplistFormat::STEAM =>
                 new SteamAppListSpecification($this->appListPath, $this->chunks, $this->chunkIndex),
-            ApplistFormat::CLUB250() =>
+            ApplistFormat::CLUB250 =>
                 new Club250AppListSpecification($this->appListPath, $this->chunks, $this->chunkIndex),
         };
     }
