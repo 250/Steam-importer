@@ -584,16 +584,16 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v5.3.3",
+            "version": "v5.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "09212ebc2f34efb5e1eaac4374fef6b11a7d2fbc"
+                "reference": "75ad21574fd632594a2dd914496647816d5106bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/09212ebc2f34efb5e1eaac4374fef6b11a7d2fbc",
-                "reference": "09212ebc2f34efb5e1eaac4374fef6b11a7d2fbc",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/75ad21574fd632594a2dd914496647816d5106bc",
+                "reference": "75ad21574fd632594a2dd914496647816d5106bc",
                 "shasum": ""
             },
             "require": {
@@ -670,7 +670,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client/issues",
-                "source": "https://github.com/amphp/http-client/tree/v5.3.3"
+                "source": "https://github.com/amphp/http-client/tree/v5.3.4"
             },
             "funding": [
                 {
@@ -678,7 +678,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-21T03:24:20+00:00"
+            "time": "2025-08-16T20:41:23+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -1217,20 +1217,20 @@
         },
         {
             "name": "connectors/http",
-            "version": "7.2.0",
+            "version": "8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Porter-connectors/HttpConnector.git",
-                "reference": "13248101b7748d411ba16715211a9927c889b3ed"
+                "reference": "150e6025fef8a70f1e53200e6b0542759dccae08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Porter-connectors/HttpConnector/zipball/13248101b7748d411ba16715211a9927c889b3ed",
-                "reference": "13248101b7748d411ba16715211a9927c889b3ed",
+                "url": "https://api.github.com/repos/Porter-connectors/HttpConnector/zipball/150e6025fef8a70f1e53200e6b0542759dccae08",
+                "reference": "150e6025fef8a70f1e53200e6b0542759dccae08",
                 "shasum": ""
             },
             "require": {
-                "amphp/http-client": "^5.1",
+                "amphp/http-client": "^5.3.3",
                 "amphp/http-client-cookies": "^2",
                 "php": "^8.1",
                 "scriptfusion/porter": "^7|^8"
@@ -1259,9 +1259,9 @@
             "description": "Provides an HTTP connector for Porter.",
             "support": {
                 "issues": "https://github.com/Porter-connectors/HttpConnector/issues",
-                "source": "https://github.com/Porter-connectors/HttpConnector/tree/7.2.0"
+                "source": "https://github.com/Porter-connectors/HttpConnector/tree/8.0.0"
             },
-            "time": "2025-02-20T02:43:15+00:00"
+            "time": "2025-06-11T14:41:35+00:00"
         },
         {
             "name": "daverandom/libdns",
@@ -2851,16 +2851,16 @@
         },
         {
             "name": "masterminds/html5",
-            "version": "2.9.0",
+            "version": "2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "f5ac2c0b0a2eefca70b2ce32a5809992227e75a6"
+                "reference": "fcf91eb64359852f00d921887b219479b4f21251"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/f5ac2c0b0a2eefca70b2ce32a5809992227e75a6",
-                "reference": "f5ac2c0b0a2eefca70b2ce32a5809992227e75a6",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/fcf91eb64359852f00d921887b219479b4f21251",
+                "reference": "fcf91eb64359852f00d921887b219479b4f21251",
                 "shasum": ""
             },
             "require": {
@@ -2912,9 +2912,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Masterminds/html5-php/issues",
-                "source": "https://github.com/Masterminds/html5-php/tree/2.9.0"
+                "source": "https://github.com/Masterminds/html5-php/tree/2.10.0"
             },
-            "time": "2024-03-31T07:05:07+00:00"
+            "time": "2025-07-25T09:04:22+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3235,16 +3235,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.43",
+            "version": "3.0.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "709ec107af3cb2f385b9617be72af8cf62441d02"
+                "reference": "56483a7de62a6c2a6635e42e93b8a9e25d4f0ec6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/709ec107af3cb2f385b9617be72af8cf62441d02",
-                "reference": "709ec107af3cb2f385b9617be72af8cf62441d02",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/56483a7de62a6c2a6635e42e93b8a9e25d4f0ec6",
+                "reference": "56483a7de62a6c2a6635e42e93b8a9e25d4f0ec6",
                 "shasum": ""
             },
             "require": {
@@ -3325,7 +3325,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.43"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.46"
             },
             "funding": [
                 {
@@ -3341,24 +3341,24 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-14T21:12:59+00:00"
+            "time": "2025-06-26T16:29:55+00:00"
         },
         {
             "name": "provider/steam",
-            "version": "10.1.4",
+            "version": "10.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "c546ffad043ddb66550327bb6662c5dba73c32c6"
+                "reference": "48b26e577fc06e7c10aa081605c766d84dcd06fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/c546ffad043ddb66550327bb6662c5dba73c32c6",
-                "reference": "c546ffad043ddb66550327bb6662c5dba73c32c6",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/48b26e577fc06e7c10aa081605c766d84dcd06fc",
+                "reference": "48b26e577fc06e7c10aa081605c766d84dcd06fc",
                 "shasum": ""
             },
             "require": {
-                "connectors/http": "^7.1",
+                "connectors/http": "^7.1|^8",
                 "ext-dom": "*",
                 "ext-json": "*",
                 "php": "^8.1",
@@ -3366,7 +3366,7 @@
                 "scriptfusion/porter": "^7|^8",
                 "symfony/css-selector": "^5.3|^6|^7",
                 "symfony/dom-crawler": "^5.4|^6.3|^7",
-                "xpaw/steamid": "^2.0"
+                "xpaw/steamid": "^4"
             },
             "require-dev": {
                 "amphp/byte-stream": "^2",
@@ -3394,9 +3394,9 @@
             "description": "Steam data provider for Porter.",
             "support": {
                 "issues": "https://github.com/Provider/Steam/issues",
-                "source": "https://github.com/Provider/Steam/tree/10.1.4"
+                "source": "https://github.com/Provider/Steam/tree/10.1.8"
             },
-            "time": "2025-06-04T06:41:06+00:00"
+            "time": "2025-08-19T22:19:10+00:00"
         },
         {
             "name": "psr/cache",
@@ -4330,16 +4330,16 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v7.3.0",
+            "version": "v7.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "0fabbc3d6a9c473b716a93fc8e7a537adb396166"
+                "reference": "8b2ee2e06ab99fa5f067b6699296d4e35c156bb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/0fabbc3d6a9c473b716a93fc8e7a537adb396166",
-                "reference": "0fabbc3d6a9c473b716a93fc8e7a537adb396166",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/8b2ee2e06ab99fa5f067b6699296d4e35c156bb9",
+                "reference": "8b2ee2e06ab99fa5f067b6699296d4e35c156bb9",
                 "shasum": ""
             },
             "require": {
@@ -4377,7 +4377,7 @@
             "description": "Eases DOM navigation for HTML and XML documents",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/dom-crawler/tree/v7.3.0"
+                "source": "https://github.com/symfony/dom-crawler/tree/v7.3.1"
             },
             "funding": [
                 {
@@ -4393,11 +4393,11 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-05T10:15:41+00:00"
+            "time": "2025-06-15T10:07:06+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.32.0",
+            "version": "v1.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -4456,7 +4456,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.32.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -4465,6 +4465,10 @@
                 },
                 {
                     "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
                     "type": "github"
                 },
                 {
@@ -4635,7 +4639,7 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.32.0",
+            "version": "v1.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
@@ -4696,7 +4700,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.32.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -4705,6 +4709,10 @@
                 },
                 {
                     "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
                     "type": "github"
                 },
                 {
@@ -4933,30 +4941,32 @@
         },
         {
             "name": "xpaw/steamid",
-            "version": "2.0.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xPaw/SteamID.php.git",
-                "reference": "11303c1646b0b47b72398bae845aca5d75a8848b"
+                "reference": "b0e3b80afad782fec8b8d0f809eecb913d4f0686"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xPaw/SteamID.php/zipball/11303c1646b0b47b72398bae845aca5d75a8848b",
-                "reference": "11303c1646b0b47b72398bae845aca5d75a8848b",
+                "url": "https://api.github.com/repos/xPaw/SteamID.php/zipball/b0e3b80afad782fec8b8d0f809eecb913d4f0686",
+                "reference": "b0e3b80afad782fec8b8d0f809eecb913d4f0686",
                 "shasum": ""
             },
             "require": {
                 "ext-gmp": "*",
-                "php": ">=7.3"
+                "php": ">=8.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.3"
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^10.3"
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "SteamID.php"
-                ]
+                "psr-4": {
+                    "xPaw\\Steam\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -4971,15 +4981,9 @@
             "description": "SteamID conversion library",
             "support": {
                 "issues": "https://github.com/xPaw/SteamID.php/issues",
-                "source": "https://github.com/xPaw/SteamID.php/tree/2.0.0"
+                "source": "https://github.com/xPaw/SteamID.php/tree/4.0.0"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/xPaw",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-01-01T14:19:03+00:00"
+            "time": "2025-05-28T14:04:10+00:00"
         }
     ],
     "packages-dev": [],
