@@ -53,7 +53,7 @@ class Importer
         $this->database = $database;
         $this->logger = $logger;
         $this->appListPath = $appListPath;
-        $this->throttle = new DualThrottle(70);
+        $this->throttle = new DualThrottle(33);
     }
 
     public function import(): void
