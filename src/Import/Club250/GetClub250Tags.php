@@ -22,7 +22,7 @@ final class GetClub250Tags implements ProviderResource
         $response = $connector->fetch(new HttpDataSource(self::URL));
 
         $crawler = new Crawler((string)$response);
-        $tags = $crawler->filter('ol.tags');
+        $tags = $crawler->filter('#body ol.tags');
 
         yield from $tags->children()->each(static function (Crawler $tag) {
             $id = preg_replace('[^/tag/(\d+)$]', '$1', $tag->children('a')->attr('href'));

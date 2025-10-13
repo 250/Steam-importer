@@ -22,7 +22,7 @@ final class GetClub250TagCategories implements ProviderResource
         $response = $connector->fetch(new HttpDataSource(self::URL));
 
         $crawler = new Crawler((string)$response);
-        $tags = $crawler->filter('ol.tags');
+        $tags = $crawler->filter('#body ol.tags');
 
         foreach (json_decode($tags->attr('data-cat'), true, 512, JSON_THROW_ON_ERROR) as $category) {
             yield array_combine(['id', 'short_name', 'name'], $category);
