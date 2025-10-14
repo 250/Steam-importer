@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2de61c3479d49320d6b4114ddbce4ea",
+    "content-hash": "d898aefbef73ee488f46e414f9ec36a3",
     "packages": [
         {
             "name": "250/log",
@@ -55,12 +55,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/250/Shared.git",
-                "reference": "2e83427bb9593c95a53f90b7e7fb0f3864c74182"
+                "reference": "73d1d00c448e68a0ec4ffdc12afa46e0ae1062f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/250/Shared/zipball/2e83427bb9593c95a53f90b7e7fb0f3864c74182",
-                "reference": "2e83427bb9593c95a53f90b7e7fb0f3864c74182",
+                "url": "https://api.github.com/repos/250/Shared/zipball/73d1d00c448e68a0ec4ffdc12afa46e0ae1062f4",
+                "reference": "73d1d00c448e68a0ec4ffdc12afa46e0ae1062f4",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                 "issues": "https://github.com/250/Shared/issues",
                 "source": "https://github.com/250/Shared/tree/master"
             },
-            "time": "2024-11-25T20:43:38+00:00"
+            "time": "2025-10-14T15:04:36+00:00"
         },
         {
             "name": "250/storage",
@@ -3348,16 +3348,16 @@
         },
         {
             "name": "provider/steam",
-            "version": "10.1.10",
+            "version": "11.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "7f7f8d7f05533df3d9d7446d6ac7cbab378024ab"
+                "reference": "a0e7600f3a301441551544280e49fec7826cb1d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/7f7f8d7f05533df3d9d7446d6ac7cbab378024ab",
-                "reference": "7f7f8d7f05533df3d9d7446d6ac7cbab378024ab",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/a0e7600f3a301441551544280e49fec7826cb1d8",
+                "reference": "a0e7600f3a301441551544280e49fec7826cb1d8",
                 "shasum": ""
             },
             "require": {
@@ -3397,9 +3397,9 @@
             "description": "Steam data provider for Porter.",
             "support": {
                 "issues": "https://github.com/Provider/Steam/issues",
-                "source": "https://github.com/Provider/Steam/tree/10.1.10"
+                "source": "https://github.com/Provider/Steam/tree/11.0.0"
             },
-            "time": "2025-09-22T19:19:10+00:00"
+            "time": "2025-10-14T13:37:15+00:00"
         },
         {
             "name": "psr/cache",
