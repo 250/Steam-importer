@@ -26,10 +26,6 @@ jobs:
       - script: 250 c250-trending "$(CLUB_250_API_TOKEN)"
         displayName: Download Club 250 trending ranking
 
-      - script: retry drun sh -c '>applist.json /repo/bin/250 applist && ls -l applist.json &&
-          [[ $(($(stat -c%s applist.json) > 4000000)) = 1 ]]'
-        displayName: Download app list
-
       - script: 250 players-import
         displayName: Import player stats
         condition: and(succeeded(), not(variables['skip-players']))
