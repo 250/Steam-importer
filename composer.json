@@ -8,7 +8,7 @@
     }
   ],
   "require": {
-    "php": "^8.2",
+    "php": "^8.5",
     "ext-fileinfo": "*",
     "ext-json": "*",
     "250/log": "dev-master",
