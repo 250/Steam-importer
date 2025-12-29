@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c50b436cc91a0e0ff90f0f617a71de27",
+    "content-hash": "1742059294e2696800fa2d23116bba0d",
     "packages": [
         {
             "name": "250/log",
@@ -3360,27 +3360,27 @@
         },
         {
             "name": "provider/steam",
-            "version": "11.1.2",
+            "version": "12.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "c7d4458662bcaf501b80f3afad33c91fd7f49dbe"
+                "reference": "a9e3315fdb08e16bfb169e537f38b78a9a564cc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/c7d4458662bcaf501b80f3afad33c91fd7f49dbe",
-                "reference": "c7d4458662bcaf501b80f3afad33c91fd7f49dbe",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/a9e3315fdb08e16bfb169e537f38b78a9a564cc5",
+                "reference": "a9e3315fdb08e16bfb169e537f38b78a9a564cc5",
                 "shasum": ""
             },
             "require": {
                 "connectors/http": "^7.1|^8",
                 "ext-dom": "*",
                 "ext-json": "*",
-                "php": "^8.1",
+                "php": "^8.4",
                 "phpseclib/phpseclib": "^3.0.34",
                 "scriptfusion/porter": "^7|^8",
                 "symfony/css-selector": "^5.3|^6|^7",
-                "symfony/dom-crawler": "^5.4|^6.3|^7",
+                "symfony/dom-crawler": "^7.4",
                 "xpaw/steamid": "^4"
             },
             "require-dev": {
@@ -3409,9 +3409,9 @@
             "description": "Steam data provider for Porter.",
             "support": {
                 "issues": "https://github.com/Provider/Steam/issues",
-                "source": "https://github.com/Provider/Steam/tree/11.1.2"
+                "source": "https://github.com/Provider/Steam/tree/12.0.5"
             },
-            "time": "2025-11-08T11:06:50+00:00"
+            "time": "2025-12-15T08:36:59+00:00"
         },
         {
             "name": "psr/cache",
