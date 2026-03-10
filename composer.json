@@ -15,7 +15,7 @@
     "250/shared": "dev-master",
     "250/storage": "dev-master",
     "async/throttle": "^4",
-    "doctrine/dbal": "^2",
+    "doctrine/dbal": "^4",
     "joomla/di": "^2",
     "monolog/monolog": "^3",
     "provider/steam": "^12",

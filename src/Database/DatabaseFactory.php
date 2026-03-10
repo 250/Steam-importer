@@ -13,7 +13,7 @@ final class DatabaseFactory
         // Truncate existing file. unlink() always fails.
         $overwrite && is_writable($path) && file_put_contents($path, '');
 
-        $connection = DriverManager::getConnection(['url' => "sqlite:///$path"]);
+        $connection = DriverManager::getConnection(compact('path') + ['driver' => 'pdo_sqlite']);
 
         // NB: Any tables added or removed should probably also be reflected in the Stitcher.
         $connection->executeStatement(
