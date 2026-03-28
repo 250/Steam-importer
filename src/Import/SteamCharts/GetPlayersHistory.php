@@ -32,6 +32,7 @@ final class GetPlayersHistory implements ProviderResource
 
         $json = \json_decode((string)$response, true);
 
+        // Spool player history in reverse chronological order (newest first).
         for ($item = end($json); $item !== false; $item = prev($json)) {
             yield [
                 'date' => new \DateTimeImmutable('@' . $item[0] / 1000),

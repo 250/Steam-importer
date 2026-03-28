@@ -28,7 +28,7 @@ final class PlayersImporter
         $this->logger->info('Starting players import...');
 
         $averagePlayersIterator = $this->fetchAveragePlayers();
-        $averagePlayers = array_column(iterator_to_array($averagePlayersIterator), 'average_players_7d', 'app_id');
+        $averagePlayers = array_column(iterator_to_array($averagePlayersIterator), 'average_players_1d', 'app_id');
         arsort($averagePlayers);
 
         $count = 0;
@@ -59,7 +59,7 @@ final class PlayersImporter
 
         foreach (Future::iterate(
             (function () use ($apps) {
-                $cutoffDate = new \DateTimeImmutable('-7 days');
+                $cutoffDate = new \DateTimeImmutable('-1 day');
                 $count = 0;
 
                 foreach ($apps as $app) {
@@ -71,9 +71,11 @@ final class PlayersImporter
                             ['count' => ++$count, 'total' => 2000, 'throttle' => $this->throttle]
                         );
 
-                        $players = $this->fetchPlayersHistory($appId, $cutoffDate);
+                        [$players, $totalTime] = $this->fetchPlayersHistory($appId, $cutoffDate);
 
-                        return $app + ['average_players_7d' => $players ? array_sum($players) / \count($players) : 0];
+                        $this->logger->debug("App #$appId samples: " . \count($players));
+
+                        return $app + ['average_players_1d' => $players ? array_sum($players) / $totalTime : 0];
                     });
                 }
             })()
@@ -83,29 +85,43 @@ final class PlayersImporter
     }
 
     /**
-     * @return int[]
+     * Fetches the number of time-weighted players for the specified app.
+     *
+     * @param int $appId App ID.
+     * @param \DateTimeInterface $cutoffDate Cutoff date for the player history.
+     *
+     * @return array{int[], int} Tuple of time-weighted player counts and the total time.
      */
     private function fetchPlayersHistory(int $appId, \DateTimeInterface $cutoffDate): array
     {
         try {
-            $playersHistory = $this->porter->import(
+            $playersHistory = iterator_to_array($this->porter->import(
                 (new GetPlayersHistoryImport(new GetPlayersHistory($appId)))->setThrottle($this->throttle)
-            );
+            ));
         } catch (GameUnavailableException) {
             $this->logger->error("App ID #$appId is unavailable: skipped.");
 
-            return [];
+            return [[], 0];
         }
 
         $players = [];
-        foreach ($playersHistory as $history) {
-            if ($history['date'] < $cutoffDate) {
+        $totalTime = 0;
+        foreach ($playersHistory as $i => $current) {
+            if (!isset($playersHistory[$i + 1])) {
                 break;
             }
 
-            $players[] = $history['players'];
+            $next = $playersHistory[$i + 1];
+
+            if ($current['date'] < $cutoffDate) {
+                break;
+            }
+
+            $players[] = $current['players'] *
+                ($duration = $next['date']?->getTimestamp() - $current['date']?->getTimestamp());
+            $totalTime += $duration;
         }
 
-        return $players;
+        return [$players, $totalTime];
     }
 }
