@@ -80,6 +80,7 @@ final class DatabaseFactory
                 list_id TEXT NOT NULL,
                 rank INTEGER NOT NULL,
                 app_id INTEGER NOT NULL,
+                score INTEGER NOT NULL,
                 PRIMARY KEY(list_id, rank)
             );'
         );
