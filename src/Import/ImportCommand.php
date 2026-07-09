@@ -33,7 +33,6 @@ class ImportCommand extends Command
             )
             ->addOption('lite', null, null, 'Do not insert invalid apps or apps with no reviews.')
             ->addOption('overwrite', null, InputOption::VALUE_NONE, 'Overwrite any existing database.')
-            ->addOption('steam-spy', null, InputOption::VALUE_REQUIRED, 'Path to Steam Spy data in JSON format.')
         ;
     }
 
@@ -47,7 +46,6 @@ class ImportCommand extends Command
             $output->isVeryVerbose()
         );
         $importer->setLite($input->getOption('lite'));
-        $importer->setSteamSpyPath($input->getOption('steam-spy'));
 
         $importer->import();
 

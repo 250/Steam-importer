@@ -15,7 +15,6 @@ use ScriptFUSION\Retry\FailingTooHardException;
 use ScriptFUSION\Steam250\Database\Queries;
 use ScriptFUSION\Steam250\Import\Club250\Club250AppListSpecification;
 use ScriptFUSION\Steam250\Import\Patreon\ApplistFormat;
-use ScriptFUSION\Steam250\Import\SteamSpy\SteamSpySpecification;
 
 /**
  * Imports Steam app data into a database with chunking support.
@@ -39,10 +38,6 @@ class Importer
     private int $chunks = self::DEFAULT_CHUNKS;
     private int $chunkIndex = self::DEFAULT_CHUNK_INDEX;
     private bool $lite = false;
-    private string $steamSpyPath;
-
-    private static array $steamSpyData;
-
     public function __construct(
         Porter $porter,
         Connection $database,
@@ -170,10 +165,6 @@ class Importer
             $this->logger->debug('%app%: no reviews.', $logContext);
         }
 
-        if ($this->steamSpyPath) {
-            $this->decorateWithSteamSpyData($app);
-        }
-
         $this->database->isTransactionActive() || $this->database->beginTransaction();
 
         // Insert tags.
@@ -214,20 +205,6 @@ class Importer
         $this->logger->info('Inserted %app%.', $logContext);
     }
 
-    private function decorateWithSteamSpyData(array &$app): void
-    {
-        self::$steamSpyData ??=
-            iterator_to_array($this->porter->import(new SteamSpySpecification($this->steamSpyPath)));
-
-        if (!isset(self::$steamSpyData[$app['id']])) {
-            $this->logger->debug('No Steam Spy data found for %app%.', compact('app'));
-
-            return;
-        }
-
-        $app += self::$steamSpyData[$app['id']];
-    }
-
     public function setChunks(int $chunks): void
     {
         $this->chunks = $chunks;
@@ -241,11 +218,6 @@ class Importer
     public function setLite(bool $lite): void
     {
         $this->lite = $lite;
-    }
-
-    public function setSteamSpyPath(string $steamSpyPath): void
-    {
-        $this->steamSpyPath = $steamSpyPath;
     }
 
     private function detectApplistFormat(): ApplistFormat

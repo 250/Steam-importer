@@ -25,7 +25,6 @@ final class Application
             new Club250TagsCommand,
             new Club250TrendingCommand,
             new PlayersImportCommand,
-            new SteamSpyCommand,
             new ImportCommand,
             new StitchCommand,
             new PatronImportCommand,

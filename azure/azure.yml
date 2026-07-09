@@ -43,8 +43,7 @@ jobs:
       - script: dig +short myip.opendns.com @resolver1.opendns.com
         displayName: WAN IP
 
-      - script: 250 import --lite --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase)
-          --steam-spy '/repo/data/steamspy 20180411.json' c250-applist.txt
+      - script: 250 import --lite --chunks $(System.TotalJobsInPhase) -i $(System.JobPositionInPhase) c250-applist.txt
         displayName: Import apps ($(System.JobPositionInPhase)/$(System.TotalJobsInPhase))
 
       - script: data upload "$BUILDDIR" "$RBUILDDIR"
