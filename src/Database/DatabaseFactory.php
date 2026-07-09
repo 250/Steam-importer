@@ -82,6 +82,10 @@ final class DatabaseFactory
                 app_id INTEGER NOT NULL,
                 score INTEGER NOT NULL,
                 PRIMARY KEY(list_id, rank)
+            );
+            CREATE TABLE IF NOT EXISTS global_top_sellers (
+                app_id INTEGER PRIMARY KEY NOT NULL,
+                rank INTEGER NOT NULL
             );'
         );
 
