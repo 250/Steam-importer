@@ -83,6 +83,13 @@ final class DatabaseFactory
                 score INTEGER NOT NULL,
                 PRIMARY KEY(list_id, rank)
             );
+            CREATE TABLE IF NOT EXISTS c250_stories (
+                id INTEGER PRIMARY KEY NOT NULL,
+                app_id INTEGER NOT NULL,
+                label TEXT NOT NULL,
+                headline TEXT NOT NULL,
+                summary TEXT NOT NULL
+            );
             CREATE TABLE IF NOT EXISTS global_top_sellers (
                 app_id INTEGER PRIMARY KEY NOT NULL,
                 rank INTEGER NOT NULL

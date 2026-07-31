@@ -5,6 +5,7 @@ namespace ScriptFUSION\Steam250;
 
 use ScriptFUSION\Steam250\Import\Club250\Club250AppListCommand;
 use ScriptFUSION\Steam250\Import\Club250\Club250TagsCommand;
+use ScriptFUSION\Steam250\Import\Club250\Club250StoriesCommand;
 use ScriptFUSION\Steam250\Import\Club250\Club250TrendingCommand;
 use ScriptFUSION\Steam250\Import\Steam\TopSellersCommand;
 use ScriptFUSION\Steam250\Import\ImportCommand;
@@ -25,6 +26,7 @@ final class Application
             new Club250AppListCommand,
             new Club250TagsCommand,
             new Club250TrendingCommand,
+            new Club250StoriesCommand,
             new PlayersImportCommand,
             new TopSellersCommand,
             new ImportCommand,

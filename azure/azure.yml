@@ -26,6 +26,9 @@ jobs:
       - script: 250 c250-trending "$(CLUB_250_API_TOKEN)"
         displayName: Download Club 250 trending ranking
 
+      - script: 250 c250-stories "$(CLUB_250_API_TOKEN)"
+        displayName: Download Club 250 stories
+
       - script: 250 import-top-sellers
         displayName: Import global top sellers
 
