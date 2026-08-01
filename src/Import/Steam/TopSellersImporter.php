@@ -33,7 +33,7 @@ final readonly class TopSellersImporter
             $this->logger->debug("Inserting rank #$rank app ID #$record[app_id]...", ['count' => $rank, 'total' => 10]);
 
             $this->database->executeStatement(
-                'INSERT INTO global_top_sellers (rank, app_id) VALUES (?, ?)',
+                'INSERT OR IGNORE INTO global_top_sellers (rank, app_id) VALUES (?, ?)',
                 [$rank, $record['app_id']]
             );
         }
