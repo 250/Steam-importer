@@ -64,12 +64,14 @@ final class DatabaseFactory
                 app_id INTEGER NOT NULL,
                 id INTEGER,
                 name TEXT NOT NULL,
+                "order" INTEGER NOT NULL,
                 PRIMARY KEY(app_id, name)
             );
             CREATE TABLE IF NOT EXISTS app_publisher (
                 app_id INTEGER NOT NULL,
                 id INTEGER,
                 name TEXT NOT NULL,
+                "order" INTEGER NOT NULL,
                 PRIMARY KEY(app_id, name)
             );
             CREATE TABLE IF NOT EXISTS app_players (

@@ -29,12 +29,13 @@ final class Queries
     }
 
     /**
-     * Insert developer name, ignoring any duplicates. Some apps specify the developer name multiple times.
+     * Insert developer name, ignoring any duplicates. Some apps specify the developer name multiple times. In such
+     * cases the first occurrence wins, including its order.
      */
     public static function insertDeveloper(Connection $database, array $developers): bool
     {
         return $database->executeStatement(
-            'INSERT OR IGNORE INTO app_developer VALUES (?, ?, ?)',
+            'INSERT OR IGNORE INTO app_developer (app_id, id, name, "order") VALUES (?, ?, ?, ?)',
             $developers
         ) > 0;
     }
@@ -42,7 +43,7 @@ final class Queries
     public static function insertPublisher(Connection $database, array $publishers): bool
     {
         return $database->executeStatement(
-            'INSERT OR IGNORE INTO app_publisher VALUES (?, ?, ?)',
+            'INSERT OR IGNORE INTO app_publisher (app_id, id, name, "order") VALUES (?, ?, ?, ?)',
             $publishers
         ) > 0;
     }

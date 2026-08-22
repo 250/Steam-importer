@@ -184,15 +184,17 @@ class Importer
         }
         unset($app['tags']);
 
-        // Insert developers.
+        // Insert developers, recording their original order.
+        $order = 0;
         foreach ($app['developers'] ?? [] as $developerName => $developerId) {
-            Queries::insertDeveloper($this->database, [$app['id'], $developerId, $developerName]);
+            Queries::insertDeveloper($this->database, [$app['id'], $developerId, $developerName, $order++]);
         }
         unset($app['developers']);
 
-        // Insert publishers.
+        // Insert publishers, recording their original order.
+        $order = 0;
         foreach ($app['publishers'] ?? [] as $publisherName => $publisherId) {
-            Queries::insertPublisher($this->database, [$app['id'], $publisherId, $publisherName]);
+            Queries::insertPublisher($this->database, [$app['id'], $publisherId, $publisherName, $order++]);
         }
         unset($app['publishers']);
 
