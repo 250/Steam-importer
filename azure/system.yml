@@ -24,6 +24,20 @@ steps:
       sudo chmod -v +x "$php" "$composer"
     displayName: Overload "php" and "composer" commands
 
+  - script: |
+      sudo tee ${out=/usr/local/bin/retry} <<-'.'
+        for i in {1..20}; do
+          ((i > 1)) && {
+            echo Retry \#$((i - 1))...
+            sleep $i
+          }
+
+          "$@" && exit
+        done
+      .
+      sudo chmod -v +x "$out"
+    displayName: Install "retry" command
+
   - template: php.yml
 
   - script: |
@@ -48,20 +62,6 @@ steps:
       .
       sudo chmod -v +x "$out"
     displayName: Install "data" command
-
-  - script: |
-      sudo tee ${out=/usr/local/bin/retry} <<-'.'
-        for i in {1..20}; do
-          ((i > 1)) && {
-            echo Retry \#$((i - 1))...
-            sleep $i
-          }
-      
-          "$@" && exit
-        done
-      .
-      sudo chmod -v +x "$out"
-    displayName: Install "retry" command
 
   - script: |
       marker=$AZURE_BUILD_NUMBER.date
