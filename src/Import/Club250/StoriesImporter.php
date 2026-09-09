@@ -27,8 +27,8 @@ final readonly class StoriesImporter
             $this->logger->info("Story #$story[id].");
 
             $this->database->executeStatement(
-                'INSERT OR REPLACE INTO c250_stories (id, app_id, label, headline, summary)
-                    VALUES (:id, :app_id, :label, :headline, :summary)',
+                'INSERT OR REPLACE INTO c250_stories (id, app_id, slug, label, headline, summary)
+                    VALUES (:id, :app_id, :slug, :label, :headline, :summary)',
                 $story,
             );
         }

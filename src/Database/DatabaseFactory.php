@@ -88,6 +88,7 @@ final class DatabaseFactory
             CREATE TABLE IF NOT EXISTS c250_stories (
                 id INTEGER PRIMARY KEY NOT NULL,
                 app_id INTEGER NOT NULL,
+                slug TEXT NOT NULL,
                 label TEXT NOT NULL,
                 headline TEXT NOT NULL,
                 summary TEXT NOT NULL
