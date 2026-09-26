@@ -21,15 +21,21 @@ final readonly class StoriesImporter
     {
         $this->logger->info('Begin importing stories from Club 250.');
 
+        // Clear existing stories so any removed upstream disappear on refresh.
+        $this->database->executeStatement('DELETE FROM c250_stories');
+
+        // The Club 250 API emits stories in display order; record that order as the priority.
+        $priority = 0;
+
         foreach ($this->porter->import(
             new Import(new GetClub250Stories($apiToken))
         ) as $story) {
             $this->logger->info("Story #$story[id].");
 
             $this->database->executeStatement(
-                'INSERT OR REPLACE INTO c250_stories (id, app_id, slug, label, headline, summary)
-                    VALUES (:id, :app_id, :slug, :label, :headline, :summary)',
-                $story,
+                'INSERT OR REPLACE INTO c250_stories (id, app_id, slug, label, headline, summary, priority)
+                    VALUES (:id, :app_id, :slug, :label, :headline, :summary, :priority)',
+                ['priority' => $priority++] + $story,
             );
         }
 

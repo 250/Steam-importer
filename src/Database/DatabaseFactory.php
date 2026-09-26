@@ -91,7 +91,8 @@ final class DatabaseFactory
                 slug TEXT NOT NULL,
                 label TEXT NOT NULL,
                 headline TEXT NOT NULL,
-                summary TEXT NOT NULL
+                summary TEXT NOT NULL,
+                priority INTEGER NOT NULL
             );
             CREATE TABLE IF NOT EXISTS global_top_sellers (
                 app_id INTEGER PRIMARY KEY NOT NULL,

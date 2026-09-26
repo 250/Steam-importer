@@ -9,11 +9,11 @@ use ScriptFUSION\Steam250\PorterFactory;
 
 final class StoriesImporterFactory
 {
-    public function create(): StoriesImporter
+    public function create(string $databasePath = 'steam.sqlite'): StoriesImporter
     {
         return new StoriesImporter(
             (new PorterFactory)->create(),
-            (new DatabaseFactory)->create(),
+            (new DatabaseFactory)->create($databasePath),
             (new LoggerFactory)->create('Stories Importer', false),
         );
     }
