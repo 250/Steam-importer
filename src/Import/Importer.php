@@ -10,6 +10,7 @@ use ScriptFUSION\Async\Throttle\DualThrottle;
 use ScriptFUSION\Porter\Import\Import;
 use ScriptFUSION\Porter\Porter;
 use ScriptFUSION\Porter\Provider\Steam\Resource\InvalidAppIdException;
+use ScriptFUSION\Porter\Provider\Steam\Resource\StoreSession;
 use ScriptFUSION\Porter\Provider\Steam\Scrape\SteamStoreException;
 use ScriptFUSION\Retry\FailingTooHardException;
 use ScriptFUSION\Steam250\Database\Queries;
@@ -38,11 +39,13 @@ class Importer
     private int $chunks = self::DEFAULT_CHUNKS;
     private int $chunkIndex = self::DEFAULT_CHUNK_INDEX;
     private bool $lite = false;
+
     public function __construct(
         Porter $porter,
         Connection $database,
         LoggerInterface $logger,
-        string $appListPath
+        string $appListPath,
+        private readonly ?StoreSession $storeSession = null,
     ) {
         $this->porter = $porter;
         $this->database = $database;
@@ -86,7 +89,7 @@ class Importer
                 yield $importQ->async(function () use ($app, $count, $context): ?array {
                     try {
                         $appDetails = $this->porter->importOne(
-                            (new AppDetailsSpecification($app['id']))->setThrottle($this->throttle)
+                            new AppDetailsSpecification($app['id'], $this->storeSession)->setThrottle($this->throttle)
                         );
 
                         // Overwrite name with imported name, preserving only the original ID.

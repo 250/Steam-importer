@@ -18,7 +18,7 @@
     "doctrine/dbal": "^4",
     "joomla/di": "^2",
     "monolog/monolog": "^3",
-    "provider/steam": "^12",
+    "provider/steam": "^13.1",
     "symfony/console": "^6",
     "transformers/mapping-transformer": "^3"
   },

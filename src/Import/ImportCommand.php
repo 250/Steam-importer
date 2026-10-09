@@ -33,6 +33,18 @@ class ImportCommand extends Command
             )
             ->addOption('lite', null, null, 'Do not insert invalid apps or apps with no reviews.')
             ->addOption('overwrite', null, InputOption::VALUE_NONE, 'Overwrite any existing database.')
+            ->addOption(
+                'steam-user',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Steam username. Defaults to STEAM_USER environment variable.'
+            )
+            ->addOption(
+                'steam-pass',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Steam password. Defaults to STEAM_PASS environment variable.'
+            )
         ;
     }
 
@@ -43,7 +55,9 @@ class ImportCommand extends Command
             (int)$input->getOption('chunks'),
             (int)$input->getOption('chunk-index'),
             $input->getOption('overwrite'),
-            $output->isVeryVerbose()
+            $output->isVeryVerbose(),
+            $input->getOption('steam-user') ?? getenv('STEAM_USER') ?: null,
+            $input->getOption('steam-pass') ?? getenv('STEAM_PASS') ?: null
         );
         $importer->setLite($input->getOption('lite'));
 

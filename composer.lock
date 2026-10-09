@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da50fc4536d13ae211b6bd607ef1a933",
+    "content-hash": "40f3ec3819986aeef41ad4d03b9f1a59",
     "packages": [
         {
             "name": "250/log",
@@ -3161,16 +3161,16 @@
         },
         {
             "name": "provider/steam",
-            "version": "12.4.4",
+            "version": "13.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Provider/Steam.git",
-                "reference": "0d7d7ae10c1bbea761399d5e39d3c5231c5578ab"
+                "reference": "4c78cbe2c374d8649dfa167226764d0dbc586727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Provider/Steam/zipball/0d7d7ae10c1bbea761399d5e39d3c5231c5578ab",
-                "reference": "0d7d7ae10c1bbea761399d5e39d3c5231c5578ab",
+                "url": "https://api.github.com/repos/Provider/Steam/zipball/4c78cbe2c374d8649dfa167226764d0dbc586727",
+                "reference": "4c78cbe2c374d8649dfa167226764d0dbc586727",
                 "shasum": ""
             },
             "require": {
@@ -3211,9 +3211,9 @@
             "description": "Steam data provider for Porter.",
             "support": {
                 "issues": "https://github.com/Provider/Steam/issues",
-                "source": "https://github.com/Provider/Steam/tree/12.4.4"
+                "source": "https://github.com/Provider/Steam/tree/13.1.0"
             },
-            "time": "2026-08-19T06:35:08+00:00"
+            "time": "2026-10-09T13:32:18+00:00"
         },
         {
             "name": "psr/cache",
